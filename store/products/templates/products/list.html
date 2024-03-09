@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+    Products List
+{% endblock %}
+
+{% block content %}
+    {% for product in products %}
+        <h4><a href="{% url 'products:detail' product.slug %}">{{ product.slug }}</a></h4>
+        {% for image in product.images.all %}
+            <p>
+                <img src="{{ image.image.url }}" alt="">
+            </p>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

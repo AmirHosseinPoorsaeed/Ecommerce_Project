@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+
+{% block page_title %}
+    Poduct Detail {{ product.title }}
+{% endblock %}
+
+{% block content %}
+    <h4>{{ product.title }}</h4>
+    {% for image in product.images.all %}
+        <p>
+            <img src="{{ image.image.url }}" alt="">
+        </p>
+    {% endfor %}
+    {% for attribute in product.attributes.all %}
+        <p>{{ attribute.title }}</p>
+        {% for option in attribute.options.all %}
+            <p>{{ option.title }}</p>
+            {% for value in option.values.all %}
+                <p>{{ value.description }}</p>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

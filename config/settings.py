@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from environs import Env
+import mimetypes
 
 env = Env()
 env.read_env()
@@ -43,15 +44,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third part
+    'debug_toolbar',
     'allauth',
     'allauth.account',
+    'treebeard',
 
     # Local
     'store.accounts.apps.AccountsConfig',
     'store.pages.apps.PagesConfig',
+    'store.products.apps.ProductsConfig',
 ]
 
 MIDDLEWARE = [
+    # debug toolbar
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,6 +67,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # allauth
     'allauth.account.middleware.AccountMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -142,6 +152,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Media settings
+MEDIA_URL = '/media/'
+MEDIA_ROOT = str(BASE_DIR.joinpath('store/media'))
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -165,3 +179,10 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Debug toolbar settings
+mimetypes.add_type("application/javascript", ".js", True)
+
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
+}
