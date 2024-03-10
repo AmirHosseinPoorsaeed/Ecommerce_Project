@@ -20,4 +20,16 @@
             {% endfor %}
         {% endfor %}
     {% endfor %}
+    {% for comment in product.comments.all %}
+        <p>{{ comment.author }}</p>
+        <p>{{ comment.title }}</p>
+        <p>{{ comment.body }}</p>
+    {% endfor %}
+
+    <form action="{% url 'comments:create' product.id %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="submit" value="Save">
+    </form>
+
 {% endblock %}

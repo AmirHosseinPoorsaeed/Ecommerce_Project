@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'store.accounts.apps.AccountsConfig',
     'store.pages.apps.PagesConfig',
     'store.products.apps.ProductsConfig',
+    'store.comments.apps.CommentsConfig',
 ]
 
 MIDDLEWARE = [

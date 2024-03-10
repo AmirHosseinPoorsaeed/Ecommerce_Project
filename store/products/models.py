@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 from treebeard.mp_tree import MP_Node
 
@@ -42,6 +43,9 @@ class Product(TimeStampedModel):
             self.slug = slugify(self.title, allow_unicode=True)
 
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('products:detail', args=[self.slug])
 
     class Meta:
         verbose_name = 'Product'

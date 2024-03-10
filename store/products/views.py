@@ -3,6 +3,7 @@ from django.views import generic
 from django.db.models import Prefetch
 
 from .models import Product, Attribute, OptionGroup
+from store.comments.forms import CommentForm
 
 
 class ProductListView(generic.ListView):
@@ -23,6 +24,7 @@ class ProductDetailView(generic.DetailView):
         product_slug = self.kwargs.get('slug')
         product_queryset = Product.objects.filter(slug=product_slug)
         product_queryset = product_queryset.prefetch_related(
+            'comments',
             Prefetch(
                 'attributes',
                 queryset=Attribute.objects.prefetch_related(
@@ -37,3 +39,7 @@ class ProductDetailView(generic.DetailView):
         )
         return product_queryset
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment_form'] = CommentForm()
+        return context
