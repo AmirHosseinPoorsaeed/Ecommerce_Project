@@ -20,15 +20,46 @@
             {% endfor %}
         {% endfor %}
     {% endfor %}
+    Comments
     {% for comment in product.comments.all %}
         <p>{{ comment.author }}</p>
         <p>{{ comment.title }}</p>
         <p>{{ comment.body }}</p>
     {% endfor %}
 
+    <br>
+
     <form action="{% url 'comments:create' product.id %}" method="POST">
         {% csrf_token %}
         {{ comment_form.as_p }}
+        <input type="submit" value="Save">
+    </form>
+
+    <br><br>
+    Question
+    {% for question in product.product_questions.all %}
+        <p>{{ question.author }}</p>
+        <p>{{ question.text }}</p>
+        Answer Question
+        <form action="{% url 'qas:answer_create' question.id %}" method="POST">
+            {% csrf_token %}
+            {{ answer_form.as_p }}
+            <input type="submit" value="Save">
+        </form>
+        <br>
+        Answers
+        {% for answer in question.question_answers.all %}
+            <p>{{ answer.author }}</p>
+            <p>{{ answer.text }}</p>
+        {% endfor %}
+
+        <br>
+    {% endfor %}
+
+    <br>
+    <form action="{% url 'qas:question_create' product.id %}" method="POST">
+        {% csrf_token %}
+        {{ question_form.as_p }}
         <input type="submit" value="Save">
     </form>
 

@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('store.pages.urls', namespace='pages')),
     path('products/', include('store.products.urls', namespace='products')),
     path('comments/', include('store.comments.urls', namespace='comments')),
+    path('qas/', include('store.qas.urls', namespace='qas')),
 ]
 
 if settings.DEBUG:

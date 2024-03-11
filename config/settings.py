@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'store.pages.apps.PagesConfig',
     'store.products.apps.ProductsConfig',
     'store.comments.apps.CommentsConfig',
+    'store.qas.apps.QasConfig',
 ]
 
 MIDDLEWARE = [
