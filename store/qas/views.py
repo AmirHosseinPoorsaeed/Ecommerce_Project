@@ -8,6 +8,7 @@ from store.products.models import Product
 
 class QuestionCreateView(generic.CreateView):
     form_class = QuestionForm
+    template_name = 'qas/question_form.html'
 
     def form_valid(self, form):
         obj = form.save(commit=False)
@@ -22,6 +23,7 @@ class QuestionCreateView(generic.CreateView):
 
 class AnswerCreateView(generic.CreateView):
     form_class = AnswerForm
+    template_name = 'qas/answer_form.html'
 
     def form_valid(self, form):
         obj = form.save(commit=False)
@@ -32,3 +34,10 @@ class AnswerCreateView(generic.CreateView):
         obj.question = question
 
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        question_id = self.kwargs.get('question_id')
+        question = get_object_or_404(Question, pk=question_id)
+        context['question'] = question
+        return context

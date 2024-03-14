@@ -1,0 +1,61 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block page_title %}
+    Leave Comment
+{% endblock %}
+
+{% block custom_css %}
+    <link href="{% static 'css/leave_review.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <main>
+
+
+	<div class="container margin_60_35">
+
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="write_review">
+						<h1>{{ product.title }}</h1>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="rating_submit">
+							<div class="form-group">
+							<label class="d-block">Overall rating</label>
+                                <span class="rating mb-0">
+								<input type="radio" class="rating-input" id="5_star" name="rate"
+                                       value="5"><label for="5_star" class="rating-star"></label>
+								<input type="radio" class="rating-input" id="4_star" name="rate"
+                                       value="4"><label for="4_star" class="rating-star"></label>
+								<input type="radio" class="rating-input" id="3_star" name="rate"
+                                       value="3"><label for="3_star" class="rating-star"></label>
+								<input type="radio" class="rating-input" id="2_star" name="rate"
+                                       value="2"><label for="2_star" class="rating-star"></label>
+								<input type="radio" class="rating-input" id="1_star" name="rate" value="1"><label
+                                        for="1_star" class="rating-star"></label>
+							</span>
+                            </div>
+                            </div>
+                            <!-- /rating_submit -->
+                            <div class="form-group">
+                                <label>Title of your review</label>
+                                <input class="form-control" name="title" type="text" placeholder="If you could say it in one sentence, what would you say?">
+                            </div>
+                            <div class="form-group">
+                                <label>Your review</label>
+                                <textarea class="form-control" name="body" style="height: 180px;" placeholder="Write your review to help others learn about this online business"></textarea>
+                            </div>
+                            <input type="submit" class="btn_1" value="Submit review">
+                        </form>
+					</div>
+				</div>
+		</div>
+		<!-- /row -->
+		</div>
+		<!-- /container -->
+	</main>
+	<!--/main-->
+{% endblock %}

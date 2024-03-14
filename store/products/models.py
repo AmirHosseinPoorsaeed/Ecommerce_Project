@@ -1,8 +1,11 @@
 from django.db import models
+from django.db.models import F
 from django.utils.text import slugify
 from django.urls import reverse
 
 from treebeard.mp_tree import MP_Node
+
+from .managers import ProductManager
 
 
 class Category(MP_Node):
@@ -31,9 +34,12 @@ class Product(TimeStampedModel):
     title = models.CharField(max_length=256)
     summary = models.TextField(blank=True)
     description = models.TextField(blank=True)
+    main_cover = models.ImageField(upload_to='cover/%Y/%m/%d/')
     slug = models.SlugField(max_length=256, unique=True, allow_unicode=True)
     is_active = models.BooleanField(default=True)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    category = models.ManyToManyField(Category, related_name='products')
+
+    objects = ProductManager()
 
     def __str__(self):
         return self.title
@@ -53,7 +59,7 @@ class Product(TimeStampedModel):
 
 
 class ProductImage(TimeStampedModel):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='users/%Y/%m/%d/')
 
     def __str__(self):
@@ -77,8 +83,8 @@ class AttributeType(models.Model):
 
 class Attribute(models.Model):
     title = models.CharField(max_length=256)
-    type = models.ForeignKey(AttributeType, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='attributes')
+    type = models.ForeignKey('products.AttributeType', on_delete=models.CASCADE)
+    product = models.ForeignKey('products.Product', on_delete=models.PROTECT, related_name='attributes')
 
     def __str__(self):
         return f'{self.title} --> {self.product}'
@@ -90,7 +96,7 @@ class Attribute(models.Model):
 
 class OptionGroup(models.Model):
     title = models.CharField(max_length=256)
-    attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE, related_name='options')
+    attribute = models.ForeignKey('products.Attribute', on_delete=models.CASCADE, related_name='options')
 
     def __str__(self):
         return f'{self.title} --> {self.attribute}'
@@ -102,7 +108,7 @@ class OptionGroup(models.Model):
 
 class OptionGroupValue(models.Model):
     description = models.CharField(max_length=512)
-    group = models.ForeignKey(OptionGroup, on_delete=models.CASCADE, related_name='values')
+    group = models.ForeignKey('products.OptionGroup', on_delete=models.CASCADE, related_name='values')
 
     def __str__(self):
         return f'{self.description} --> {self.group}'

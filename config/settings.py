@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'store.products.apps.ProductsConfig',
     'store.comments.apps.CommentsConfig',
     'store.qas.apps.QasConfig',
+    'store.inventory.apps.InventoryConfig',
 ]
 
 MIDDLEWARE = [
@@ -90,6 +91,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'store.products.context_processors.categories',
             ],
         },
     },
@@ -152,7 +154,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [str(BASE_DIR.joinpath('store/static'))]
 
 # Media settings
 MEDIA_URL = '/media/'

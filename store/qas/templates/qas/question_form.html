@@ -1,0 +1,44 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block page_title %}
+    Leave Question
+{% endblock %}
+
+{% block custom_css %}
+    <link href="{% static 'css/leave_review.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <main>
+
+
+	<div class="container margin_60_35">
+
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="write_review">
+						<h1>{{ product.title }}</h1>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="rating_submit">
+							<div class="form-group">
+                            </div>
+                            </div>
+                            <!-- /rating_submit -->
+                            <div class="form-group">
+                                <label>Your question</label>
+                                <textarea class="form-control" name="text" style="height: 180px;" placeholder="Write your review to help others learn about this online business"></textarea>
+                            </div>
+                            <input type="submit" class="btn_1" value="Submit review">
+                        </form>
+					</div>
+				</div>
+		</div>
+		<!-- /row -->
+		</div>
+		<!-- /container -->
+	</main>
+	<!--/main-->
+{% endblock %}
