@@ -10,6 +10,7 @@ from .mixins import CategoryMixin
 class ProductListView(generic.ListView):
     template_name = 'products/list.html'
     context_object_name = 'products'
+    paginate_by = 1
 
     def get_queryset(self):
         return Product.objects.active_with_stock_info()
@@ -18,6 +19,7 @@ class ProductListView(generic.ListView):
 class CategoryListView(CategoryMixin, generic.ListView):
     template_name = 'products/category_list.html'
     context_object_name = 'products'
+    paginate_by = 1
 
 
 class ProductDetailView(generic.DetailView):
