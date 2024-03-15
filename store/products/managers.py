@@ -6,9 +6,9 @@ from store.qas.models import Question, Answer
 
 class ProductManager(Manager):
     def active_with_stock_info(self):
-        return self.filter(is_active=True).prefetch_related(
-            'stock_records'
-        ).annotate(
+        results = self.filter(is_active=True)
+        results = results.prefetch_related('stock_records')
+        results = results.annotate(
             num_stock=F('stock_records__num_stock'),
             sale_price=F('stock_records__sale_price'),
             threshold_low_stock=F('stock_records__threshold_low_stock'),
@@ -19,10 +19,12 @@ class ProductManager(Manager):
                 )
             )
         )
+        return results
 
     def with_related_info(self, slug):
         from .models import Attribute, OptionGroup
-        return self.filter(slug=slug).prefetch_related(
+        results = self.filter(slug=slug)
+        results = results.prefetch_related(
             'stock_records',
             Prefetch(
                 'comments',
@@ -47,8 +49,9 @@ class ProductManager(Manager):
                         queryset=Answer.objects.select_related('author')
                     )
                 )
-            )
-        ).annotate(
+            ),
+        )
+        results = results.annotate(
             num_stock=F('stock_records__num_stock'),
             sale_price=F('stock_records__sale_price'),
             threshold_low_stock=F('stock_records__threshold_low_stock'),
@@ -62,3 +65,4 @@ class ProductManager(Manager):
                 )
             )
         )
+        return results

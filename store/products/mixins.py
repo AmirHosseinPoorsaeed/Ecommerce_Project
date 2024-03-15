@@ -10,5 +10,9 @@ class CategoryMixin:
         return category
 
     def get_queryset(self):
+        sort = self.request.GET.get('sort')
         category = self.get_category()
-        return category.products.active_with_stock_info()
+        queryset = category.products.active_with_stock_info()
+        if sort in self.allowed_sort_fields:
+            queryset = queryset.order_by(sort)
+        return queryset

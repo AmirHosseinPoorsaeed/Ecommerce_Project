@@ -16,17 +16,18 @@
 			<div class="toolbox elemento_stick">
 				<div class="container">
 				<ul class="clearfix">
-					<li>
-						<div class="sort_select">
-							<select name="sort" id="sort">
-                                    <option value="popularity" selected="selected">Sort by popularity</option>
-                                    <option value="rating">Sort by average rating</option>
-                                    <option value="date">Sort by newness</option>
-                                    <option value="price">Sort by price: low to high</option>
-                                    <option value="price-desc">Sort by price: high to
-							</select>
-						</div>
-					</li>
+					<form action="" method="GET">
+                        <li>
+                            <div class="sort_select">
+                                <select name="sort" id="sort">
+                                    {% for value, label in sort_form.fields.field.choices %}
+                                        <option value="{{ value }}" {% if value == sort_form.data.field %}selected="selected"{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </li>
+                        <button type="submit" class="btn btn-success btn-sm">Sort</button>
+                    </form>
 					<li>
 						<a href="#0"><i class="ti-view-grid"></i></a>
 						<a href="listing-row-1-sidebar-left.html"><i class="ti-view-list"></i></a>

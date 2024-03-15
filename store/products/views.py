@@ -1,25 +1,44 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
-from .models import Product
 from store.comments.forms import CommentForm
 from store.qas.forms import QuestionForm, AnswerForm
+from .models import Product
 from .mixins import CategoryMixin
+from .forms import SortForm
 
 
 class ProductListView(generic.ListView):
     template_name = 'products/list.html'
     context_object_name = 'products'
-    paginate_by = 1
+    paginate_by = 10
+    form_class = SortForm
+    allowed_sort_fields = ('sale_price', '-sale_price', '-created')
 
     def get_queryset(self):
-        return Product.objects.active_with_stock_info()
+        queryset = Product.objects.active_with_stock_info()
+        sort = self.request.GET.get('sort')
+        if sort in self.allowed_sort_fields:
+            queryset = queryset.order_by(sort)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sort_form'] = self.form_class
+        return context
 
 
 class CategoryListView(CategoryMixin, generic.ListView):
     template_name = 'products/category_list.html'
     context_object_name = 'products'
-    paginate_by = 1
+    paginate_by = 10
+    form_class = SortForm
+    allowed_sort_fields = ('sale_price', '-sale_price', '-created')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sort_form'] = self.form_class
+        return context
 
 
 class ProductDetailView(generic.DetailView):
