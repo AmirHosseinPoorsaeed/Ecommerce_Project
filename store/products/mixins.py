@@ -1,18 +1,17 @@
-from django.shortcuts import get_object_or_404
-
-from .models import Category
+from .forms import SortForm
 
 
-class CategoryMixin:
-    def get_category(self):
-        category_slug = self.kwargs.get('slug')
-        category = get_object_or_404(Category, slug=category_slug)
-        return category
+class SortMixin:
+    form_class = SortForm
+    allowed_sort_fields = ('sale_price', '-sale_price', '-created')
 
-    def get_queryset(self):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sort_form'] = self.form_class
+        return context
+
+    def get_sorted_queryset(self, queryset):
         sort = self.request.GET.get('sort')
-        category = self.get_category()
-        queryset = category.products.active_with_stock_info()
         if sort in self.allowed_sort_fields:
             queryset = queryset.order_by(sort)
         return queryset

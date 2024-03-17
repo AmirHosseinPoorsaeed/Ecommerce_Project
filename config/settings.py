@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'treebeard',
+    'django_filters',
 
     # Local
     'store.accounts.apps.AccountsConfig',
