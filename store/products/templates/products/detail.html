@@ -200,6 +200,14 @@
                                                 <h4>"{{ comment.title }}"</h4>
                                                 <p>{{ comment.body }}</p>
                                                 <p>Author: {{ comment.author }}</p>
+                                                <a href="{% url 'comments:like' comment.id 'like' %}">
+                                                    <i class="fa-solid fa-thumbs-up"></i>
+                                                    <small>{{ comment.count_likes }}</small>
+                                                </a>
+                                                <a href="{% url 'comments:like' comment.id 'dislike' %}">
+                                                    <i class="fa-solid fa-thumbs-down"></i>
+                                                    <small>{{ comment.count_dislikes }}</small>
+                                                </a>
                                             </div>
                                         </div>
                                     {% endfor %}

@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
 
-
 User = get_user_model()
 
 
@@ -16,9 +15,19 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     rate = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True)
+    likes = models.ManyToManyField(User, related_name='comment_likes')
+    dislikes = models.ManyToManyField(User, related_name='comment_dislikes')
 
     def __str__(self):
         return f'{self.author} comment for {self.product}'
+
+    @property
+    def count_likes(self):
+        return self.likes.count()
+
+    @property
+    def count_dislikes(self):
+        return self.dislikes.count()
 
     class Meta:
         verbose_name = 'Comment'

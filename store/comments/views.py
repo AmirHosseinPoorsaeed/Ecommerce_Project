@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 
 from .forms import CommentForm
+from .models import Comment
 from store.products.models import Product
 
 
@@ -27,3 +28,24 @@ class CommentCreateView(generic.CreateView):
         return context
 
 
+def comment_like(request, comment_id, reaction):
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if reaction == 'like':
+        reaction_set = comment.likes
+        other_reaction_set = comment.dislikes
+    elif reaction == 'dislike':
+        reaction_set = comment.dislikes
+        other_reaction_set = comment.likes
+    else:
+        return redirect(comment.get_absolute_url())
+
+    if request.user in reaction_set.all():
+        reaction_set.remove(request.user)
+    elif request.user in other_reaction_set.all():
+        reaction_set.add(request.user)
+        other_reaction_set.remove(request.user)
+    else:
+        reaction_set.add(request.user)
+
+    return redirect(comment.get_absolute_url())

@@ -28,7 +28,7 @@ class ProductManager(Manager):
             'stock_records',
             Prefetch(
                 'comments',
-                queryset=Comment.objects.select_related('author')
+                queryset=Comment.objects.select_related('author').prefetch_related('likes', 'dislikes')
             ),
             Prefetch(
                 'attributes',
