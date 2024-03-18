@@ -17,6 +17,12 @@ class Stock(models.Model):
     def __str__(self):
         return self.sku
 
+    @property
+    def final_price(self):
+        if self.discount:
+            return int(self.sale_price - (self.sale_price * self.discount / 100))
+        return self.sale_price
+
     class Meta:
         verbose_name = 'Stock'
         verbose_name_plural = 'Stocks'

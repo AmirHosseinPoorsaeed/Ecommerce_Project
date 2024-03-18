@@ -6,6 +6,7 @@ from django_filters.views import FilterView
 
 from store.comments.forms import CommentForm
 from store.qas.forms import QuestionForm, AnswerForm
+from store.cart.forms import CartAddProductForm
 from .models import Product, Category
 from .mixins import SortMixin
 from .filters import ProductFilter
@@ -58,4 +59,5 @@ class ProductDetailView(generic.DetailView):
         context['question_form'] = QuestionForm()
         context['answer_form'] = AnswerForm()
         context['similar_products'] = similar_products
+        context['add_to_cart_form'] = CartAddProductForm()
         return context

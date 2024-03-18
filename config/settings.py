@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'store.comments.apps.CommentsConfig',
     'store.qas.apps.QasConfig',
     'store.inventory.apps.InventoryConfig',
+    'store.cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +94,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'store.products.context_processors.categories',
+                'store.cart.context_processors.cart',
             ],
         },
     },
