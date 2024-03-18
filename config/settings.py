@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
 
     # Third part
     'debug_toolbar',
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
     'store.qas.apps.QasConfig',
     'store.inventory.apps.InventoryConfig',
     'store.cart.apps.CartConfig',
+    'store.search.apps.SearchConfig',
 ]
 
 MIDDLEWARE = [
