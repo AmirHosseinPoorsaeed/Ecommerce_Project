@@ -1,0 +1,75 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% load jalali_tags %}
+
+{% block custom_css %}
+    <link href="{% static 'css/checkout.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <main class="bg_gray">
+        <div class="container margin_30">
+            <!-- /page_header -->
+            <form action="" method="POST">
+                {% csrf_token %}
+                {% if order_form.errors %}
+                    <div class="alert alert-danger">
+                        {{ order_form.errors }}
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="step first">
+                            <h3>1. Order Note</h3>
+                            <div class="tab-content checkout">
+                                <div class="tab-pane fade show active" id="tab_1" role="tabpanel"
+                                     aria-labelledby="tab_1">
+                                    <div class="form-group">
+                                        <textarea type="text" class="form-control" placeholder="Note"
+                                                  name="notes"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /step -->
+
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="step last">
+                            <h3>2. Order Summary And Payment</h3>
+                            <div class="box_general summary">
+
+                                <ul>
+                                    {% for item in cart %}
+                                        <li class="clearfix"><em>{{ item.quantity }}x {{ item.product_obj.title }}</em>
+                                            <span>${{ item.price }}</span></li>
+                                    {% endfor %}
+                                </ul>
+
+                                <ul>
+                                    <li class="clearfix"><em><strong>Subtotal</strong></em>
+                                        <span>${{ cart.get_total_price }}</span></li>
+                                </ul>
+
+                                <ul>
+                                    <li class="clearfix"><em><strong>Delivery Date</strong></em>
+                                        <span>{{ shipping.delivery_date|to_jalali:'%Y/%m/%d' }} in {{ shipping.delivery_time_slot }}</span></li>
+                                </ul>
+                                <div class="total clearfix">TOTAL <span>${{ cart.get_total_price }}</span></div>
+
+                                    <input type="submit" class="btn_1 full-width" value="Pay">
+                                </div>
+                                <!-- /box_general -->
+                            </div>
+                            <!-- /step -->
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </form>
+            </div>
+            <!-- /container -->
+        </main>
+    <!--/main-->
+{% endblock %}

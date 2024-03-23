@@ -30,6 +30,7 @@ urlpatterns = [
     path('cart/', include('store.cart.urls', namespace='cart')),
     path('search/', include('store.search.urls', namespace='search')),
     path('shipping/', include('store.shipping.urls', namespace='shipping')),
+    path('orders/', include('store.orders.urls', namespace='orders')),
 ]
 
 if settings.DEBUG:

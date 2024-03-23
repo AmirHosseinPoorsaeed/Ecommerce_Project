@@ -13,17 +13,6 @@
 {% block content %}
     <main class="bg_gray">
         <div class="container margin_30">
-            <div class="page_header">
-                <div class="breadcrumbs">
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li>Page active</li>
-                    </ul>
-                </div>
-                <h1>Sign In or Create an Account</h1>
-
-            </div>
             <!-- /page_header -->
             <form action="" method="POST">
                 {% csrf_token %}
@@ -143,9 +132,6 @@
                                         <input type="text" class="jalali_date-date form-control" placeholder="Calendar"
                                                name="delivery_date">
                                     </div>
-                                    {% if shipping_form.delivery_time_slot.errors %}
-                                        <p>{{ shipping_form.delivery_time_slot.errors }}</p>
-                                    {% endif %}
                                     <div class="row no-gutters">
                                         <div class="col-md-12 form-group">
                                             <div class="custom-select-form">
