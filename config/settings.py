@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from environs import Env
 import mimetypes
+import locale
 
 env = Env()
 env.read_env()
@@ -50,6 +51,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'treebeard',
     'django_filters',
+    'jalali_date',
+    'phonenumber_field',
+    'phonenumbers',
 
     # Local
     'store.accounts.apps.AccountsConfig',
@@ -60,6 +64,7 @@ INSTALLED_APPS = [
     'store.inventory.apps.InventoryConfig',
     'store.cart.apps.CartConfig',
     'store.search.apps.SearchConfig',
+    'store.shipping.apps.ShippingConfig',
 ]
 
 MIDDLEWARE = [
@@ -147,7 +152,8 @@ AUTHENTICATION_BACKENDS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
+locale.setlocale(locale.LC_ALL, "Persian_Iran.UTF-8")
 
 TIME_ZONE = 'UTC'
 

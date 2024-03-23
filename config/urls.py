@@ -29,6 +29,7 @@ urlpatterns = [
     path('qas/', include('store.qas.urls', namespace='qas')),
     path('cart/', include('store.cart.urls', namespace='cart')),
     path('search/', include('store.search.urls', namespace='search')),
+    path('shipping/', include('store.shipping.urls', namespace='shipping')),
 ]
 
 if settings.DEBUG:
