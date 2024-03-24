@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
+from decimal import Decimal
 
 
 class Order(models.Model):
@@ -9,13 +11,33 @@ class Order(models.Model):
     is_paid = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    coupon = models.ForeignKey(
+        'coupons.Coupon', 
+        on_delete=models.SET_NULL,
+        related_name='orders',
+        blank=True,
+        null=True)
+    discount = models.IntegerField(default=0, validators=[
+        MaxValueValidator(100),
+        MinValueValidator(0)
+    ])
 
     class Meta:
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'
 
-    def get_total_price(self):
+    def get_total_price_before_discount(self):
         return sum(item.quantity * item.price for item in self.items.all())
+
+    def get_discount(self):
+        total_price = self.get_total_price_before_discount()
+        if self.discount:
+            return total_price * (self.discount / Decimal(100))
+        return Decimal(0)
+    
+    def get_total_price(self):
+        total_price = self.get_total_price_before_discount
+        return total_price - self.get_discount()
 
 
 class OrderItem(models.Model):

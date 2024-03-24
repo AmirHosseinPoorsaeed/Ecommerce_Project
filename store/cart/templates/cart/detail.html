@@ -87,14 +87,20 @@
                                 <a href="{% url 'cart:clear' %}" class="btn_1 gray">Clear Cart</a>
                             </div>
 							<div class="col-sm-8">
-							<div class="apply-coupon">
-								<div class="form-group">
-									<div class="row g-2">
-										<div class="col-md-6"><input type="text" name="coupon-code" value="" placeholder="Promo code" class="form-control"></div>
-										<div class="col-md-4"><button type="button" class="btn_1 outline">Apply Coupon</button></div>
+							<form action="{% url 'coupons:apply' %}" method="POST">
+								{% csrf_token %}
+							
+								<div class="apply-coupon">
+									<div class="form-group">
+										<div class="row g-2">
+											<div class="col-md-6"><input type="text" name="code" value="" placeholder="Promo code" class="form-control"></div>
+											<div class="col-md-4"><button type="submit" class="btn_1 outline">Apply Coupon</button></div>
+										</div>
 									</div>
 								</div>
-							</div>
+
+							</form>
+
 						</div>
 					</div>
 					<!-- /cart_actions -->
@@ -107,11 +113,21 @@
 			<div class="row justify-content-end">
 				<div class="col-xl-4 col-lg-4 col-md-6">
 			<ul>
+				{% if cart.coupon %}
 				<li>
 					<span>Subtotal</span> ${{ cart.get_total_price }}
 				</li>
 				<li>
-					<span>Total</span> ${{ cart.get_total_price }}
+					<span>
+						"{{ cart.coupon.code }}" coupon
+						({{ cart.coupon.discount }}% off)
+					</span> 
+					- ${{ cart.get_discount }}
+				</li>
+				{% endif %}
+
+				<li>
+					<span>Total</span> ${{ cart.get_total_price_after_discount }}
 				</li>
 			</ul>
 			<a href="{% url 'shipping:create' %}" class="btn_1 full-width cart">Proceed to Checkout</a>

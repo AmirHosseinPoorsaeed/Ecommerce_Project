@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'store.search.apps.SearchConfig',
     'store.shipping.apps.ShippingConfig',
     'store.orders.apps.OrdersConfig',
+    'store.coupons.apps.CouponsConfig',
 ]
 
 MIDDLEWARE = [
@@ -156,7 +157,7 @@ AUTHENTICATION_BACKENDS = [
 LANGUAGE_CODE = 'fa'
 locale.setlocale(locale.LC_ALL, "Persian_Iran.UTF-8")
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 

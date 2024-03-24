@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 
 from store.products.models import Product
+from store.coupons.forms import CouponApplyForm
 from .cart import Cart
 from .forms import CartAddProductForm
 
@@ -17,7 +18,11 @@ def cart_detail(request):
             }
         )
 
-    return render(request, 'cart/detail.html', {'cart': cart})
+    coupon_apply_form = CouponApplyForm()
+
+    print(request.session.items())
+
+    return render(request, 'cart/detail.html', {'cart': cart, 'coupon_apply_form': coupon_apply_form})
 
 
 @require_POST

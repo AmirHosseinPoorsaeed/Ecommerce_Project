@@ -48,20 +48,36 @@
                                     {% endfor %}
                                 </ul>
 
-                                <ul>
-                                    <li class="clearfix"><em><strong>Subtotal</strong></em>
-                                        <span>${{ cart.get_total_price }}</span></li>
-                                </ul>
+                                {% if cart.coupon %}
+                                    
+                                    <ul>
+                                        <li class="clearfix">
+                                            <em><strong>Subtotal</strong></em>
+                                            <span>${{ cart.get_total_price }}</span>
+                                        </li>
+                                        
+                                        <li class="clearfix">
+                                            <em><strong>
+                                                "{{ cart.coupon.code }}" coupon
+						                        ({{ cart.coupon.discount }}% off)
+                                            </strong></em>
+                                            <span>- ${{ cart.get_discount }}</span>
+                                        </li>
+                                    </ul>
+
+                                {% endif %}
 
                                 <ul>
                                     <li class="clearfix"><em><strong>Delivery Date</strong></em>
                                         <span>{{ shipping.delivery_date|to_jalali:'%Y/%m/%d' }} in {{ shipping.delivery_time_slot }}</span></li>
-                                </ul>
-                                <div class="total clearfix">TOTAL <span>${{ cart.get_total_price }}</span></div>
+                                    </ul>
+                                    
+                                <div class="total clearfix">TOTAL <span>${{ cart.get_total_price_after_discount }}</span></div>
 
-                                    <input type="submit" class="btn_1 full-width" value="Pay">
+                                    <input type="submit" class="btn_1 full-width" value="Payment">
                                 </div>
                                 <!-- /box_general -->
+
                             </div>
                             <!-- /step -->
                         </div>

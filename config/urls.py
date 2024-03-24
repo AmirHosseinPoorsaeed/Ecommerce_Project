@@ -31,6 +31,7 @@ urlpatterns = [
     path('search/', include('store.search.urls', namespace='search')),
     path('shipping/', include('store.shipping.urls', namespace='shipping')),
     path('orders/', include('store.orders.urls', namespace='orders')),
+    path('coupons/', include('store.coupons.urls', namespace='coupons')),
 ]
 
 if settings.DEBUG:

@@ -20,6 +20,9 @@ def order_create_view(request):
         order_form = OrderForm(request.POST)
         if order_form.is_valid():
             order_obj = order_form.save(commit=False)
+            if cart.coupon:
+                order_obj.coupon = cart.coupon
+                order_obj.discount = cart.coupon.discount
             order_obj.user = request.user
             order_obj.shipping = shipping
             order_obj.save()
