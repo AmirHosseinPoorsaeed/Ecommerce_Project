@@ -1,0 +1,71 @@
+<html>
+    <body>
+        <h1>My Shop</h1>
+        <p>
+            Invoice no. {{ order.id }}<br>
+            <span class="secondary">
+                {{ order.created|date:"M d, Y" }}
+            </span>
+        </p>
+        <h3>Bill to</h3>
+        <p>
+            {{ order.shipping.address.receiver_first_name }} {{
+            order.shipping.address.receiver_last_name }}<br>
+            {{ order.shipping.address.address }}<br>
+            {{ order.shipping.address.postal_code }}, {{
+            order.shipping.address.city }}
+        </p>
+        <h3>Items bought</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all %}
+                <tr class="row{% cycle "1" "2" %}">
+                    <td>{{ item.product.title }}</td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">{{ item.quantity }}</td>
+                    <td class="num">${{ item.get_price }}</td>
+                </tr>
+                {% endfor %}
+
+                {% if order.coupon %}
+                <tr class="subtotal">
+                    <td colspan="3">Subtotal</td>
+                    <td class="num">
+                        ${{ order.get_total_price_before_discount }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        "{{ order.coupon.code }}" coupon
+                        ({{ order.discount }}% off)
+                    </td>
+                    <td class="num neg">
+                        - ${{ order.get_discount }}
+                    </td>
+                </tr>
+                {% endif %}
+
+                <tr class="total">
+                    <td colspan="3">Total</td>
+                    <td class="num">${{ order.get_total_price }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <span class="{% if order.paid %}paid{% else %}pending{% endif %}">
+            {% if order.is_paid %}
+            Paid
+            {% else %}
+            Pending payment
+            {% endif %}
+        </span>
+    </body>
+</html>

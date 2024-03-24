@@ -32,12 +32,12 @@ class Order(models.Model):
     def get_discount(self):
         total_price = self.get_total_price_before_discount()
         if self.discount:
-            return total_price * (self.discount / Decimal(100))
+            return round(total_price * (self.discount / Decimal(100)), 0)
         return Decimal(0)
     
     def get_total_price(self):
-        total_price = self.get_total_price_before_discount
-        return total_price - self.get_discount()
+        total_price = self.get_total_price_before_discount()
+        return round(total_price - self.get_discount(), 0)
 
 
 class OrderItem(models.Model):
@@ -49,3 +49,6 @@ class OrderItem(models.Model):
     class Meta:
         verbose_name = 'Order Item'
         verbose_name_plural = 'Order Items'
+
+    def get_price(self):
+        return self.price * self.quantity
