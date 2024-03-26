@@ -22,6 +22,10 @@ class Order(models.Model):
         MinValueValidator(0)
     ])
 
+    zarinpal_authority = models.CharField(max_length=255, blank=True)
+    zarinpal_ref_id = models.CharField(max_length=255, blank=True)
+    zarinpal_data = models.TextField(blank=True)
+
     class Meta:
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'

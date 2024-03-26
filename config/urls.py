@@ -32,6 +32,7 @@ urlpatterns = [
     path('shipping/', include('store.shipping.urls', namespace='shipping')),
     path('orders/', include('store.orders.urls', namespace='orders')),
     path('coupons/', include('store.coupons.urls', namespace='coupons')),
+    path('payment/', include('store.payment.urls', namespace='payment')),
 ]
 
 if settings.DEBUG:

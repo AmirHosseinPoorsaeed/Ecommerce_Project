@@ -9,11 +9,9 @@
         </p>
         <h3>Bill to</h3>
         <p>
-            {{ order.shipping.address.receiver_first_name }} {{
-            order.shipping.address.receiver_last_name }}<br>
+            {{ order.shipping.address.receiver_first_name }} {{ order.shipping.address.receiver_last_name }}<br>
             {{ order.shipping.address.address }}<br>
-            {{ order.shipping.address.postal_code }}, {{
-            order.shipping.address.city }}
+            {{ order.shipping.address.postal_code }}, {{ order.shipping.address.city }}
         </p>
         <h3>Items bought</h3>
         <table>
