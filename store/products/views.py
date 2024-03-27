@@ -43,6 +43,15 @@ class ProductDetailView(generic.DetailView):
     def get_queryset(self):
         product_slug = self.kwargs.get('slug')
         return Product.objects.with_related_info(product_slug)
+    
+    def get_object(self):
+        product = super().get_object()
+
+        ip_address = self.request.user.ip_address
+        if ip_address not in product.hits.all():
+            product.hits.add(ip_address)
+
+        return product
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -61,3 +70,4 @@ class ProductDetailView(generic.DetailView):
         context['similar_products'] = similar_products
         context['add_to_cart_form'] = CartAddProductForm()
         return context
+    

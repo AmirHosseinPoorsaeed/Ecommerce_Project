@@ -28,5 +28,14 @@ class Stock(models.Model):
         verbose_name_plural = 'Stocks'
 
 
+class Sale(models.Model):
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name='sale_records')
+    num_sold = models.PositiveIntegerField(default=0)
+    sold_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Sale'
+        verbose_name_plural = 'Sales'
 
+    def __str__(self):
+        return f'{self.product}'

@@ -7,7 +7,6 @@ from store.qas.models import Question, Answer
 class ProductManager(Manager):
     def active_with_stock_info(self):
         results = self.filter(is_active=True)
-        results = results.prefetch_related('stock_records')
         results = results.annotate(
             num_stock=F('stock_records__num_stock'),
             sale_price=F('stock_records__sale_price'),
@@ -25,7 +24,6 @@ class ProductManager(Manager):
         from .models import Attribute, OptionGroup
         results = self.filter(slug=slug)
         results = results.prefetch_related(
-            'stock_records',
             Prefetch(
                 'comments',
                 queryset=Comment.objects.select_related('author').prefetch_related('likes', 'dislikes')

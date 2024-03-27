@@ -7,6 +7,18 @@ from treebeard.mp_tree import MP_Node
 from .managers import ProductManager
 
 
+
+class IPAddress(models.Model):
+    ip_address = models.GenericIPAddressField()
+
+    class Meta:
+        verbose_name = 'IP Address'
+        verbose_name_plural = 'IP Addresses'
+
+    def __str__(self):
+        return self.ip_address
+
+
 class Category(MP_Node):
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=256, blank=True)
@@ -37,6 +49,7 @@ class Product(TimeStampedModel):
     slug = models.SlugField(max_length=256, unique=True, allow_unicode=True)
     is_active = models.BooleanField(default=True)
     category = models.ManyToManyField(Category, related_name='products')
+    hits = models.ManyToManyField(IPAddress, through='ProductHit', blank=True, related_name='hits')
 
     objects = ProductManager()
 
@@ -55,6 +68,12 @@ class Product(TimeStampedModel):
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
+
+
+class ProductHit(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
 
 
 class ProductImage(TimeStampedModel):

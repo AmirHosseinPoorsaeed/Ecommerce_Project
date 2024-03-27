@@ -3,7 +3,7 @@ from django.contrib import admin
 from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory
 
-from .models import Category, Product, ProductImage, Attribute, AttributeType, OptionGroup, OptionGroupValue
+from .models import Category, Product, ProductImage, Attribute, AttributeType, OptionGroup, OptionGroupValue, ProductHit
 
 admin.site.register(ProductImage)
 admin.site.register(Attribute)
@@ -18,6 +18,11 @@ class CategoryAdmin(TreeAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     exclude = ('slug',)
+
+
+@admin.register(ProductHit)
+class ProductHitAdmin(admin.ModelAdmin):
+    pass
 
 
 admin.site.register(Product, ProductAdmin)

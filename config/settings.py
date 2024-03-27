@@ -82,6 +82,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # allauth
     'allauth.account.middleware.AccountMiddleware',
+    # ipaddress
+    'store.products.middleware.SaveIPAddressMiddleware',
 ]
 
 INTERNAL_IPS = [
