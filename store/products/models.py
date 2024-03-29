@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 from treebeard.mp_tree import MP_Node
 
@@ -25,12 +26,12 @@ class Category(MP_Node):
     slug = models.SlugField(unique=True, allow_unicode=True)
     is_active = models.BooleanField(default=True)
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+    
+    def __str__(self):
+        return self.title
 
 
 class TimeStampedModel(models.Model):
@@ -53,6 +54,10 @@ class Product(TimeStampedModel):
 
     objects = ProductManager()
 
+    class Meta:
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+
     def __str__(self):
         return self.title
 
@@ -64,11 +69,7 @@ class Product(TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse('products:detail', args=[self.slug])
-
-    class Meta:
-        verbose_name = 'Product'
-        verbose_name_plural = 'Products'
-
+        
 
 class ProductHit(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -80,23 +81,29 @@ class ProductImage(TimeStampedModel):
     product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='users/%Y/%m/%d/')
 
-    def __str__(self):
-        return f'{self.product}  -->  {self.image}'
-
     class Meta:
         verbose_name = 'Product Image'
         verbose_name_plural = 'Product Images'
+
+    def __str__(self):
+        return f'{self.product.title}  -->  {self.image}'
+    
+    def image_preview(self):
+        return mark_safe(f'<img src="{self.image.url}" width="100" height="100" />')
+    
+    image_preview.short_description = 'Image'
 
 
 class AttributeType(models.Model):
     title = models.CharField(max_length=256)
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = 'Attribute Type'
         verbose_name_plural = 'Attribute Types'
+    
+    def __str__(self):
+        return self.title
+
 
 
 class Attribute(models.Model):
@@ -104,33 +111,33 @@ class Attribute(models.Model):
     type = models.ForeignKey('products.AttributeType', on_delete=models.CASCADE)
     product = models.ForeignKey('products.Product', on_delete=models.PROTECT, related_name='attributes')
 
-    def __str__(self):
-        return f'{self.title} --> {self.product}'
-
     class Meta:
         verbose_name = 'Attribute'
         verbose_name_plural = 'Attributes'
+    
+    def __str__(self):
+        return f'Attribute {self.product.title}: {self.title}'
 
 
 class OptionGroup(models.Model):
     title = models.CharField(max_length=256)
     attribute = models.ForeignKey('products.Attribute', on_delete=models.CASCADE, related_name='options')
 
-    def __str__(self):
-        return f'{self.title} --> {self.attribute}'
-
     class Meta:
         verbose_name = 'Option Group'
         verbose_name_plural = 'Option Groups'
+
+    def __str__(self):
+        return f'Option {self.attribute.title}: {self.title}'
 
 
 class OptionGroupValue(models.Model):
     description = models.CharField(max_length=512)
     group = models.ForeignKey('products.OptionGroup', on_delete=models.CASCADE, related_name='values')
 
-    def __str__(self):
-        return f'{self.description} --> {self.group}'
-
     class Meta:
         verbose_name = 'Option Group Value'
         verbose_name_plural = 'Option Group Values'
+
+    def __str__(self):
+        return f'Value {self.group.title}: {self.description}'

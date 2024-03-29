@@ -30,6 +30,9 @@ class Order(models.Model):
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'
 
+    def __str__(self) -> str:
+        return f'Order id={self.id} for {self.user.first_name}'
+
     def get_total_price_before_discount(self):
         return sum(item.quantity * item.price for item in self.items.all())
 
@@ -52,7 +55,7 @@ class OrderItem(models.Model):
 
     class Meta:
         verbose_name = 'Order Item'
-        verbose_name_plural = 'Order Items'
+        verbose_name_plural = 'Order Items' 
 
     def get_price(self):
         return self.price * self.quantity

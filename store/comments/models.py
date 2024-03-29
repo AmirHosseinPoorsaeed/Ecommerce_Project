@@ -15,8 +15,8 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     rate = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True)
-    likes = models.ManyToManyField(User, related_name='comment_likes')
-    dislikes = models.ManyToManyField(User, related_name='comment_dislikes')
+    likes = models.ManyToManyField(User, related_name='comment_likes', blank=True)
+    dislikes = models.ManyToManyField(User, related_name='comment_dislikes', blank=True)
 
     def __str__(self):
         return f'{self.author} comment for {self.product}'

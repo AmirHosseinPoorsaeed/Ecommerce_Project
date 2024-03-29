@@ -1,4 +1,3 @@
-import uuid
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -22,6 +21,9 @@ class Address(models.Model):
         verbose_name = 'Address'
         verbose_name_plural = 'Addresses'
 
+    def __str__(self):
+        return f'Address: {self.address}'
+
 
 class TimeSlot(models.Model):
     start_time = models.TimeField()
@@ -36,7 +38,7 @@ class TimeSlot(models.Model):
 
 
 class Shipping(models.Model):
-    address = models.ForeignKey('shipping.Address', on_delete=models.PROTECT)
+    address = models.ForeignKey('shipping.Address', on_delete=models.PROTECT, related_name='shippings')
     delivery_date = models.DateField()
     delivery_time_slot = models.ForeignKey('shipping.TimeSlot', on_delete=models.PROTECT)
     max_capacity = models.PositiveSmallIntegerField(default=10)
@@ -44,6 +46,9 @@ class Shipping(models.Model):
     class Meta:
         verbose_name = 'Shipping'
         verbose_name_plural = 'Shippings'
+
+    def __str__(self):
+        return f'shipping id: {self.id} in {self.delivery_date}, {self.address.address}'
 
     def clean(self):
         if not self.time_slot_is_available():

@@ -20,12 +20,12 @@ class Question(TimeStampedModel):
     product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name='product_questions')
     is_active = models.BooleanField(default=True)
 
-    def __str__(self):
-        return f'{self.text} --> {self.author}'
-
     class Meta:
         verbose_name = 'Question'
         verbose_name_plural = 'Questions'
+
+    def __str__(self):
+        return f'{self.text} --> {self.author.first_name}'
 
     def get_absolute_url(self):
         return reverse('products:detail', args=[self.product.slug])
@@ -36,12 +36,12 @@ class Answer(TimeStampedModel):
     author = models.ForeignKey(User, on_delete=models.PROTECT, related_name='answers')
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='question_answers')
 
-    def __str__(self):
-        return f'{self.author} answer question {self.question}'
-
     class Meta:
         verbose_name = 'Answer'
         verbose_name_plural = 'Answers'
+
+    def __str__(self):
+        return f'{self.author.first_name} answer'
 
     def get_absolute_url(self):
         return reverse('products:detail', args=[self.question.product.slug])

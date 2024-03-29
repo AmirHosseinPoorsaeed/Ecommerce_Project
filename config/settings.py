@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'jalali_date',
     'phonenumber_field',
     'phonenumbers',
+    'nested_inline',
 
     # Local
     'store.accounts.apps.AccountsConfig',

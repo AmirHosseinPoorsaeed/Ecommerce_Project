@@ -14,6 +14,10 @@ class Stock(models.Model):
     num_stock = models.PositiveIntegerField(default=0)
     threshold_low_stock = models.PositiveIntegerField(null=True, blank=True)
 
+    class Meta:
+        verbose_name = 'Stock'
+        verbose_name_plural = 'Stocks'
+
     def __str__(self):
         return self.sku
 
@@ -23,11 +27,7 @@ class Stock(models.Model):
             return int(self.sale_price - (self.sale_price * self.discount / 100))
         return self.sale_price
 
-    class Meta:
-        verbose_name = 'Stock'
-        verbose_name_plural = 'Stocks'
-
-
+    
 class Sale(models.Model):
     product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name='sale_records')
     num_sold = models.PositiveIntegerField(default=0)
