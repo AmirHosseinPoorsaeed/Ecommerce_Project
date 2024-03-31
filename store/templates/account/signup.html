@@ -1,15 +1,74 @@
 {% extends '_base.html' %}
 
+{% load static %}
+{% load socialaccount %}
+
 {% block page_title %}
     Sign Up Page
 {% endblock %}
 
-{% block content %}
-    <h3>Sign Up Page View</h3>
+{% block custom_css %}
+    <!-- SPECIFIC CSS -->
+    <link href="{% static 'css/account.css' %}" rel="stylesheet">
+{% endblock %}
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Sign Up">
-    </form>
+{% block content %}
+
+    <main class="bg_gray">
+
+	<div class="container margin_30">
+		<div class="page_header">
+		    <h1>Create an Account</h1>
+		</div>
+	</div>
+	<!-- /page_header -->
+			<div class="row justify-content-center">
+			<div class="col-xl-6 col-lg-6 col-md-8">
+				<div class="box_account">
+					<h3 class="new_client">New Client</h3> <small class="float-right pt-2">* Required Fields</small>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form_container">
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" id="email_2" placeholder="Email*">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="password1" id="password_in_2" value="" placeholder="Password*">
+                            </div>
+                            <hr>
+                            <div class="private box">
+                                <div class="row no-gutters">
+                                    <div class="col-6 pl-1">
+                                        <div class="form-group">
+                                            <input type="text" name="username" class="form-control" placeholder="Username *">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 pl-1">
+                                        <div class="form-group">
+                                            <input type="tel" name="phone_number" class="form-control" placeholder="Telephone *">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /row -->
+
+                            </div>
+                            <hr>
+                            <div class="text-center"><input type="submit" value="Register" class="btn_1 full-width"></div>
+                        </div>
+                        <!-- /form_container -->
+                    </form>
+				</div>
+				<!-- /box_account -->
+			</div>
+		</div>
+		<!-- /row -->
+		<!-- /container -->
+	</main>
+	<!--/main-->
+
 {% endblock %}

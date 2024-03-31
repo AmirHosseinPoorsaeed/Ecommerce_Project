@@ -25,7 +25,9 @@ admin.site.index_title = 'Website Management'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
+    path('accounts/', include('store.accounts.urls', namespace='accounts')),
     path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.socialaccount.urls')),
     path('', include('store.pages.urls', namespace='pages')),
     path('products/', include('store.products.urls', namespace='products')),
     path('comments/', include('store.comments.urls', namespace='comments')),

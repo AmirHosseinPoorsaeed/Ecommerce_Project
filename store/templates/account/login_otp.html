@@ -1,0 +1,59 @@
+{% extends '_base.html' %}
+
+{% load static %}
+{% load socialaccount %}
+
+{% block page_title %}
+    Login Page
+{% endblock %}
+
+{% block custom_css %}
+    <!-- SPECIFIC CSS -->
+    <link href="{% static 'css/account.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <main class="bg_gray">
+
+        <div class="container margin_30">
+            <div class="page_header">
+                <h1>Sign In With Phone Number</h1>
+            </div>
+        </div>
+        <!-- /page_header -->
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-6 col-md-8">
+                <div class="box_account">
+                    <h3 class="client">Send Code To Client</h3>
+                    <div class="form_container">
+                        <div class="row no-gutters">
+                            <div class="col-lg-6 pl-lg-1">
+                                <a href="{% provider_login_url 'google' %}" class="social_bt google">Login with
+                                    Google</a>
+                            </div>
+                        </div>
+                        <div class="divider"><span>Or</span></div>
+
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="tel" class="form-control" name="phone_number" placeholder="Phone Number*">
+                            </div>
+                            <div class="text-center"><input type="submit" value="Send Code" class="btn_1 full-width">
+                            </div>
+                        </form>
+
+                    </div>
+                    <!-- /form_container -->
+                </div>
+                <!-- /box_account -->
+            </div>
+        </div>
+        <!-- /row -->
+        <!-- /container -->
+    </main>
+    <!--/main-->
+
+{% endblock %}
+

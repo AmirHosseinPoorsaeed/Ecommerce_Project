@@ -1,5 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
+from django import forms
+from django.utils.translation import gettext_lazy as _
+
+from allauth.account.forms import SignupForm as AllAuthSignupForm
+from phonenumber_field.formfields import PhoneNumberField
 
 User = get_user_model()
 
@@ -14,3 +19,27 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = User
         fields = ('email', 'username',)
+
+
+class CustomSignupForm(AllAuthSignupForm):
+    phone_number = PhoneNumberField(region='IR', label=_('Your Phone Number'))
+
+    def clean_phone_number(self):
+        data = self.cleaned_data['phone_number']
+        if not User.objects.filter(phone_number=data).exists():
+            return data
+        raise forms.ValidationError('User with this phone number already exists.')
+
+    def save(self, request):
+        user = super().save(request)
+        user.phone_number = self.cleaned_data['phone_number']
+        user.save()
+        return user
+
+
+class PhoneNumberForm(forms.Form):
+    phone_number = PhoneNumberField(region='IR', label=_('Your Phone Number'))
+
+
+class VerifyForm(forms.Form):
+    code = forms.CharField(max_length=5)

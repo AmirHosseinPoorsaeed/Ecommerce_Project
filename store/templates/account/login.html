@@ -1,15 +1,76 @@
 {% extends '_base.html' %}
 
+{% load static %}
+{% load socialaccount %}
+
 {% block page_title %}
     Login Page
 {% endblock %}
 
-{% block content %}
-    <h3>Login Page View</h3>
+{% block custom_css %}
+    <!-- SPECIFIC CSS -->
+    <link href="{% static 'css/account.css' %}" rel="stylesheet">
+{% endblock %}
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Login">
-    </form>
+{% block content %}
+
+    <main class="bg_gray">
+
+	<div class="container margin_30">
+        <div class="page_header">
+		    <h1>Sign In</h1>
+        </div>
+	</div>
+	<!-- /page_header -->
+			<div class="row justify-content-center">
+			<div class="col-xl-6 col-lg-6 col-md-8">
+				<div class="box_account">
+					<h3 class="client">Already Client</h3>
+					<div class="form_container">
+						<div class="row no-gutters">
+							<div class="col-lg-6 pr-lg-1">
+								<a href="{% provider_login_url 'google' %}" class="social_bt google">Login with Google</a>
+							</div>
+						</div>
+						<div class="divider"><span>Or</span></div>
+
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="login" id="email" placeholder="Email or Username*">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="password" id="password_in" value="" placeholder="Password*">
+                            </div>
+                            <div class="clearfix add_bottom_15">
+                                <div class="checkboxes float-start">
+                                    <a href="{% url 'accounts:send_otp' %}" class="float-end m-2">Login with Phone Number
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="clearfix add_bottom_15">
+                                <div class="checkboxes float-start">
+                                    <a href="{% url 'account_reset_password' %}" class="float-end m-2">Forgot Password?
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="text-center"><input type="submit" value="Log In" class="btn_1 full-width"></div>
+                        </form>
+
+					</div>
+					<!-- /form_container -->
+				</div>
+				<!-- /box_account -->
+			</div>
+		</div>
+		<!-- /row -->
+		<!-- /container -->
+	</main>
+	<!--/main-->
+
 {% endblock %}

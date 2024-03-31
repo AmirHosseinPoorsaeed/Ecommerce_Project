@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from django.contrib.messages import constants as messages
 from pathlib import Path
 from environs import Env
 import mimetypes
@@ -49,6 +50,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'treebeard',
     'django_filters',
     'jalali_date',
@@ -70,6 +73,25 @@ INSTALLED_APPS = [
     'store.coupons.apps.CouponsConfig',
     'store.payment.apps.PaymentConfig',
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': env('CLIENT_ID'),
+            'secret': env('CLIENT_SECRET'),
+            'key': '',
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online'
+        },
+    }
+}
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     # debug toolbar
@@ -152,6 +174,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     # allauth
     'allauth.account.auth_backends.AuthenticationBackend',
+    'store.accounts.authentication.PhoneNumberAuthBackend',
 ]
 
 
@@ -194,11 +217,16 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_NOTIFICATIONS = True
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_UNKNOWN_ACCOUNTS = False
+ACCOUNT_FORMS = {
+    'signup': 'store.accounts.forms.CustomSignupForm',
+}
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -209,3 +237,12 @@ mimetypes.add_type("application/javascript", ".js", True)
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
 }
+
+# Messages setting
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
