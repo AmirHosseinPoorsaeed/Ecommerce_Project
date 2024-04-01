@@ -1,0 +1,53 @@
+{% extends '_base.html' %}
+
+{% load jalali_tags %}
+
+{% block page_title %}
+    Order List
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="m-5">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">discount</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">Status</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for order in orders %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ order.order_number }}</td>
+                        <td>{{ order.address }}</td>
+                        <td>{{ order.created|to_jalali:'%Y/%m/%d - %H:%S' }}</td>
+                        <td>{{ order.discount }}%</td>
+                        <td>{{ order.get_total_price }}</td>
+                        <td>
+                            {% if order.is_paid == False %}
+                                <i class="fa-regular fa-circle-xmark"></i>
+                            {% else %}
+                                <i class="fa-solid fa-check"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,12 +1,16 @@
+import uuid
+
 from django.db import models
 from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
+from uuid import uuid4
 
 
 class Order(models.Model):
     shipping = models.ForeignKey('shipping.Shipping', on_delete=models.PROTECT)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    order_number = models.UUIDField(unique=True, default=uuid4, editable=False)
     note = models.CharField(max_length=200, blank=True)
     is_paid = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -30,7 +34,7 @@ class Order(models.Model):
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f'Order id={self.id} for {self.user.first_name}'
 
     def get_total_price_before_discount(self):

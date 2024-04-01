@@ -1,7 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import CustomUser
+from jalali_date.admin import ModelAdminJalaliMixin
+from jalali_date import date2jalali
+
+from .models import CustomUser, Customer
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
@@ -20,3 +23,12 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'username',)
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
+
+
+@admin.register(Customer)
+class CustomerAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
+    list_display = ('user', 'first_name', 'last_name', 'get_birth_date_jalali', 'age')
+
+    @admin.display(description='Birth Date')
+    def get_birth_date_jalali(self, obj):
+        return date2jalali(obj.birth_date).strftime('%d %b %Y')

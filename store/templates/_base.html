@@ -292,10 +292,7 @@
                                             {% endif %}
                                             <ul>
                                                 <li>
-                                                    <a href="track-order.html"><i class="ti-truck"></i>Track your Order</a>
-                                                </li>
-                                                <li>
-                                                    <a href="account.html"><i class="ti-package"></i>My Orders</a>
+                                                    <a href="{% url 'orders:customer_list' %}"><i class="ti-package"></i>My Orders</a>
                                                 </li>
                                                 <li>
                                                     <a href="account.html"><i class="ti-user"></i>My Profile</a>

@@ -3,6 +3,8 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.conf import settings
 from django.db import transaction
+from django.db.models import F
+from django.views import generic
 
 import weasyprint
 import os
@@ -75,3 +77,15 @@ def order_pdf(request, order_id):
         weasyprint.CSS(os.path.join(settings.STATICFILES_DIRS[0], 'css\pdf.css'))
     ])
     return response
+
+
+class OrderCustomerListView(generic.ListView):
+    template_name = 'orders/list.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user) \
+            .select_related('shipping', 'user') \
+            .prefetch_related('items') \
+            .annotate(address=F('shipping__address__address')) \
+            .order_by('-created')
