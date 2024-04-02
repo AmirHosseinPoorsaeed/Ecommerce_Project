@@ -93,9 +93,14 @@
                     <!-- /prod_info -->
                     <div class="product_actions">
                         <ul>
-                            <li>
-                                <a href="#"><i class="ti-heart"></i><span>Add to Wishlist</span></a>
-                            </li>
+                            <form action="{% url 'products:add_favorite' product.id %}" method="POST">
+                                {% csrf_token %}
+                                <li>
+                                    <input type="submit" 
+                                    value="{% if user not in add_to_wishlist %}Add To Wishlist{% else %}Remove From Wishlist{% endif %}" 
+                                    class="btn btn-primary btn-sm">
+                                </li>
+                            </form>
                             <li>
                                 <a href="#"><i class="ti-control-shuffle"></i><span>Add to Compare</span></a>
                             </li>

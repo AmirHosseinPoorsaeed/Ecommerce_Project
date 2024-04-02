@@ -9,7 +9,7 @@ from treebeard.forms import movenodeform_factory
 from jalali_date import datetime2jalali
 from nested_inline.admin import NestedTabularInline, NestedModelAdmin, NestedStackedInline
 
-from .models import Category, IPAddress, Product, ProductImage, Attribute, AttributeType, OptionGroup, OptionGroupValue, ProductHit
+from .models import Category, IPAddress, Product, ProductImage, Attribute, AttributeType, OptionGroup, OptionGroupValue, ProductHit, ProductFavorite
 
 
 class ProductImageInline(NestedTabularInline):
@@ -169,14 +169,26 @@ class OptionGroupValueAdmin(admin.ModelAdmin):
 
 @admin.register(IPAddress)
 class IPAddressAdmin(admin.ModelAdmin):
-    list_display = ('id', 'ip_address')
+    list_display = ('id', 'ip_address',)
 
 
 @admin.register(ProductHit)
 class ProductHitAdmin(admin.ModelAdmin):
-    list_display = ('product', 'ip_address', 'get_created_jalali')
+    list_display = ('product', 'ip_address', 'get_created_jalali',)
     autocomplete_fields = ('product',)
 
     @admin.display(description='Datetime Created', ordering='created')
     def get_created_jalali(self, product):
         return datetime2jalali(product.created).strftime('%a, %d %b %Y %H:%M:%S')
+
+
+@admin.register(ProductFavorite)
+class ProductFavoriteAdmin(admin.ModelAdmin):
+    list_display = ('user', 'product', 'get_created_jalali',)
+    autocomplete_fields = ('user', 'product',)
+    ordering = ('-created',)
+
+    @admin.display(description='Datetime Created', ordering='created')
+    def get_created_jalali(self, product):
+        return datetime2jalali(product.created).strftime('%a, %d %b %Y %H:%M:%S')
+

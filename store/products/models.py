@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.conf import settings
 
 from treebeard.mp_tree import MP_Node
 
@@ -51,6 +52,7 @@ class Product(TimeStampedModel):
     is_active = models.BooleanField(default=True)
     category = models.ManyToManyField(Category, related_name='products')
     hits = models.ManyToManyField(IPAddress, through='ProductHit', blank=True, related_name='hits')
+    favorites = models.ManyToManyField(settings.AUTH_USER_MODEL, through='ProductFavorite', blank=True, related_name='favorites')
 
     objects = ProductManager()
 
@@ -69,6 +71,14 @@ class Product(TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse('products:detail', args=[self.slug])
+    
+
+class ProductFavorite(TimeStampedModel):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'product')
         
 
 class ProductHit(models.Model):

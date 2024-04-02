@@ -41,6 +41,7 @@ def payment_process_sandbox_view(request):
     order.save()
 
     if 'errors' not in data or len(data['errors']) == 0:
+        del request.session['order_id']
         return redirect(f'https://sandbox.zarinpal.com/pg/StartPay/{authority}')
     else:
         messages.error(request, 'Error from zarinpal')
@@ -88,7 +89,7 @@ def payment_callback_sandbox_view(request):
                         product = order_item.product
                         quantity_sold = order_item.quantity
 
-                        sale, created = Sale.objects.get_or_create(product=product)
+                        Sale.objects.get_or_create(product=product)
 
                         Sale.objects.filter(product=product).update(num_sold=F('num_sold') + quantity_sold)
                         Stock.objects.filter(product=product).update(num_stock=F('num_stock') - quantity_sold)

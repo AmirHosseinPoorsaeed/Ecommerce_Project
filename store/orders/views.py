@@ -64,6 +64,8 @@ def order_create_view(request):
 
                 request.session['order_id'] = order_obj.id
 
+                del request.session['shipping_id']
+
                 return redirect('payment:process')
 
     else:

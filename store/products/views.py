@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.db.models import Count
+from django.views.decorators.http import require_POST
 
 from django_filters.views import FilterView
 
@@ -43,7 +44,7 @@ class ProductDetailView(generic.DetailView):
     def get_queryset(self):
         product_slug = self.kwargs.get('slug')
         return Product.objects.with_related_info(product_slug)
-    
+
     def get_object(self):
         product = super().get_object()
 
@@ -69,5 +70,32 @@ class ProductDetailView(generic.DetailView):
         context['answer_form'] = AnswerForm()
         context['similar_products'] = similar_products
         context['add_to_cart_form'] = CartAddProductForm()
+        context['add_to_wishlist'] = product.favorites.all()
+        context['add_to_cart_form'] = CartAddProductForm()
         return context
+
+
+@require_POST
+def product_favorite(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.user not in product.favorites.all():
+        product.favorites.add(request.user)
+    else:
+        product.favorites.remove(request.user)
+
+    return redirect(product.get_absolute_url())
+
+
+class WishListView(generic.ListView):
+    template_name = 'products/wish_list.html'
+    context_object_name = 'products'
     
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Product.objects.active_with_stock_info()
+        queryset = queryset.filter(favorites=user)
+        return queryset
+
+
+
