@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.views import generic
+from django.urls import reverse_lazy
 
 from store.cart.cart import Cart
 from .forms import ShppingForm, AddressForm
@@ -16,25 +18,14 @@ def shipping_create_view(request):
         shipping_form = ShppingForm(request.POST, user=request.user)
         address_form = AddressForm(request.POST)
 
-        if shipping_form.is_valid() and address_form.is_valid():
-            address_obj = address_form.save(commit=False)
-            address_obj.user = request.user
-            address_obj.save()
-
-            shipping_obj = shipping_form.save(commit=False)
-            shipping_obj.address = address_obj
-            shipping_obj.save()
-
-            request.session['shipping_id'] = shipping_obj.id
-
-            return redirect('orders:create')
-
-        elif shipping_form.is_valid():
+        if shipping_form.is_valid():
             shipping_obj = shipping_form.save(commit=False)
 
             shipping_obj.save()
 
             request.session['shipping_id'] = shipping_obj.id
+
+            print(request.session.items())
 
             return redirect('orders:create')
 
@@ -46,3 +37,13 @@ def shipping_create_view(request):
         'shipping_form': shipping_form,
         'address_form': address_form,
     })
+
+
+class AddressCreateView(generic.CreateView):
+    form_class = AddressForm
+    success_url = reverse_lazy('shipping:create')
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.user = self.request.user
+        return super().form_valid(form)

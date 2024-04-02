@@ -1,6 +1,8 @@
 {% extends '_base.html' %}
 
 {% load static %}
+{% load product_tags %}
+{% load humanize %}
 
 {% block custom_css %}
     <link href="{% static 'css/product_page.css' %}" rel="stylesheet">
@@ -16,9 +18,6 @@
 
     <main>
         <div class="container margin_30">
-{#            <div class="countdown_inner">-20% This offer ends in#}
-{#                <div data-countdown="2019/05/15" class="countdown"></div>#}
-{#            </div>#}
             <div class="row">
                 {% with images=product.images.all %}
                     <div class="col-md-6">
@@ -47,21 +46,15 @@
                     </div>
                 {% endwith %}
                 <div class="col-md-6">
-                    <div class="breadcrumbs">
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Category</a></li>
-                            <li>Page active</li>
-                        </ul>
-                    </div>
                     <!-- /page_header -->
                     <div class="prod_info">
                         <h1>{{ product.title }}</h1>
                         <span class="rating">
-                            <i class="icon-star voted"></i><em>{{ product.average_rate }}</em>
+                            <i class="icon-star voted"></i><em>{{ product.average_rate|default:0 }}</em>
                             <br>
-                            <em>{{ product.comment_count }} reviews</em></span>
+                            <em>{{ product.comment_count|default:0 }} reviews</em></span>
                         <p><small>SKU: {{ product.sku }}</small><br>{{ product.summary }}</p>
+                        {% if product.num_stock %}
                         <form action="{% url 'cart:add' product.id %}" method="POST">
                             {% csrf_token %}
                             <div class="prod_options">
@@ -69,7 +62,7 @@
                                     <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong>Quantity</strong></label>
                                     <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                                         <div class="numbers-row">
-                                            <input type="text" value="1" id="quantity_1" class="qty2" name="quantity">
+                                            <input type="text" value="1" min="1" max="{{ product.num_stock }}" id="quantity_1" class="qty2" name="quantity">
                                         </div>
                                     </div>
                                 </div>
@@ -78,11 +71,11 @@
                                 <div class="col-lg-5 col-md-6">
                                     <div class="price_main">
                                         {% if product.discount %}
-                                            <span class="new_price">${{ product.final_price }}</span>
+                                            <span class="new_price">${{ product.final_price|persian_number|intcomma:False }}</span>
                                             <span class="percentage">-{{ product.discount }}%</span>
-                                            <span class="old_price">${{ product.sale_price }}</span>
+                                            <span class="old_price">${{ product.sale_price|persian_number|intcomma:False }}</span>
                                         {% else %}
-                                            <span class="new_price">${{ product.sale_price }}</span>
+                                            <span class="new_price">${{ product.sale_price|persian_number|intcomma:False }}</span>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -93,6 +86,9 @@
                                 </div>
                             </div>
                         </form>
+                        {% else %}
+                        <p>Unavailable</p>
+                        {% endif %}
                     </div>
                     <!-- /prod_info -->
                     <div class="product_actions">
@@ -282,17 +278,33 @@
                                          data-src="{{ product.main_cover.url }}" alt="">
                                 </a>
                             </figure>
+                            {% if product.num_stock <= product.threshold_low_stock %}
+                            <p class="text-danger">{{ product.num_stock }} in stock</p>
+                            {% endif %}
                             <a href="{{ product.get_absolute_url }}">
                                 <h3>{{ product.title }}</h3>
                             </a>
+                            {% if product.num_stock %}
                             <div class="price_box">
                                 {% if product.discount %}
-                                    <span class="new_price">${{ product.final_price }}</span>
-                                    <span class="old_price">${{ product.sale_price }}</span>
+                                <span class="new_price">${{ product.final_price }}</span>
+                                <span class="old_price">${{ product.sale_price }}</span>
                                 {% else %}
-                                    <span class="new_price">${{ product.sale_price }}</span>
+                                <span class="new_price">${{ product.sale_price }}</span>
                                 {% endif %}
                             </div>
+                            <div class="price_box">
+                                <form action="{% url 'cart:add' product.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-primary btn-sm" value="Add To Cart">
+                                    <input type="hidden" name="quantity" value="1">
+                                </form>
+                            </div>
+                            {% else %}
+                            <div class="price_box">
+                                <span class="new_price">Unavailable</span>
+                            </div>
+                            {% endif %}
                             <ul>
                                 <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
                                        title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a>
@@ -351,64 +363,6 @@
 
     </main>
     <!-- /main -->
-
-    {#    <h4>{{ product.title }}</h4>#}
-    {#    {% for image in product.images.all %}#}
-    {#        <p>#}
-    {#            <img src="{{ image.image.url }}" alt="">#}
-    {#        </p>#}
-    {#    {% endfor %}#}
-    {#    {% for attribute in product.attributes.all %}#}
-    {#        <p>{{ attribute.title }}</p>#}
-    {#        {% for option in attribute.options.all %}#}
-    {#            <p>{{ option.title }}</p>#}
-    {#            {% for value in option.values.all %}#}
-    {#                <p>{{ value.description }}</p>#}
-    {#            {% endfor %}#}
-    {#        {% endfor %}#}
-    {#    {% endfor %}#}
-    {#    Comments#}
-    {#    {% for comment in product.comments.all %}#}
-    {#        <p>{{ comment.author }}</p>#}
-    {#        <p>{{ comment.title }}</p>#}
-    {#        <p>{{ comment.body }}</p>#}
-    {#    {% endfor %}#}
-    {##}
-    {#    <br>#}
-    {##}
-    {#    <form action="{% url 'comments:create' product.id %}" method="POST">#}
-    {#        {% csrf_token %}#}
-    {#        {{ comment_form.as_p }}#}
-    {#        <input type="submit" value="Save">#}
-    {#    </form>#}
-    {##}
-    {#    <br><br>#}
-    {#    Question#}
-    {#    {% for question in product.product_questions.all %}#}
-    {#        <p>{{ question.author }}</p>#}
-    {#        <p>{{ question.text }}</p>#}
-    {#        Answer Question#}
-    {#        <form action="{% url 'qas:answer_create' question.id %}" method="POST">#}
-    {#            {% csrf_token %}#}
-    {#            {{ answer_form.as_p }}#}
-    {#            <input type="submit" value="Save">#}
-    {#        </form>#}
-    {#        <br>#}
-    {#        Answers#}
-    {#        {% for answer in question.question_answers.all %}#}
-    {#            <p>{{ answer.author }}</p>#}
-    {#            <p>{{ answer.text }}</p>#}
-    {#        {% endfor %}#}
-    {##}
-    {#        <br>#}
-    {#    {% endfor %}#}
-    {##}
-    {#    <br>#}
-    {#    <form action="{% url 'qas:question_create' product.id %}" method="POST">#}
-    {#        {% csrf_token %}#}
-    {#        {{ question_form.as_p }}#}
-    {#        <input type="submit" value="Save">#}
-    {#    </form>#}
 
 {% endblock %}
 

@@ -1,6 +1,8 @@
 {% extends '_base.html' %}
 
 {% load static %}
+{% load product_tags %}
+{% load humanize %}
 
 {% block page_title %}
 Home Page
@@ -146,10 +148,10 @@ Home Page
 					</a>
 					<div class="price_box">
 						{% if product.discount %}
-						<span class="new_price">${{ product.final_price }}</span>
-						<span class="old_price">${{ product.sale_price }}</span>
+						<span class="new_price">${{ product.final_price|persian_number|intcomma:False }}</span>
+						<span class="old_price">${{ product.sale_price|persian_number|intcomma:False }}</span>
 						{% else %}
-						<span class="new_price">${{ product.sale_price }}</span>
+						<span class="new_price">${{ product.sale_price|persian_number|intcomma:False }}</span>
 						{% endif %}
 					</div>
 					<div class="price_box">
@@ -199,15 +201,19 @@ Home Page
 							<img class="owl-lazy" data-src="{{ product.main_cover.url }}" alt>
 						</a>
 					</figure>
+					{% if product.num_stock <= product.threshold_low_stock %}
+					<p class="text-danger">{{ product.num_stock }} in stock</p>
+					{% endif %}
 					<a href="{{ product.get_absolute_url }}">
 						<h3>{{ product.title }}</h3>
 					</a>
+					{% if product.num_stock %}
 					<div class="price_box">
 						{% if product.discount %}
-						<span class="new_price">${{ product.final_price }}</span>
-						<span class="old_price">${{ product.sale_price }}</span>
+						<span class="new_price">${{ product.final_price|persian_number|intcomma:False }}</span>
+						<span class="old_price">${{ product.sale_price|persian_number|intcomma:False }}</span>
 						{% else %}
-						<span class="new_price">${{ product.sale_price }}</span>
+						<span class="new_price">${{ product.sale_price|persian_number|intcomma:False }}</span>
 						{% endif %}
 					</div>
 					<div class="price_box">
@@ -217,6 +223,11 @@ Home Page
 							<input type="hidden" name="quantity" value="1">
 						</form>
 					</div>
+					{% else %}
+					<div class="price_box">
+						<span class="new_price">Unavailable</span>
+					</div>
+					{% endif %}
 					<ul>
 						<li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip"
 								data-bs-placement="left" title="Add to favorites"><i
@@ -235,90 +246,7 @@ Home Page
 		<!-- /products_carousel -->
 	</div>
 	<!-- /container -->
-
-	<div class="container margin_60_35">
-		<div class="main_title">
-			<h2>Latest News</h2>
-			<span>Blog</span>
-			<p>Cum doctus civibus efficiantur in imperdiet deterruisset</p>
-		</div>
-		<div class="row">
-			<div class="col-lg-6">
-				<a class="box_news" href="blog.html">
-					<figure>
-						<img src="{% static 'img/blog-thumb-placeholder.jpg' %}"
-							data-src="{% static 'img/blog-thumb-1.jpg' %}" alt width="400"
-							height="266" class="lazy">
-						<figcaption><strong>28</strong>Dec</figcaption>
-					</figure>
-					<ul>
-						<li>by Mark Twain</li>
-						<li>20.11.2017</li>
-					</ul>
-					<h4>Pri oportere scribentur eu</h4>
-					<p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis
-						eos ex. In ius esse ullum vidisse....</p>
-				</a>
-			</div>
-			<!-- /box_news -->
-			<div class="col-lg-6">
-				<a class="box_news" href="blog.html">
-					<figure>
-						<img src="{% static 'img/blog-thumb-placeholder.jpg' %}"
-							data-src="{% static 'img/blog-thumb-2.jpg' %}" alt width="400"
-							height="266" class="lazy">
-						<figcaption><strong>28</strong>Dec</figcaption>
-					</figure>
-					<ul>
-						<li>By Jhon Doe</li>
-						<li>20.11.2017</li>
-					</ul>
-					<h4>Duo eius postea suscipit ad</h4>
-					<p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis
-						eos ex. In ius esse ullum vidisse....</p>
-				</a>
-			</div>
-			<!-- /box_news -->
-			<div class="col-lg-6">
-				<a class="box_news" href="blog.html">
-					<figure>
-						<img src="{% static 'img/blog-thumb-placeholder.jpg' %}"
-							data-src="{% static 'img/blog-thumb-3.jpg' %}" alt width="400"
-							height="266" class="lazy">
-						<figcaption><strong>28</strong>Dec</figcaption>
-					</figure>
-					<ul>
-						<li>By Luca Robinson</li>
-						<li>20.11.2017</li>
-					</ul>
-					<h4>Elitr mandamus cu has</h4>
-					<p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis
-						eos ex. In ius esse ullum vidisse....</p>
-				</a>
-			</div>
-			<!-- /box_news -->
-			<div class="col-lg-6">
-				<a class="box_news" href="blog.html">
-					<figure>
-						<img src="{% static 'img/blog-thumb-placeholder.jpg' %}"
-							data-src="{% static 'img/blog-thumb-4.jpg' %}" alt width="400"
-							height="266" class="lazy">
-						<figcaption><strong>28</strong>Dec</figcaption>
-					</figure>
-					<ul>
-						<li>By Paula Rodrigez</li>
-						<li>20.11.2017</li>
-					</ul>
-					<h4>Id est adhuc ignota delenit</h4>
-					<p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis
-						eos ex. In ius esse ullum vidisse....</p>
-				</a>
-			</div>
-			<!-- /box_news -->
-		</div>
-		<!-- /row -->
-	</div>
-	<!-- /container -->
 </main>
 <!-- /main -->
+
 {% endblock %}

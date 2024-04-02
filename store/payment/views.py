@@ -2,10 +2,11 @@ import requests
 import json
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
 from django.urls import reverse
 from django.db import transaction
 from django.db.models import F
+from django.contrib import messages
+
 from store.orders.models import Order
 from store.inventory.models import Sale, Stock
 
@@ -28,7 +29,7 @@ def payment_process_sandbox_view(request):
     request_data = {
         'MerchantID': 'aaabbbaaabbbaaabbbaaabbbaaabbbaaabbb',
         'Amount': rial_total_price,
-        'Description': f'#{order.id}',
+        'Description': f'#{order.order_number}',
         'CallbackURL': request.build_absolute_uri(reverse('payment:callback')),
     }
 
@@ -42,7 +43,8 @@ def payment_process_sandbox_view(request):
     if 'errors' not in data or len(data['errors']) == 0:
         return redirect(f'https://sandbox.zarinpal.com/pg/StartPay/{authority}')
     else:
-        return HttpResponse('Error from zarinpal')
+        messages.error(request, 'Error from zarinpal')
+        return redirect('pages:home')
     
 def payment_callback_sandbox_view(request):
     payment_authority = request.GET.get('Authority')
@@ -85,19 +87,25 @@ def payment_callback_sandbox_view(request):
                     for order_item in order_items:
                         product = order_item.product
                         quantity_sold = order_item.quantity
-                        
+
+                        sale, created = Sale.objects.get_or_create(product=product)
+
                         Sale.objects.filter(product=product).update(num_sold=F('num_sold') + quantity_sold)
                         Stock.objects.filter(product=product).update(num_stock=F('num_stock') - quantity_sold)
                     order.save()
-            
-                return HttpResponse('پرداخت شما با موفقیت انجام شد.')
+
+                    messages.success(request, 'پرداخت شما با موفقیت انجام شد.')
+                    return redirect('pages:home')
             
             elif payment_code == 101:
-                return HttpResponse('پرداخت شما با موفقیت انجام شد. این تراکنش قبلا ثبت شده است.')
+                messages.warning(request, 'پرداخت شما با موفقیت انجام شد. این تراکنش قبلا ثبت شده است.')
+                return redirect('pages:home')
             
             else:
                 error_code = response.json()['errors']['code']
                 error_message = response.json()['errors']['message']
-                return HttpResponse(f'تراکنش ناموفق بود {error_message} {error_code}')
+                messages.error(request, f'تراکنش ناموفق بود {error_message} {error_code}')
+                return redirect('pages:home')
     else:
-        return HttpResponse('تراکنش ناموفق بود')
+        messages.error(request, 'تراکنش ناموفق بود')
+        return redirect('pages:home')

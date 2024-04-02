@@ -1,6 +1,8 @@
 {% extends '_base.html' %}
 
 {% load jalali_tags %}
+{% load product_tags %}
+{% load humanize %}
 
 {% block page_title %}
     Order List
@@ -20,6 +22,7 @@
                     <th scope="col">discount</th>
                     <th scope="col">Total Amount</th>
                     <th scope="col">Status</th>
+                    <th scope="col">PDF</th>
 
                 </tr>
                 </thead>
@@ -32,12 +35,18 @@
                         <td>{{ order.address }}</td>
                         <td>{{ order.created|to_jalali:'%Y/%m/%d - %H:%S' }}</td>
                         <td>{{ order.discount }}%</td>
-                        <td>{{ order.get_total_price }}</td>
+                        <td>${{ order.get_total_price|persian_number|intcomma:False }}</td>
                         <td>
                             {% if order.is_paid == False %}
-                                <i class="fa-regular fa-circle-xmark"></i>
+                            <i class="fa-regular fa-circle-xmark"></i>
+                            <a href="{% url 'payment:process' %}">Pay</a>
                             {% else %}
-                                <i class="fa-solid fa-check"></i>
+                            <i class="fa-solid fa-check"></i>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.is_paid %}
+                                <a href="{% url 'orders:order_pdf' order.order_number %}">Download</a>
                             {% endif %}
                         </td>
                     </tr>

@@ -63,7 +63,7 @@
                     <div class="row small-gutters">
                         <div class="col-xl-3 col-lg-3 d-lg-flex align-items-center">
                             <div id="logo">
-                                <a href="index.html"><img src="{% static 'img/logo.svg' %}" alt="" width="100"
+                                <a href="{% url 'pages:home' %}"><img src="{% static 'img/logo.svg' %}" alt="" width="100"
                                                           height="35"></a>
                             </div>
                         </div>
@@ -269,8 +269,7 @@
                                             <div class="total_drop">
                                                 <div class="clearfix">
                                                     <strong>Total</strong><span>${{ cart.get_total_price }}</span></div>
-                                                <a href="{% url 'cart:detail' %}" class="btn_1 outline">View Cart</a><a
-                                                    href="checkout.html" class="btn_1">Checkout</a>
+                                                <a href="{% url 'cart:detail' %}" class="btn_1 outline">View Cart</a>
                                             </div>
                                         </div>
                                     </div>
@@ -295,10 +294,10 @@
                                                     <a href="{% url 'orders:customer_list' %}"><i class="ti-package"></i>My Orders</a>
                                                 </li>
                                                 <li>
-                                                    <a href="account.html"><i class="ti-user"></i>My Profile</a>
+                                                    <a href="{% url 'accounts:profile' %}"><i class="ti-user"></i>My Profile</a>
                                                 </li>
                                                 <li>
-                                                    <a href="help.html"><i class="ti-help-alt"></i>Help and Faq</a>
+                                                    <a href="{% url 'pages:help' %}"><i class="ti-help-alt"></i>Help and Faq</a>
                                                 </li>
                                             </ul>
                                         </div>

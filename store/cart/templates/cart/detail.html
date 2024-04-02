@@ -1,18 +1,20 @@
 {% extends '_base.html' %}
 
 {% load static %}
+{% load product_tags %}
+{% load humanize %}
 
 {% block custom_css %}
-    <link href="{% static 'css/cart.css' %}" rel="stylesheet">
+<link href="{% static 'css/cart.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block page_title %}
-    Cart
+Cart
 {% endblock %}
 
 {% block content %}
-    <main class="bg_gray">
-		<div class="container margin_30">
+<main class="bg_gray">
+	<div class="container margin_30">
 		<div class="page_header">
 			<div class="breadcrumbs">
 				<ul>
@@ -25,118 +27,124 @@
 		</div>
 		<!-- /page_header -->
 		<table class="table table-striped cart-list">
-							<thead>
-								<tr>
-									<th>
-										Product
-									</th>
-									<th>
-										Price
-									</th>
-									<th>
-										Quantity
-									</th>
-									<th>
-										Subtotal
-									</th>
-									<th>
+			<thead>
+				<tr>
+					<th>
+						Product
+					</th>
+					<th>
+						Price
+					</th>
+					<th>
+						Quantity
+					</th>
+					<th>
+						Subtotal
+					</th>
+					<th>
 
-									</th>
-								</tr>
-							</thead>
-							<tbody>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
 
-                                {% for item in cart %}
-                                    <tr>
-                                        <td>
-                                            <div class="thumb_cart">
-                                                <img data-src="{{ item.product_obj.main_cover.url }}" class="lazy" alt="Image">
-                                            </div>
-                                            <span class="item_cart">{{ item.product_obj.title }}</span>
-                                        </td>
-                                        <td>
-                                            <strong>${{ item.price }}</strong>
-                                        </td>
-                                        <td>
+				{% for item in cart %}
+				<tr>
+					<td>
+						<div class="thumb_cart">
+							<img data-src="{{ item.product_obj.main_cover.url }}" class="lazy"
+								alt="Image">
+						</div>
+						<span class="item_cart">{{ item.product_obj.title }}</span>
+					</td>
+					<td>
+						<strong>${{ item.price|persian_number|intcomma:False }}</strong>
+					</td>
+					<td>
 
-                                            <form action="{% url 'cart:add' item.product_obj.id %}" method="POST">
-                                                {% csrf_token %}
-                                                <div class="numbers-row">
-                                                    <input type="text" value="{{ item.quantity }}" id="quantity_1" class="qty2" name="quantity">
-                                                    {{ item.product_update_quantity_form.override }}
-                                                    <div class="inc button_inc">+</div><div class="dec button_inc">-</div>
-                                                </div>
-                                                <button type="submit" class="btn_1 gray">Update Cart</button>
-                                            </form>
+						<form action="{% url 'cart:add' item.product_obj.id %}" method="POST">
+							{% csrf_token %}
+							<div class="numbers-row">
+								<input type="text" value="{{ item.quantity }}" id="quantity_1"
+									class="qty2" name="quantity">
+								{{ item.product_update_quantity_form.override }}
+								<div class="inc button_inc">+</div><div class="dec button_inc">-</div>
+							</div>
+							<button type="submit" class="btn_1 gray">Update Cart</button>
+						</form>
 
-                                        </td>
-                                        <td>
-                                            <strong>${{ item.total_price }}</strong>
-                                        </td>
-                                        <td class="options">
-                                            <a href="{% url 'cart:remove' item.product_obj.id %}"><i class="ti-trash"></i></a>
-                                        </td>
-                                    </tr>
-                            {% endfor %}
+					</td>
+					<td>
+						<strong>${{ item.total_price|persian_number|intcomma:False }}</strong>
+					</td>
+					<td class="options">
+						<a href="{% url 'cart:remove' item.product_obj.id %}"><i
+								class="ti-trash"></i></a>
+					</td>
+				</tr>
+				{% endfor %}
 
-							</tbody>
-						</table>
+			</tbody>
+		</table>
 
-						<div class="row add_top_30 flex-sm-row-reverse cart_actions">
-                            <div class="col-sm-4 text-end">
-                                <a href="{% url 'cart:clear' %}" class="btn_1 gray">Clear Cart</a>
-                            </div>
-							<div class="col-sm-8">
-							<form action="{% url 'coupons:apply' %}" method="POST">
-								{% csrf_token %}
-							
-								<div class="apply-coupon">
-									<div class="form-group">
-										<div class="row g-2">
-											<div class="col-md-6"><input type="text" name="code" value="" placeholder="Promo code" class="form-control"></div>
-											<div class="col-md-4"><button type="submit" class="btn_1 outline">Apply Coupon</button></div>
-										</div>
-									</div>
-								</div>
+		<div class="row add_top_30 flex-sm-row-reverse cart_actions">
+			<div class="col-sm-4 text-end">
+				<a href="{% url 'cart:clear' %}" class="btn_1 gray">Clear Cart</a>
+			</div>
+			<div class="col-sm-8">
+				<form action="{% url 'coupons:apply' %}" method="POST">
+					{% csrf_token %}
 
-							</form>
-
+					<div class="apply-coupon">
+						<div class="form-group">
+							<div class="row g-2">
+								<div class="col-md-6"><input type="text" name="code" value
+										placeholder="Promo code" class="form-control"></div>
+								<div class="col-md-4"><button type="submit" class="btn_1 outline">Apply
+										Coupon</button></div>
+							</div>
 						</div>
 					</div>
-					<!-- /cart_actions -->
 
+				</form>
+
+			</div>
 		</div>
-		<!-- /container -->
+		<!-- /cart_actions -->
 
-		<div class="box_cart">
-			<div class="container">
+	</div>
+	<!-- /container -->
+
+	<div class="box_cart">
+		<div class="container">
 			<div class="row justify-content-end">
 				<div class="col-xl-4 col-lg-4 col-md-6">
-			<ul>
-				{% if cart.coupon %}
-				<li>
-					<span>Subtotal</span> ${{ cart.get_total_price }}
-				</li>
-				<li>
-					<span>
-						"{{ cart.coupon.code }}" coupon
-						({{ cart.coupon.discount }}% off)
-					</span> 
-					- ${{ cart.get_discount }}
-				</li>
-				{% endif %}
+					<ul>
+						{% if cart.coupon %}
+						<li>
+							<span>Subtotal</span> ${{ cart.get_total_price|persian_number|intcomma:False }}
+						</li>
+						<li>
+							<span>
+								"{{ cart.coupon.code }}" coupon
+								({{ cart.coupon.discount }}% off)
+							</span>
+							- ${{ cart.get_discount|persian_number|intcomma:False }}
+						</li>
+						{% endif %}
 
-				<li>
-					<span>Total</span> ${{ cart.get_total_price_after_discount }}
-				</li>
-			</ul>
-			<a href="{% url 'shipping:create' %}" class="btn_1 full-width cart">Proceed to Checkout</a>
-					</div>
+						<li>
+							<span>Total</span> ${{ cart.get_total_price_after_discount|persian_number|intcomma:False }}
+						</li>
+					</ul>
+					<a href="{% url 'shipping:create' %}" class="btn_1 full-width cart">Proceed
+						to Checkout</a>
 				</div>
 			</div>
 		</div>
-		<!-- /box_cart -->
+	</div>
+	<!-- /box_cart -->
 
-	</main>
-	<!--/main-->
+</main>
+<!--/main-->
 {% endblock %}

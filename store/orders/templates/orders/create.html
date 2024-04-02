@@ -1,6 +1,8 @@
 {% extends '_base.html' %}
 
 {% load static %}
+{% load product_tags %}
+{% load humanize %}
 
 {% load jalali_tags %}
 
@@ -44,7 +46,7 @@
                                 <ul>
                                     {% for item in cart %}
                                         <li class="clearfix"><em>{{ item.quantity }}x {{ item.product_obj.title }}</em>
-                                            <span>${{ item.price }}</span></li>
+                                            <span>${{ item.price|persian_number|intcomma:False }}</span></li>
                                     {% endfor %}
                                 </ul>
 
@@ -53,7 +55,7 @@
                                     <ul>
                                         <li class="clearfix">
                                             <em><strong>Subtotal</strong></em>
-                                            <span>${{ cart.get_total_price }}</span>
+                                            <span>${{ cart.get_total_price|persian_number|intcomma:False }}</span>
                                         </li>
                                         
                                         <li class="clearfix">
@@ -61,7 +63,7 @@
                                                 "{{ cart.coupon.code }}" coupon
 						                        ({{ cart.coupon.discount }}% off)
                                             </strong></em>
-                                            <span>- ${{ cart.get_discount }}</span>
+                                            <span>- ${{ cart.get_discount|persian_number|intcomma:False }}</span>
                                         </li>
                                     </ul>
 
@@ -72,7 +74,7 @@
                                         <span>{{ shipping.delivery_date|to_jalali:'%Y/%m/%d' }} in {{ shipping.delivery_time_slot }}</span></li>
                                     </ul>
                                     
-                                <div class="total clearfix">TOTAL <span>${{ cart.get_total_price_after_discount }}</span></div>
+                                <div class="total clearfix">TOTAL <span>${{ cart.get_total_price_after_discount|persian_number|intcomma:False }}</span></div>
 
                                     <input type="submit" class="btn_1 full-width" value="Payment">
                                 </div>

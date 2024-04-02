@@ -25,3 +25,7 @@ class HomePageView(TemplateView):
         context['most_sold_products'] = most_sold_products
         context['most_hits_products'] = most_hits_products
         return context
+    
+
+class HelpPageView(TemplateView):
+    template_name = 'help.html'

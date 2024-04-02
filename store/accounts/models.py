@@ -23,10 +23,12 @@ class Customer(models.Model):
 
     @property
     def age(self):
-        today = timezone.now().today()
-        age = today.year - self.birth_date.year - (
-                (today.month, today.day) < (self.birth_date.month, self.birth_date.day))
-        return f'{age} yeas old'
+        if self.birth_date:
+            today = timezone.now().today()
+            age = today.year - self.birth_date.year - (
+                    (today.month, today.day) < (self.birth_date.month, self.birth_date.day))
+            return f'{age} yeas old'
+        return
 
     @property
     def first_name(self):

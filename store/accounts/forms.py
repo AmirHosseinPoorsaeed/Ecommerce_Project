@@ -5,6 +5,10 @@ from django.utils.translation import gettext_lazy as _
 
 from allauth.account.forms import SignupForm as AllAuthSignupForm
 from phonenumber_field.formfields import PhoneNumberField
+from jalali_date.fields import JalaliDateField
+from jalali_date.widgets import AdminJalaliDateWidget
+
+from store.accounts.models import Customer
 
 User = get_user_model()
 
@@ -43,3 +47,22 @@ class PhoneNumberForm(forms.Form):
 
 class VerifyForm(forms.Form):
     code = forms.CharField(max_length=5)
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name',)
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ('birth_date',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['birth_date'] = JalaliDateField(
+            label='date',
+            widget=AdminJalaliDateWidget()
+        )

@@ -5,6 +5,8 @@ from django.conf import settings
 from django.db import transaction
 from django.db.models import F
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 import weasyprint
 import os
@@ -15,6 +17,7 @@ from .forms import OrderForm
 from .models import OrderItem, Order
 
 
+@login_required
 def order_create_view(request):
     cart = Cart(request)
 
@@ -26,6 +29,9 @@ def order_create_view(request):
     shipping = get_object_or_404(Shipping, id=shipping_id)
 
     if request.method == 'POST':
+
+        print(request.session.items())
+
         order_form = OrderForm(request.POST)
         if order_form.is_valid():
             with transaction.atomic():
@@ -33,6 +39,7 @@ def order_create_view(request):
                 if cart.coupon:
                     order_obj.coupon = cart.coupon
                     order_obj.discount = cart.coupon.discount
+                    del request.session['coupon_id']
                 order_obj.user = request.user
                 order_obj.shipping = shipping
                 order_obj.save()
@@ -69,7 +76,7 @@ def order_create_view(request):
 
 
 def order_pdf(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
+    order = get_object_or_404(Order, order_number=order_id)
     html = render_to_string('orders/pdf.html', {'order': order})
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename=order_{order.id}.pdf'
@@ -79,7 +86,7 @@ def order_pdf(request, order_id):
     return response
 
 
-class OrderCustomerListView(generic.ListView):
+class OrderCustomerListView(LoginRequiredMixin, generic.ListView):
     template_name = 'orders/list.html'
     context_object_name = 'orders'
 

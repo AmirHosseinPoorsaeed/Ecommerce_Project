@@ -10,8 +10,10 @@ from .models import Order, OrderItem
 
 
 def order_pdf(obj):
-    url = reverse('orders:order_pdf', args=[obj.id])
-    return mark_safe(f'<a href="{url}">PDF</a>')
+    if obj.is_paid:
+        url = reverse('orders:order_pdf', args=[obj.order_number])
+        return mark_safe(f'<a href="{url}">PDF</a>')
+    return
 
 
 order_pdf.short_description = 'Invoice'

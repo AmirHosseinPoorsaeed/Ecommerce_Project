@@ -30,5 +30,7 @@ class CustomerAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
     list_display = ('user', 'first_name', 'last_name', 'get_birth_date_jalali', 'age')
 
     @admin.display(description='Birth Date')
-    def get_birth_date_jalali(self, obj):
-        return date2jalali(obj.birth_date).strftime('%d %b %Y')
+    def get_birth_date_jalali(self, customer):
+        if customer.birth_date:
+            return date2jalali(customer.birth_date).strftime('%d %b %Y')
+        return

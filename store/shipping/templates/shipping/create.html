@@ -1,6 +1,8 @@
 {% extends '_base.html' %}
 
 {% load static %}
+{% load product_tags %}
+{% load humanize %}
 
 {% load jalali_tags %}
 
@@ -14,47 +16,47 @@
     <main class="bg_gray">
         <div class="container margin_30">
             <!-- /page_header -->
-            <form action="" method="POST">
-                {% csrf_token %}
-                {% if shipping_form.errors %}
-                    <div class="alert alert-danger">
-                        {{ shipping_form.errors }}
-                    </div>
-                {% endif %}
-                {% if address_form.errors %}
-                    <div class="alert alert-danger">
-                        {{ address_form.errors }}
-                    </div>
-                {% endif %}
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="step first">
-                            <h3>1. User Info and Billing address</h3>
-                            <ul class="nav nav-tabs" id="tab_checkout" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#tab_1"
-                                       role="tab" aria-controls="tab_1" aria-selected="true">Add New Address</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#tab_2" role="tab"
-                                       aria-controls="tab_2" aria-selected="false">Choose A Address</a>
-                                </li>
-                            </ul>
+            {% if shipping_form.errors %}
+                <div class="alert alert-danger">
+                    {{ shipping_form.errors }}
+                </div>
+            {% endif %}
+            {% if address_form.errors %}
+                <div class="alert alert-danger">
+                    {{ address_form.errors }}
+                </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="step first">
+                        <h3>1. User Info and Billing address</h3>
+                        <ul class="nav nav-tabs" id="tab_checkout" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#tab_1"
+                                    role="tab" aria-controls="tab_1" aria-selected="true">Add New Address</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#tab_2" role="tab"
+                                    aria-controls="tab_2" aria-selected="false">Choose A Address</a>
+                            </li>
+                        </ul>
+                        <form action="{% url 'shipping:address_create' %}" method="POST">
+                            {% csrf_token %}
                             <div class="tab-content checkout">
                                 <div class="tab-pane fade show active" id="tab_1" role="tabpanel"
-                                     aria-labelledby="tab_1">
+                                    aria-labelledby="tab_1">
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="First Name"
-                                               name="receiver_first_name">
+                                            name="receiver_first_name">
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Last Name"
-                                               name="receiver_last_name">
+                                            name="receiver_last_name">
                                     </div>
                                     <hr>
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Full Address"
-                                               name="address">
+                                            name="address">
                                     </div>
                                     <div class="row no-gutters">
                                         <div class="col-6 form-group pr-1">
@@ -62,18 +64,18 @@
                                         </div>
                                         <div class="col-6 form-group pr-1">
                                             <input type="text" class="form-control" placeholder="Province"
-                                                   name="province">
+                                                name="province">
                                         </div>
                                         <div class="col-6 form-group pr-1">
                                             <input type="text" class="form-control" placeholder="Building Number"
-                                                   name="building_number">
+                                                name="building_number">
                                         </div>
                                         <div class="col-6 form-group pr-1">
                                             <input type="text" class="form-control" placeholder="Unit" name="unit">
                                         </div>
                                         <div class="col-6 form-group pl-1">
                                             <input type="text" class="form-control" placeholder="Postal code"
-                                                   name="postal_code">
+                                                name="postal_code">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -102,9 +104,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="submit" class="btn_1 full-width" value="Save Address">
                                 </div>
+                            </form>
+                            <form action="" method="POST">
+                                {% csrf_token %}
                                 <div class="tab-pane fade" id="tab_2" role="tabpanel" aria-labelledby="tab_2"
-                                     style="position: relative;">
+                                    style="position: relative;">
                                     <div class="row no-gutters">
                                         <div class="col-md-12 form-group">
                                             <div class="custom-select-form">
@@ -120,7 +126,7 @@
                                 <!-- /tab_2 -->
                             </div>
                         </div>
-                        <!-- /step -->
+                    <!-- /step -->
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="step first">
@@ -158,7 +164,7 @@
                                 <ul>
                                     {% for item in cart %}
                                         <li class="clearfix"><em>{{ item.quantity }}x {{ item.product_obj.title }}</em>
-                                            <span>${{ item.price }}</span></li>
+                                            <span>${{ item.price|persian_number|intcomma:False }}</span></li>
                                     {% endfor %}
                                 </ul>
 
@@ -167,7 +173,7 @@
                                     <ul>
                                         <li class="clearfix">
                                             <em><strong>Subtotal</strong></em>
-                                            <span>${{ cart.get_total_price }}</span>
+                                            <span>${{ cart.get_total_price|persian_number|intcomma:False }}</span>
                                         </li>
                                         
                                         <li class="clearfix">
@@ -175,14 +181,14 @@
                                                 "{{ cart.coupon.code }}" coupon
 						                        ({{ cart.coupon.discount }}% off)
                                             </strong></em>
-                                            <span>- ${{ cart.get_discount }}</span>
+                                            <span>- ${{ cart.get_discount|persian_number|intcomma:False }}</span>
                                         </li>
                                     </ul>
 
                                 {% endif %}
 
 
-                                <div class="total clearfix">TOTAL <span>${{ cart.get_total_price_after_discount }}</span></div>
+                                <div class="total clearfix">TOTAL <span>${{ cart.get_total_price_after_discount|persian_number|intcomma:False }}</span></div>
 
                                     <input type="submit" class="btn_1 full-width" value="Confirm">
                                 </div>
