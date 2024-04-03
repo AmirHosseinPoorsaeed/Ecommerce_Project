@@ -29,9 +29,6 @@ def order_create_view(request):
     shipping = get_object_or_404(Shipping, id=shipping_id)
 
     if request.method == 'POST':
-
-        print(request.session.items())
-
         order_form = OrderForm(request.POST)
         if order_form.is_valid():
             with transaction.atomic():

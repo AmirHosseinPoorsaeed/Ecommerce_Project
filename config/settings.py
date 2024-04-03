@@ -247,3 +247,12 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
  }
+
+CELERY_BROKER_URL = 'redis://localhost:6379/1'
+
+CELERY_BEAT_SCHEDULE = {
+    'update_coupon_status': {
+        'task': 'store.coupons.tasks.update_coupon_status',
+        'schedule': 60,
+    }
+}

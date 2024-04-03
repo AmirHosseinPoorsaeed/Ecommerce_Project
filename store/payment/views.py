@@ -9,6 +9,7 @@ from django.contrib import messages
 
 from store.orders.models import Order
 from store.inventory.models import Sale, Stock
+from .tasks import payment_completed
 
 
 def payment_process_sandbox_view(request):
@@ -94,6 +95,8 @@ def payment_callback_sandbox_view(request):
                         Sale.objects.filter(product=product).update(num_sold=F('num_sold') + quantity_sold)
                         Stock.objects.filter(product=product).update(num_stock=F('num_stock') - quantity_sold)
                     order.save()
+
+                    payment_completed.delay(order.id)
 
                     messages.success(request, 'پرداخت شما با موفقیت انجام شد.')
                     return redirect('pages:home')

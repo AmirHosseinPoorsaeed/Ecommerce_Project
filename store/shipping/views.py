@@ -25,8 +25,6 @@ def shipping_create_view(request):
 
             request.session['shipping_id'] = shipping_obj.id
 
-            print(request.session.items())
-
             return redirect('orders:create')
 
     else:
