@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.db.models import Count
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django_filters.views import FilterView
 
@@ -76,6 +78,7 @@ class ProductDetailView(generic.DetailView):
 
 
 @require_POST
+@login_required
 def product_favorite(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
@@ -87,7 +90,7 @@ def product_favorite(request, product_id):
     return redirect(product.get_absolute_url())
 
 
-class WishListView(generic.ListView):
+class WishListView(LoginRequiredMixin, generic.ListView):
     template_name = 'products/wish_list.html'
     context_object_name = 'products'
     

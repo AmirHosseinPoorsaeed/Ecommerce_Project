@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from store.cart.cart import Cart
 from .forms import ShppingForm, AddressForm
@@ -37,7 +38,7 @@ def shipping_create_view(request):
     })
 
 
-class AddressCreateView(generic.CreateView):
+class AddressCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = AddressForm
     success_url = reverse_lazy('shipping:create')
 

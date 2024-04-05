@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from .forms import CommentForm
 from .models import Comment
 from store.products.models import Product
 
 
-class CommentCreateView(generic.CreateView):
+class CommentCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = CommentForm
     template_name = 'comments/comment_form.html'
 
@@ -28,6 +30,7 @@ class CommentCreateView(generic.CreateView):
         return context
 
 
+@login_required
 def comment_like(request, comment_id, reaction):
     comment = get_object_or_404(Comment, pk=comment_id)
 

@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import QuestionForm, AnswerForm
 from .models import Question
 from store.products.models import Product
 
 
-class QuestionCreateView(generic.CreateView):
+class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = QuestionForm
     template_name = 'qas/question_form.html'
 
@@ -21,7 +22,7 @@ class QuestionCreateView(generic.CreateView):
         return super().form_valid(form)
 
 
-class AnswerCreateView(generic.CreateView):
+class AnswerCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = AnswerForm
     template_name = 'qas/answer_form.html'
 
