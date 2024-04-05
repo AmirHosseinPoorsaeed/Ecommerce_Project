@@ -1,7 +1,4 @@
-import uuid
-
 from django.db import models
-from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
 from uuid import uuid4
@@ -9,7 +6,7 @@ from uuid import uuid4
 
 class Order(models.Model):
     shipping = models.ForeignKey('shipping.Shipping', on_delete=models.PROTECT)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    user = models.ForeignKey('accounts.Customer', on_delete=models.PROTECT)
     order_number = models.UUIDField(unique=True, default=uuid4, editable=False)
     note = models.CharField(max_length=200, blank=True)
     is_paid = models.BooleanField(default=False)

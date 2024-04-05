@@ -37,7 +37,7 @@ def order_create_view(request):
                     order_obj.coupon = cart.coupon
                     order_obj.discount = cart.coupon.discount
                     del request.session['coupon_id']
-                order_obj.user = request.user
+                order_obj.user = request.user.customer
                 order_obj.shipping = shipping
                 order_obj.save()
 
@@ -90,7 +90,7 @@ class OrderCustomerListView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'orders'
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user) \
+        return Order.objects.filter(user=self.request.user.customer) \
             .select_related('shipping', 'user') \
             .prefetch_related('items') \
             .annotate(address=F('shipping__address__address')) \

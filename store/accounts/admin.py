@@ -27,7 +27,8 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Customer)
 class CustomerAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
-    list_display = ('user', 'first_name', 'last_name', 'get_birth_date_jalali', 'age')
+    list_display = ('user', 'first_name', 'last_name', 'get_birth_date_jalali', 'age',)
+    search_fields = ('username', 'last_name', 'first_name',)
 
     @admin.display(description='Birth Date')
     def get_birth_date_jalali(self, customer):

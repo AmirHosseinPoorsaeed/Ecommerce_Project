@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-
-
-User = get_user_model()
+from django.conf import settings
 
 
 class TimeStampedModel(models.Model):
@@ -16,7 +14,7 @@ class TimeStampedModel(models.Model):
 
 class Question(TimeStampedModel):
     text = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.PROTECT, related_name='questions')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='questions')
     product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name='product_questions')
     is_active = models.BooleanField(default=True)
 
@@ -33,7 +31,7 @@ class Question(TimeStampedModel):
 
 class Answer(TimeStampedModel):
     text = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.PROTECT, related_name='answers')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='answers')
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='question_answers')
 
     class Meta:

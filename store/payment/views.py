@@ -42,7 +42,6 @@ def payment_process_sandbox_view(request):
     order.save()
 
     if 'errors' not in data or len(data['errors']) == 0:
-        del request.session['order_id']
         return redirect(f'https://sandbox.zarinpal.com/pg/StartPay/{authority}')
     else:
         messages.error(request, 'Error from zarinpal')
@@ -97,6 +96,8 @@ def payment_callback_sandbox_view(request):
                     order.save()
 
                     payment_completed.delay(order.id)
+
+                    del request.session['order_id']
 
                     messages.success(request, 'پرداخت شما با موفقیت انجام شد.')
                     return redirect('pages:home')

@@ -18,7 +18,7 @@ class AnswerInline(admin.StackedInline):
     def get_queryset(self, request):
         return super() \
             .get_queryset(request) \
-            .select_related('author', 'question')
+            .select_related('author',)
 
 
 @admin.register(Question)
@@ -26,7 +26,6 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = ('text', 'author_detail', 'product_detail',
                     'is_active', 'count_answers', 'get_created_jalali',)
     list_per_page = 10
-    list_select_related = ('author', 'product',)
     list_filter = ('created', 'is_active',)
     ordering = ('-created',)
     list_editable = ('is_active',)
@@ -39,7 +38,8 @@ class QuestionAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super() \
             .get_queryset(request) \
-            .prefetch_related('question_answers') \
+            .prefetch_related('question_answers',) \
+            .select_related('author', 'product') \
             .annotate(count_answers=Count('question_answers'))
 
     @admin.display(description='Datetime Created', ordering='created')
@@ -53,7 +53,7 @@ class QuestionAdmin(admin.ModelAdmin):
                     args=[question.product.id])
         )
         return format_html(f'<a href="{url}">{question.product}</a>')
-    
+
     @admin.display(description='Author')
     def author_detail(self, question):
         url = (
@@ -61,7 +61,7 @@ class QuestionAdmin(admin.ModelAdmin):
                     args=[question.author.id])
         )
         return format_html(f'<a href="{url}">{question.author}</a>')
-    
+
     @admin.display(description='Answers')
     def count_answers(self, question):
         url = (
@@ -71,19 +71,24 @@ class QuestionAdmin(admin.ModelAdmin):
                 'question__id': question.id,
             })
         )
-        
+
         return format_html(f'<a href="{url}">{question.count_answers}</a>')
-        
+
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('text', 'author_detail', 'get_created_jalali',)
     list_per_page = 10
-    list_select_related = ('author',)
     list_filter = ('created',)
     autocomplete_fields = ('author', 'question',)
-    search_fields = ('text__icontains', 'author__icontains', 'question__icontains',)
+    search_fields = ('text__icontains', 'author__icontains',
+                     'question__icontains',)
     ordering = ('-created',)
+
+    def get_queryset(self, request):
+        return super() \
+            .get_queryset(request) \
+            .select_related('author')
 
     @admin.display(description='Datetime Created', ordering='created')
     def get_created_jalali(self, answer):
@@ -96,4 +101,3 @@ class AnswerAdmin(admin.ModelAdmin):
                     args=[answer.author.id])
         )
         return format_html(f'<a href="{url}">{answer.author}</a>')
-
