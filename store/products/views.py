@@ -4,6 +4,8 @@ from django.db.models import Count
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.utils.translation import gettext as _
 
 from django_filters.views import FilterView
 
@@ -84,8 +86,10 @@ def product_favorite(request, product_id):
 
     if request.user not in product.favorites.all():
         product.favorites.add(request.user)
+        messages.success(request, _('The product successfully added to favorite.'))
     else:
         product.favorites.remove(request.user)
+        messages.success(request, _('The product successfully removed from favorite.'))
 
     return redirect(product.get_absolute_url())
 

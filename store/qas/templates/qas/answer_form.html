@@ -1,9 +1,10 @@
 {% extends '_base.html' %}
 
 {% load static %}
+{% load i18n %}
 
 {% block page_title %}
-    Leave Question
+    {% trans 'Leave Answer' %}
 {% endblock %}
 
 {% block custom_css %}
@@ -28,10 +29,10 @@
                             </div>
                             <!-- /rating_submit -->
                             <div class="form-group">
-                                <label>Your answer</label>
-                                <textarea class="form-control" name="text" style="height: 180px;" placeholder="Write your review to help others learn about this online business"></textarea>
+                                <label>{% trans 'Your answer' %}</label>
+                                <textarea class="form-control" name="text" style="height: 180px;" placeholder="{% trans 'Write your question answer' %}"></textarea>
                             </div>
-                            <input type="submit" class="btn_1" value="Submit review">
+                            <input type="submit" class="btn_1" value="{% trans 'Submit answer' %}">
                         </form>
 					</div>
 				</div>

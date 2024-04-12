@@ -3,9 +3,10 @@
 {% load jalali_tags %}
 {% load product_tags %}
 {% load humanize %}
+{% load i18n %}
 
 {% block page_title %}
-    Order List
+    {% trans 'Order List' %}
 {% endblock %}
 
 {% block content %}
@@ -16,13 +17,13 @@
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Order ID</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">discount</th>
-                    <th scope="col">Total Amount</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">PDF</th>
+                    <th scope="col">{% trans 'Order ID' %}</th>
+                    <th scope="col">{% trans 'Address' %}</th>
+                    <th scope="col">{% trans 'Date' %}</th>
+                    <th scope="col">{% trans 'discount' %}</th>
+                    <th scope="col">{% trans 'Total Amount' %}</th>
+                    <th scope="col">{% trans 'Status' %}</th>
+                    <th scope="col">{% trans 'PDF' %}</th>
 
                 </tr>
                 </thead>
@@ -35,18 +36,18 @@
                         <td>{{ order.address }}</td>
                         <td>{{ order.created|to_jalali:'%Y/%m/%d - %H:%S' }}</td>
                         <td>{{ order.discount }}%</td>
-                        <td>${{ order.get_total_price|persian_number|intcomma:False }}</td>
+                        <td>{% trans '$' %}{{ order.get_total_price|persian_number|intcomma:False }}</td>
                         <td>
                             {% if order.is_paid == False %}
                             <i class="fa-regular fa-circle-xmark"></i>
-                            <a href="{% url 'payment:process' %}">Pay</a>
+                            <a href="{% url 'payment:process' %}">{% trans 'Pay' %}</a>
                             {% else %}
                             <i class="fa-solid fa-check"></i>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.is_paid %}
-                                <a href="{% url 'orders:order_pdf' order.order_number %}">Download</a>
+                                <a href="{% url 'orders:order_pdf' order.order_number %}">{% trans 'Download' %}</a>
                             {% endif %}
                         </td>
                     </tr>

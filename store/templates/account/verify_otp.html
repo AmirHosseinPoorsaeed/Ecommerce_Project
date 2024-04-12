@@ -1,9 +1,10 @@
 {% extends '_base.html' %}
 
 {% load static %}
+{% load i18n %}
 
 {% block page_title %}
-    Login Page
+    {% trans 'Login Page' %}
 {% endblock %}
 
 {% block custom_css %}
@@ -17,22 +18,22 @@
 
 	<div class="container margin_30">
 		<div class="page_header">
-		    <h1>Sign In With Phone Number</h1>
+		    <h1>{% trans 'Sign In With Phone Number' %}</h1>
 		</div>
 	</div>
 	<!-- /page_header -->
 			<div class="row justify-content-center">
 			<div class="col-xl-6 col-lg-6 col-md-8">
 				<div class="box_account">
-					<h3 class="client">Verify Code</h3>
+					<h3 class="client">{% trans 'Verify Code' %}</h3>
 					<div class="form_container">
 
                         <form action="" method="POST">
                             {% csrf_token %}
                             <div class="form-group">
-                                <input type="text" class="form-control" name="code" placeholder="Code*">
+                                <input type="text" class="form-control" name="code" placeholder="{% trans 'Code*' %}">
                             </div>
-                            <div class="text-center"><input type="submit" value="Send Code" class="btn_1 full-width"></div>
+                            <div class="text-center"><input type="submit" value="{% trans 'Send Code' %}" class="btn_1 full-width"></div>
                         </form>
 
 					</div>

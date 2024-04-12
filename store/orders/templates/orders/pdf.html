@@ -1,68 +1,70 @@
+{% load i18n %}
+
 <html>
     <body>
-        <h1>My Shop</h1>
+        <h1>{% trans 'My Shop' %}</h1>
         <p>
-            Invoice no. {{ order.id }}<br>
+            {% trans 'Invoice no.' %} {{ order.id }}<br>
             <span class="secondary">
                 {{ order.created|date:"M d, Y" }}
             </span>
         </p>
-        <h3>Bill to</h3>
+        <h3>{% trans 'Bill to' %}</h3>
         <p>
             {{ order.shipping.address.receiver_first_name }} {{ order.shipping.address.receiver_last_name }}<br>
             {{ order.shipping.address.address }}<br>
             {{ order.shipping.address.postal_code }}, {{ order.shipping.address.city }}
         </p>
-        <h3>Items bought</h3>
+        <h3>{% trans 'Items bought' %}</h3>
         <table>
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Cost</th>
+                    <th>{% trans 'Product' %}</th>
+                    <th>{% trans 'Price' %}</th>
+                    <th>{% trans 'Quantity' %}</th>
+                    <th>{% trans 'Cost' %}</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in order.items.all %}
                 <tr class="row{% cycle "1" "2" %}">
                     <td>{{ item.product.title }}</td>
-                    <td class="num">${{ item.price }}</td>
+                    <td class="num">{% trans '$' %}{{ item.price }}</td>
                     <td class="num">{{ item.quantity }}</td>
-                    <td class="num">${{ item.get_price }}</td>
+                    <td class="num">{% trans '$' %}{{ item.get_price }}</td>
                 </tr>
                 {% endfor %}
 
                 {% if order.coupon %}
                 <tr class="subtotal">
-                    <td colspan="3">Subtotal</td>
+                    <td colspan="3">{% trans 'Subtotal' %}</td>
                     <td class="num">
-                        ${{ order.get_total_price_before_discount }}
+                        {% trans '$' %}{{ order.get_total_price_before_discount }}
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3">
-                        "{{ order.coupon.code }}" coupon
-                        ({{ order.discount }}% off)
+                        "{{ order.coupon.code }}" {% trans 'coupon' %}
+                        ({{ order.discount }}% {% trans 'off' %})
                     </td>
                     <td class="num neg">
-                        - ${{ order.get_discount }}
+                        - {% trans '$' %}{{ order.get_discount }}
                     </td>
                 </tr>
                 {% endif %}
 
                 <tr class="total">
-                    <td colspan="3">Total</td>
-                    <td class="num">${{ order.get_total_price }}</td>
+                    <td colspan="3">{% trans 'Total' %}</td>
+                    <td class="num">{% trans '$' %}{{ order.get_total_price }}</td>
                 </tr>
             </tbody>
         </table>
 
         <span class="{% if order.paid %}paid{% else %}pending{% endif %}">
             {% if order.is_paid %}
-            Paid
+            {% trans 'Paid' %}
             {% else %}
-            Pending payment
+            {% trans 'Pending payment' %}
             {% endif %}
         </span>
     </body>

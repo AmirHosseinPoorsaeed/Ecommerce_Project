@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.utils.translation import gettext as _
 
 from .forms import QuestionForm, AnswerForm
 from .models import Question
@@ -19,6 +21,8 @@ class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
         product = get_object_or_404(Product, id=product_id)
         obj.product = product
 
+        messages.success(self.request, _('Question successfully saved.'))
+
         return super().form_valid(form)
 
 
@@ -33,6 +37,8 @@ class AnswerCreateView(LoginRequiredMixin, generic.CreateView):
         question_id = self.kwargs.get('question_id')
         question = get_object_or_404(Question, id=question_id)
         obj.question = question
+
+        messages.success(self.request, _('Answer successfully saved.'))
 
         return super().form_valid(form)
 

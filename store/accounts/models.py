@@ -2,21 +2,22 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from phonenumber_field.modelfields import PhoneNumberField
 
 
 class CustomUser(AbstractUser):
-    phone_number = PhoneNumberField(unique=True, region='IR', null=True)
+    phone_number = PhoneNumberField(_('phone_number'), unique=True, region='IR', null=True)
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, primary_key=True)
-    birth_date = models.DateField(blank=True, null=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, primary_key=True, verbose_name=_('user'))
+    birth_date = models.DateField(_('birth_date'), blank=True, null=True)
 
     class Meta:
-        verbose_name = 'Customer'
-        verbose_name_plural = 'Customers'
+        verbose_name = _('Customer')
+        verbose_name_plural = _('Customers')
 
     def __str__(self):
         return f'{self.user.username}`s Profile'

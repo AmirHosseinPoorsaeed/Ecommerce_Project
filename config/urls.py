@@ -25,6 +25,7 @@ admin.site.index_title = 'Website Management'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
+    path('rosetta/', include('rosetta.urls')),
     path('accounts/', include('store.accounts.urls', namespace='accounts')),
     path('accounts/', include('allauth.urls')),
     path('accounts/', include('allauth.socialaccount.urls')),

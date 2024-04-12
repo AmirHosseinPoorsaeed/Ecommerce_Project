@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
 
 from allauth.account.views import PasswordChangeView as AllAuthPasswordChangeView
 
@@ -27,9 +28,10 @@ def send_otp(request):
                 cache.set(cache_key, otp_code, 180)
                 request.session['phone_number'] = str(phone_number)
                 print(otp_code)
+                messages.success(request, _('Code sent successfully'))
                 return redirect('accounts:verify_otp')
             else:
-                messages.error(request, 'User with this phone number does not exists.')
+                messages.error(request, _('User with this phone number does not exists.'))
     else:
         form = PhoneNumberForm()
 
@@ -51,11 +53,12 @@ def verify_otp(request):
                 if user is not None:
                     login(request, user)
                     del request.session['phone_number']
+                    messages.success(request, _('Authentication successfully.'))
                     return redirect('pages:home')
                 else:
-                    messages.error(request, 'Authenticatin faild.')
+                    messages.error(request, _('Authentication faild.'))
             else:
-                messages.error(request, 'Invalid OTP code.')
+                messages.error(request, _('Invalid OTP code.'))
 
     else:
         form = VerifyForm()
@@ -83,7 +86,7 @@ def profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Your account has been updated.')
+            messages.success(request, _('Your account has been updated.'))
             return redirect('accounts:profile')
     else:
         user_form = UserUpdateForm(instance=request.user)

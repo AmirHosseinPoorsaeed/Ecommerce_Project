@@ -1,9 +1,10 @@
 {% extends '_base.html' %}
 
 {% load static %}
+{% load i18n %}
 
 {% block page_title %}
-    Leave Comment
+    {% trans 'Leave Comment' %}
 {% endblock %}
 
 {% block custom_css %}
@@ -24,7 +25,7 @@
                             {% csrf_token %}
                             <div class="rating_submit">
 							<div class="form-group">
-							<label class="d-block">Overall rating</label>
+							<label class="d-block">{% trans 'Overall rating' %}</label>
                                 <span class="rating mb-0">
 								<input type="radio" class="rating-input" id="5_star" name="rate"
                                        value="5"><label for="5_star" class="rating-star"></label>
@@ -41,14 +42,14 @@
                             </div>
                             <!-- /rating_submit -->
                             <div class="form-group">
-                                <label>Title of your review</label>
-                                <input class="form-control" name="title" type="text" placeholder="If you could say it in one sentence, what would you say?">
+                                <label>{% trans 'Title of your review' %}</label>
+                                <input class="form-control" name="title" type="text" placeholder="{% trans 'If you could say it in one sentence, what would you say?' %}">
                             </div>
                             <div class="form-group">
-                                <label>Your review</label>
-                                <textarea class="form-control" name="body" style="height: 180px;" placeholder="Write your review to help others learn about this online business"></textarea>
+                                <label>{% trans 'Your review' %}</label>
+                                <textarea class="form-control" name="body" style="height: 180px;" placeholder="{% trans 'Write your review to help others learn about this online business' %}"></textarea>
                             </div>
-                            <input type="submit" class="btn_1" value="Submit review">
+                            <input type="submit" class="btn_1" value="{% trans 'Submit review' %}">
                         </form>
 					</div>
 				</div>

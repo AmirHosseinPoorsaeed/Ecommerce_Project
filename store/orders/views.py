@@ -7,6 +7,8 @@ from django.db.models import F
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.utils.translation import gettext as _
 
 import weasyprint
 import os
@@ -22,6 +24,7 @@ def order_create_view(request):
     cart = Cart(request)
 
     if len(cart) == 0:
+        messages.warning(request, _('Your cart is empty please add product to cart.'))
         return redirect('products:list')
 
     shipping_id = request.session.get('shipping_id')
@@ -62,6 +65,8 @@ def order_create_view(request):
                 request.session['order_id'] = order_obj.id
 
                 del request.session['shipping_id']
+
+                messages.success(request, _('Order successfully created.'))
 
                 return redirect('payment:process')
 

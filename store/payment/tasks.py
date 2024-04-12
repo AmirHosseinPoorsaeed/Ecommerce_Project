@@ -4,6 +4,7 @@ from celery import shared_task
 import weasyprint
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
+from django.utils.translation import gettext as _
 
 from django.conf import settings
 from store.orders.models import Order
@@ -14,8 +15,8 @@ def payment_completed(order_id):
 
     order = Order.objects.get(id=order_id)
 
-    subject = f'My Shop - Invoice no. {order.id}'
-    message = 'Please, find attached the invoice for your recent purchase.'
+    subject = _('My Shop - Invoice no. ') + order.id
+    message = _('Please, find attached the invoice for your recent purchase.')
     email = EmailMessage(subject, message, 'admin@myshop.com', [order.user.email])
 
     html = render_to_string('orders/pdf.html', {'order': order})

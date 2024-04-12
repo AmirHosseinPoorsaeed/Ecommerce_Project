@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
+from django.utils.translation import gettext as _
+from django.contrib import messages
 
 from store.products.models import Product
 from store.coupons.forms import CouponApplyForm
@@ -52,6 +54,9 @@ def cart_clear(request):
 
     if len(cart):
         cart.clear()
+        messages.success(request, _('All products successfully removed from your cart'))
+    else:
+        messages.warning(request, _('Your cart is already empty.'))
 
     return redirect('cart:detail')
 

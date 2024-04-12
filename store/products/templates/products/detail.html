@@ -3,13 +3,14 @@
 {% load static %}
 {% load product_tags %}
 {% load humanize %}
+{% load i18n %}
 
 {% block custom_css %}
     <link href="{% static 'css/product_page.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block page_title %}
-    Poduct Detail {{ product.title }}
+    {% trans 'Poduct Detail' %} {{ product.title }}
 {% endblock %}
 
 
@@ -52,14 +53,14 @@
                         <span class="rating">
                             <i class="icon-star voted"></i><em>{{ product.average_rate|default:0 }}</em>
                             <br>
-                            <em>{{ product.comment_count|default:0 }} reviews</em></span>
-                        <p><small>SKU: {{ product.sku }}</small><br>{{ product.summary }}</p>
+                            <em>{{ product.comment_count|default:0 }} {% trans 'reviews' %}</em></span>
+                        <p><small>{% trans 'SKU' %}: {{ product.sku }}</small><br>{{ product.summary }}</p>
                         {% if product.num_stock %}
                         <form action="{% url 'cart:add' product.id %}" method="POST">
                             {% csrf_token %}
                             <div class="prod_options">
                                 <div class="row">
-                                    <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong>Quantity</strong></label>
+                                    <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong>{% trans 'Quantity' %}</strong></label>
                                     <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                                         <div class="numbers-row">
                                             <input type="text" value="1" min="1" max="{{ product.num_stock }}" id="quantity_1" class="qty2" name="quantity">
@@ -71,23 +72,23 @@
                                 <div class="col-lg-5 col-md-6">
                                     <div class="price_main">
                                         {% if product.discount %}
-                                            <span class="new_price">${{ product.final_price|persian_number|intcomma:False }}</span>
+                                            <span class="new_price">{% trans '$' %}{{ product.final_price|persian_number|intcomma:False }}</span>
                                             <span class="percentage">-{{ product.discount }}%</span>
-                                            <span class="old_price">${{ product.sale_price|persian_number|intcomma:False }}</span>
+                                            <span class="old_price">{% trans '$' %}{{ product.sale_price|persian_number|intcomma:False }}</span>
                                         {% else %}
-                                            <span class="new_price">${{ product.sale_price|persian_number|intcomma:False }}</span>
+                                            <span class="new_price">{% trans '$' %}{{ product.sale_price|persian_number|intcomma:False }}</span>
                                         {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
                                     <div class="btn_add_to_cart">
-                                        <button type="submit" class="btn_1">Add To Cart</button>
+                                        <button type="submit" class="btn_1">{% trans 'Add To Cart' %}</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                         {% else %}
-                        <p>Unavailable</p>
+                        <p>{% trans 'Unavailable' %}</p>
                         {% endif %}
                     </div>
                     <!-- /prod_info -->
@@ -97,7 +98,7 @@
                                 {% csrf_token %}
                                 <li>
                                     <input type="submit" 
-                                    value="{% if user not in add_to_wishlist %}Add To Wishlist{% else %}Remove From Wishlist{% endif %}" 
+                                    value="{% if user not in add_to_wishlist %}{% trans 'Add To Wishlist' %}{% else %}{% trans 'Remove From Wishlist' %}{% endif %}" 
                                     class="btn btn-primary btn-sm">
                                 </li>
                             </form>
@@ -115,13 +116,13 @@
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
                         <a id="tab-A" href="#pane-A" class="nav-link active" data-bs-toggle="tab"
-                           role="tab">Description</a>
+                           role="tab">{% trans 'Description' %}</a>
                     </li>
                     <li class="nav-item">
-                        <a id="tab-B" href="#pane-B" class="nav-link" data-bs-toggle="tab" role="tab">Reviews</a>
+                        <a id="tab-B" href="#pane-B" class="nav-link" data-bs-toggle="tab" role="tab">{% trans 'Reviews' %}</a>
                     </li>
                     <li class="nav-item">
-                        <a id="tab-B" href="#pane-C" class="nav-link" data-bs-toggle="tab" role="tab">Question And Answer</a>
+                        <a id="tab-B" href="#pane-C" class="nav-link" data-bs-toggle="tab" role="tab">{% trans 'Question And Answer' %}</a>
                     </li>
                 </ul>
             </div>
@@ -135,7 +136,7 @@
                             <h5 class="mb-0">
                                 <a class="collapsed" data-bs-toggle="collapse" href="#collapse-A" aria-expanded="false"
                                    aria-controls="collapse-A">
-                                    Description
+                                    {% trans 'Description' %}
                                 </a>
                             </h5>
                         </div>
@@ -143,7 +144,7 @@
                             <div class="card-body">
                                 <div class="row justify-content-between">
                                     <div class="col-lg-6">
-                                        <h3>Details</h3>
+                                        <h3>{% trans 'Details' %}</h3>
                                         <p>{{ product.description }}</p>
                                     </div>
                                     {% for attribute in product.attributes.all %}
@@ -175,7 +176,7 @@
                             <h5 class="mb-0">
                                 <a class="collapsed" data-bs-toggle="collapse" href="#collapse-B" aria-expanded="false"
                                    aria-controls="collapse-B">
-                                    Reviews
+                                    {% trans 'Reviews' %}
                                 </a>
                             </h5>
                         </div>
@@ -197,7 +198,7 @@
                                                 </div>
                                                 <h4>"{{ comment.title }}"</h4>
                                                 <p>{{ comment.body }}</p>
-                                                <p>Author: {{ comment.author }}</p>
+                                                <p>{% trans 'Author' %}: {{ comment.author }}</p>
                                                 <a href="{% url 'comments:like' comment.id 'like' %}">
                                                     <i class="fa-solid fa-thumbs-up"></i>
                                                     <small>{{ comment.count_likes }}</small>
@@ -211,7 +212,7 @@
                                     {% endfor %}
                                 </div>
                                 <!-- /row -->
-                                <p class="text-end"><a href="{% url 'comments:create' product.id %}" class="btn_1">Leave a review</a></p>
+                                <p class="text-end"><a href="{% url 'comments:create' product.id %}" class="btn_1">{% trans 'Leave a review' %}</a></p>
                             </div>
                             <!-- /card-body -->
                         </div>
@@ -222,7 +223,7 @@
                             <h5 class="mb-0">
                                 <a class="collapsed" data-bs-toggle="collapse" href="#collapse-B" aria-expanded="false"
                                    aria-controls="collapse-B">
-                                    Question And Answer
+                                    {% trans 'Question And Answer' %}
                                 </a>
                             </h5>
                         </div>
@@ -236,18 +237,18 @@
                                                     <em>{{ question.created|date:"b d, Y" }}</em>
                                                 </div>
                                                 <p>{{ question.text }}</p>
-                                                <p>Question Author: {{ question.author }}</p>
+                                                <p>{% trans 'Question Author' %}: {{ question.author }}</p>
                                                 {% for answer in question.question_answers.all %}
-                                                    <p>answer: {{ answer.text }}</p>
-                                                    <p>Answer Author: {{ answer.author }}</p>
+                                                    <p>{% trans 'answer' %}: {{ answer.text }}</p>
+                                                    <p>{% trans 'Answer Author' %}: {{ answer.author }}</p>
                                                 {% endfor %}
-                                                <a href="{% url 'qas:answer_create' question.id %}" class="btn_1">Leave a Answer</a>
+                                                <a href="{% url 'qas:answer_create' question.id %}" class="btn_1">{% trans 'Leave a Answer' %}</a>
                                             </div>
                                         </div>
                                     {% endfor %}
                                 </div>
                                 <!-- /row -->
-                                <p class="text-end"><a href="{% url 'qas:question_create' product.id %}" class="btn_1">Leave a Question</a></p>
+                                <p class="text-end"><a href="{% url 'qas:question_create' product.id %}" class="btn_1">{% trans 'Leave a Question' %}</a></p>
                             </div>
                             <!-- /card-body -->
                         </div>
@@ -262,9 +263,8 @@
 
         <div class="container margin_60_35">
             <div class="main_title">
-                <h2>Related</h2>
-                <span>Products</span>
-                <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+                <h2>{% trans 'Related' %}</h2>
+                <span>{% trans 'Products' %}</span>
             </div>
             <div class="owl-carousel owl-theme products_carousel">
 
@@ -281,7 +281,7 @@
                                 </a>
                             </figure>
                             {% if product.num_stock <= product.threshold_low_stock %}
-                            <p class="text-danger">{{ product.num_stock }} in stock</p>
+                            <p class="text-danger">{{ product.num_stock }} {% trans 'in stock' %}</p>
                             {% endif %}
                             <a href="{{ product.get_absolute_url }}">
                                 <h3>{{ product.title }}</h3>
@@ -289,22 +289,22 @@
                             {% if product.num_stock %}
                             <div class="price_box">
                                 {% if product.discount %}
-                                <span class="new_price">${{ product.final_price }}</span>
-                                <span class="old_price">${{ product.sale_price }}</span>
+                                <span class="new_price">{% trans '$' %}{{ product.final_price }}</span>
+                                <span class="old_price">{% trans '$' %}{{ product.sale_price }}</span>
                                 {% else %}
-                                <span class="new_price">${{ product.sale_price }}</span>
+                                <span class="new_price">{% trans '$' %}{{ product.sale_price }}</span>
                                 {% endif %}
                             </div>
                             <div class="price_box">
                                 <form action="{% url 'cart:add' product.id %}" method="POST">
                                     {% csrf_token %}
-                                    <input type="submit" class="btn btn-primary btn-sm" value="Add To Cart">
+                                    <input type="submit" class="btn btn-primary btn-sm" value="{% trans 'Add To Cart' %}">
                                     <input type="hidden" name="quantity" value="1">
                                 </form>
                             </div>
                             {% else %}
                             <div class="price_box">
-                                <span class="new_price">Unavailable</span>
+                                <span class="new_price">{% trans 'Unavailable' %}</span>
                             </div>
                             {% endif %}
                             <ul>

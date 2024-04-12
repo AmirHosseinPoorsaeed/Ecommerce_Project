@@ -3,6 +3,7 @@
 {% load static %}
 {% load product_tags %}
 {% load humanize %}
+{% load i18n %}
 
 {% load jalali_tags %}
 
@@ -10,6 +11,10 @@
     <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
 
     <link href="{% static 'css/checkout.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page_header %}
+    {% trans 'Shipping Page' %}
 {% endblock %}
 
 {% block content %}
@@ -29,15 +34,15 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="step first">
-                        <h3>1. User Info and Billing address</h3>
+                        <h3>1. {% trans 'User Info and Billing address' %}</h3>
                         <ul class="nav nav-tabs" id="tab_checkout" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#tab_1"
-                                    role="tab" aria-controls="tab_1" aria-selected="true">Add New Address</a>
+                                    role="tab" aria-controls="tab_1" aria-selected="true">{% trans 'Add New Address' %}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#tab_2" role="tab"
-                                    aria-controls="tab_2" aria-selected="false">Choose A Address</a>
+                                    aria-controls="tab_2" aria-selected="false">{% trans 'Choose A Address' %}</a>
                             </li>
                         </ul>
                         <form action="{% url 'shipping:address_create' %}" method="POST">
@@ -46,65 +51,65 @@
                                 <div class="tab-pane fade show active" id="tab_1" role="tabpanel"
                                     aria-labelledby="tab_1">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="First Name"
+                                        <input type="text" class="form-control" placeholder="{% trans 'First Name' %}"
                                             name="receiver_first_name">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Last Name"
+                                        <input type="text" class="form-control" placeholder="{% trans 'Last Name' %}"
                                             name="receiver_last_name">
                                     </div>
                                     <hr>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Full Address"
+                                        <input type="text" class="form-control" placeholder="{% trans 'Full Address' %}"
                                             name="address">
                                     </div>
                                     <div class="row no-gutters">
                                         <div class="col-6 form-group pr-1">
-                                            <input type="text" class="form-control" placeholder="City" name="city">
+                                            <input type="text" class="form-control" placeholder="{% trans 'City' %}" name="city">
                                         </div>
                                         <div class="col-6 form-group pr-1">
-                                            <input type="text" class="form-control" placeholder="Province"
+                                            <input type="text" class="form-control" placeholder="{% trans 'Province' %}"
                                                 name="province">
                                         </div>
                                         <div class="col-6 form-group pr-1">
-                                            <input type="text" class="form-control" placeholder="Building Number"
+                                            <input type="text" class="form-control" placeholder="{% trans 'Building Number' %}"
                                                 name="building_number">
                                         </div>
                                         <div class="col-6 form-group pr-1">
-                                            <input type="text" class="form-control" placeholder="Unit" name="unit">
+                                            <input type="text" class="form-control" placeholder="{% trans 'Unit' %}" name="unit">
                                         </div>
                                         <div class="col-6 form-group pl-1">
-                                            <input type="text" class="form-control" placeholder="Postal code"
+                                            <input type="text" class="form-control" placeholder="{% trans 'Postal code' %}"
                                                 name="postal_code">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Telephone" name="mobile">
+                                        <input type="text" class="form-control" placeholder="{% trans 'Telephone' %}" name="mobile">
                                     </div>
                                     <hr>
                                     <div id="other_addr_c" class="pt-2">
                                         <div class="row no-gutters">
                                             <div class="col-6 form-group pr-1">
-                                                <input type="text" class="form-control" placeholder="Name">
+                                                <input type="text" class="form-control" placeholder="{% trans 'Name' %}">
                                             </div>
                                             <div class="col-6 form-group pl-1">
-                                                <input type="text" class="form-control" placeholder="Last Name">
+                                                <input type="text" class="form-control" placeholder="{% trans 'Last Name' %}">
                                             </div>
                                         </div>
                                         <!-- /row -->
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Full Address">
+                                            <input type="text" class="form-control" placeholder="{% trans 'Full Address' %}">
                                         </div>
                                         <div class="row no-gutters">
                                             <div class="col-6 form-group pr-1">
-                                                <input type="text" class="form-control" placeholder="City">
+                                                <input type="text" class="form-control" placeholder="{% trans 'City' %}">
                                             </div>
                                             <div class="col-6 form-group pl-1">
-                                                <input type="text" class="form-control" placeholder="Postal code">
+                                                <input type="text" class="form-control" placeholder="{% trans 'Postal code' %}">
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="submit" class="btn_1 full-width" value="Save Address">
+                                    <input type="submit" class="btn_1 full-width" value="{% trans 'Save Address' %}">
                                 </div>
                             </form>
                             <form action="" method="POST">
@@ -130,12 +135,12 @@
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="step first">
-                            <h3>2. Shipping</h3>
+                            <h3>2. {% trans 'Shipping' %}</h3>
                             <div class="tab-content checkout">
                                 <div class="tab-pane fade show active" id="tab_1" role="tabpanel"
                                      aria-labelledby="tab_1">
                                     <div class="form-group">
-                                        <input type="text" class="jalali_date-date form-control" placeholder="Calendar"
+                                        <input type="text" class="jalali_date-date form-control" placeholder="{% trans 'Calendar' %}"
                                                name="delivery_date">
                                     </div>
                                     <div class="row no-gutters">
@@ -158,13 +163,13 @@
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="step last">
-                            <h3>3. Order Summary</h3>
+                            <h3>3. {% trans 'Order Summary' %}</h3>
                             <div class="box_general summary">
 
                                 <ul>
                                     {% for item in cart %}
                                         <li class="clearfix"><em>{{ item.quantity }}x {{ item.product_obj.title }}</em>
-                                            <span>${{ item.price|persian_number|intcomma:False }}</span></li>
+                                            <span>{% trans '$' %}{{ item.price|persian_number|intcomma:False }}</span></li>
                                     {% endfor %}
                                 </ul>
 
@@ -172,25 +177,25 @@
                                     
                                     <ul>
                                         <li class="clearfix">
-                                            <em><strong>Subtotal</strong></em>
-                                            <span>${{ cart.get_total_price|persian_number|intcomma:False }}</span>
+                                            <em><strong>{% trans 'Subtotal' %}</strong></em>
+                                            <span>{% trans '$' %}{{ cart.get_total_price|persian_number|intcomma:False }}</span>
                                         </li>
                                         
                                         <li class="clearfix">
                                             <em><strong>
-                                                "{{ cart.coupon.code }}" coupon
-						                        ({{ cart.coupon.discount }}% off)
+                                                "{{ cart.coupon.code }}" {% trans 'coupon' %}
+						                        ({{ cart.coupon.discount }}% {% trans 'off' %})
                                             </strong></em>
-                                            <span>- ${{ cart.get_discount|persian_number|intcomma:False }}</span>
+                                            <span>- {% trans '$' %}{{ cart.get_discount|persian_number|intcomma:False }}</span>
                                         </li>
                                     </ul>
 
                                 {% endif %}
 
 
-                                <div class="total clearfix">TOTAL <span>${{ cart.get_total_price_after_discount|persian_number|intcomma:False }}</span></div>
+                                <div class="total clearfix">{% trans 'TOTAL' %} <span>{% trans '$' %}{{ cart.get_total_price_after_discount|persian_number|intcomma:False }}</span></div>
 
-                                    <input type="submit" class="btn_1 full-width" value="Confirm">
+                                    <input type="submit" class="btn_1 full-width" value="{% trans 'Confirm' %}">
                                 </div>
                                 <!-- /box_general -->
                             </div>

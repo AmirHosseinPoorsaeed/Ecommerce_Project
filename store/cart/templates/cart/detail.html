@@ -3,43 +3,37 @@
 {% load static %}
 {% load product_tags %}
 {% load humanize %}
+{% load i18n %}
 
 {% block custom_css %}
 <link href="{% static 'css/cart.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block page_title %}
-Cart
+{% trans 'Cart' %}
 {% endblock %}
 
 {% block content %}
 <main class="bg_gray">
 	<div class="container margin_30">
 		<div class="page_header">
-			<div class="breadcrumbs">
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Category</a></li>
-					<li>Page active</li>
-				</ul>
-			</div>
-			<h1>Cart page</h1>
+			<h1>{% trans 'Cart page' %}</h1>
 		</div>
 		<!-- /page_header -->
 		<table class="table table-striped cart-list">
 			<thead>
 				<tr>
 					<th>
-						Product
+						{% trans 'Product' %}
 					</th>
 					<th>
-						Price
+						{% trans 'Price' %}
 					</th>
 					<th>
-						Quantity
+						{% trans 'Quantity' %}
 					</th>
 					<th>
-						Subtotal
+						{% trans 'Subtotal' %}
 					</th>
 					<th>
 
@@ -58,7 +52,7 @@ Cart
 						<span class="item_cart">{{ item.product_obj.title }}</span>
 					</td>
 					<td>
-						<strong>${{ item.price|persian_number|intcomma:False }}</strong>
+						<strong>{% trans '$' %}{{ item.price|persian_number|intcomma:False }}</strong>
 					</td>
 					<td>
 
@@ -70,12 +64,12 @@ Cart
 								{{ item.product_update_quantity_form.override }}
 								<div class="inc button_inc">+</div><div class="dec button_inc">-</div>
 							</div>
-							<button type="submit" class="btn_1 gray">Update Cart</button>
+							<button type="submit" class="btn_1 gray">{% trans 'Update Cart' %}</button>
 						</form>
 
 					</td>
 					<td>
-						<strong>${{ item.total_price|persian_number|intcomma:False }}</strong>
+						<strong>{% trans '$' %}{{ item.total_price|persian_number|intcomma:False }}</strong>
 					</td>
 					<td class="options">
 						<a href="{% url 'cart:remove' item.product_obj.id %}"><i
@@ -89,7 +83,7 @@ Cart
 
 		<div class="row add_top_30 flex-sm-row-reverse cart_actions">
 			<div class="col-sm-4 text-end">
-				<a href="{% url 'cart:clear' %}" class="btn_1 gray">Clear Cart</a>
+				<a href="{% url 'cart:clear' %}" class="btn_1 gray">{% trans 'Clear Cart' %}</a>
 			</div>
 			<div class="col-sm-8">
 				<form action="{% url 'coupons:apply' %}" method="POST">
@@ -99,9 +93,8 @@ Cart
 						<div class="form-group">
 							<div class="row g-2">
 								<div class="col-md-6"><input type="text" name="code" value
-										placeholder="Promo code" class="form-control"></div>
-								<div class="col-md-4"><button type="submit" class="btn_1 outline">Apply
-										Coupon</button></div>
+										placeholder="{% trans 'Promo code' %}" class="form-control"></div>
+								<div class="col-md-4"><button type="submit" class="btn_1 outline">{% trans 'Apply Coupon' %}</button></div>
 							</div>
 						</div>
 					</div>
@@ -122,23 +115,21 @@ Cart
 					<ul>
 						{% if cart.coupon %}
 						<li>
-							<span>Subtotal</span> ${{ cart.get_total_price|persian_number|intcomma:False }}
+							<span>{% trans 'Subtotal' %}</span> {% trans '$' %}{{ cart.get_total_price|persian_number|intcomma:False }}
 						</li>
 						<li>
 							<span>
-								"{{ cart.coupon.code }}" coupon
-								({{ cart.coupon.discount }}% off)
+								{{ cart.coupon.code }} {% trans 'coupon' %} ({{ cart.coupon.discount }}% {% trans 'off' %})
 							</span>
-							- ${{ cart.get_discount|persian_number|intcomma:False }}
+							- {% trans '$' %}{{ cart.get_discount|persian_number|intcomma:False }}
 						</li>
 						{% endif %}
 
 						<li>
-							<span>Total</span> ${{ cart.get_total_price_after_discount|persian_number|intcomma:False }}
+							<span>{% trans 'Total' %}</span> {% trans '$' %}{{ cart.get_total_price_after_discount|persian_number|intcomma:False }}
 						</li>
 					</ul>
-					<a href="{% url 'shipping:create' %}" class="btn_1 full-width cart">Proceed
-						to Checkout</a>
+					<a href="{% url 'shipping:create' %}" class="btn_1 full-width cart">{% trans 'Proceed to Checkout' %}</a>
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 from django.utils import timezone
+from django.contrib import messages
+from django.utils.translation import gettext as _
 
 from .models import Coupon
 from .forms import CouponApplyForm
@@ -21,8 +23,10 @@ def apply_coupon(request):
                 active=True
             )
             request.session['coupon_id'] = coupon.id
+            messages.success(request, _('Coupon apply successfull.'))
         
         except Coupon.DoesNotExist:
             request.session['coupon_id'] = None
+            messages.warning(request, _('Coupon does not exists or expired.'))
     
     return redirect('cart:detail')

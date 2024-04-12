@@ -3,13 +3,14 @@
 {% load static %}
 {% load product_tags %}
 {% load humanize %}
+{% load i18n %}
 
 {% block custom_css %}
 <link href="{% static 'css/listing.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block page_title %}
-Products List
+{% trans 'Products List' %}
 {% endblock %}
 
 {% block content %}
@@ -33,7 +34,7 @@ Products List
                         </a>
                     </figure>
                     {% if product.num_stock <= product.threshold_low_stock %}
-                    <p class="text-danger">{{ product.num_stock }} in stock</p>
+                    <p class="text-danger">{{ product.num_stock }} {% trans 'in stock' %}</p>
                     {% endif %}
                     <a href="{{ product.get_absolute_url }}">
                         <h3>{{ product.title }}</h3>
@@ -41,10 +42,10 @@ Products List
                     {% if product.num_stock %}
                     <div class="price_box">
                         {% if product.discount %}
-                        <span class="new_price">${{ product.final_price|persian_number|intcomma:False }}</span>
-                        <span class="old_price">${{ product.sale_price|persian_number|intcomma:False }}</span>
+                        <span class="new_price">{% trans '$' %}{{ product.final_price|persian_number|intcomma:False }}</span>
+                        <span class="old_price">{% trans '$' %}{{ product.sale_price|persian_number|intcomma:False }}</span>
                         {% else %}
-                        <span class="new_price">${{ product.sale_price|persian_number|intcomma:False }}</span>
+                        <span class="new_price">{% trans '$' %}{{ product.sale_price|persian_number|intcomma:False }}</span>
                         {% endif %}
                     </div>
                     <div class="price_box">
@@ -52,13 +53,13 @@ Products List
                             method="POST">
                             {% csrf_token %}
                             <input type="submit" class="btn btn-primary btn-sm"
-                                value="Add To Cart">
+                                value="{% trans 'Add To Cart' %}">
                             <input type="hidden" name="quantity" value="1">
                         </form>
                     </div>
                     {% else %}
                     <div class="price_box">
-                        <span class="new_price">Unavailable</span>
+                        <span class="new_price">{% trans 'Unavailable' %}</span>
                     </div>
                     {% endif %}
                 </div>

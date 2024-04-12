@@ -1,5 +1,7 @@
 {% load static %}
 
+{% load i18n %}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -84,10 +86,10 @@
                                 </div>
                                 <ul>
                                     <li>
-                                        <a href="{% url 'pages:home' %}">Home</a>
+                                        <a href="{% url 'pages:home' %}">{% trans 'Home' %}</a>
                                     </li>
                                     <li>
-                                        <a href="{% url 'products:list' %}">All Products</a>
+                                        <a href="{% url 'products:list' %}">{% trans 'All Products' %}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -112,7 +114,7 @@
                                                         <span class="hamburger-inner"></span>
                                                     </span>
                                                 </span>
-                                                Categories
+                                                {% trans 'Categories' %}
                                             </a>
                                         </span>
                                         <div id="menu">
@@ -138,7 +140,7 @@
                         <div class="col-xl-6 col-lg-7 col-md-6 d-none d-md-block">
                             <form action="{% url 'search:list' %}" method="GET">
                                 <div class="custom-search-input">
-                                    <input type="text" name="q" placeholder="Search over 10.000 products">
+                                    <input type="text" name="q" placeholder="{% trans 'Search over 10.000 products' %}">
                                     <button type="submit"><i class="header-icon_search_custom"></i></button>
                                 </div>
                             </form>
@@ -169,36 +171,36 @@
                                             </ul>
                                             <div class="total_drop">
                                                 <div class="clearfix">
-                                                    <strong>Total</strong><span>${{ cart.get_total_price }}</span></div>
-                                                <a href="{% url 'cart:detail' %}" class="btn_1 outline">View Cart</a>
+                                                    <strong>Total</strong><span>{% trans '$' %}{{ cart.get_total_price }}</span></div>
+                                                <a href="{% url 'cart:detail' %}" class="btn_1 outline">{% trans 'View Cart' %}</a>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- /dropdown-cart-->
                                 </li>
                                 <li>
-                                    <a href="{% url 'products:wish_list' %}" class="wishlist"><span>Wishlist</span></a>
+                                    <a href="{% url 'products:wish_list' %}" class="wishlist"><span>{% trans 'Wishlist' %}</span></a>
                                 </li>
                                 <li>
                                     <div class="dropdown dropdown-access">
-                                        <a href="" class="access_link"><span>Account</span></a>
+                                        <a href="" class="access_link"><span>{% trans 'Account' %}</span></a>
                                         <div class="dropdown-menu">
                                             {% if user.is_authenticated %}
-                                                <p>Hello {{ user.username }}</p>
-                                                <a href="{% url 'account_logout' %}" class="btn_1 mt-3">Log Out</a>
+                                                <p>{% trans 'Hello' %} {{ user.username }}</p>
+                                                <a href="{% url 'account_logout' %}" class="btn_1 mt-3">{% trans 'Log Out' %}</a>
                                             {% else %}
-                                                <a href="{% url 'account_login' %}" class="btn_1">Sign In</a>
-                                                <a href="{% url 'account_signup' %}" class="btn_1 mt-3">Sign Up</a>
+                                                <a href="{% url 'account_login' %}" class="btn_1">{% trans 'Sign In' %}</a>
+                                                <a href="{% url 'account_signup' %}" class="btn_1 mt-3">{% trans 'Sign Up' %}</a>
                                             {% endif %}
                                             <ul>
                                                 <li>
-                                                    <a href="{% url 'orders:customer_list' %}"><i class="ti-package"></i>My Orders</a>
+                                                    <a href="{% url 'orders:customer_list' %}"><i class="ti-package"></i>{% trans 'My Orders' %}</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{% url 'accounts:profile' %}"><i class="ti-user"></i>My Profile</a>
+                                                    <a href="{% url 'accounts:profile' %}"><i class="ti-user"></i>{% trans 'My Profile' %}</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{% url 'pages:help' %}"><i class="ti-help-alt"></i>Help and Faq</a>
+                                                    <a href="{% url 'pages:help' %}"><i class="ti-help-alt"></i>{% trans 'Help and Faq' %}</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -206,7 +208,7 @@
                                     <!-- /dropdown-access-->
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);" class="btn_search_mob"><span>Search</span></a>
+                                    <a href="javascript:void(0);" class="btn_search_mob"><span>{% trans 'Search' %}</span></a>
                                 </li>
                                 <li>
                                     <a href="#menu" class="btn_cat_mob">
@@ -215,7 +217,7 @@
                                                 <div class="hamburger-inner"></div>
                                             </div>
                                         </div>
-                                        Categories
+                                        {% trans 'Categories' %}
                                     </a>
                                 </li>
                             </ul>

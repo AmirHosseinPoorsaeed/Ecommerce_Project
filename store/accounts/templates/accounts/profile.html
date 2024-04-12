@@ -2,9 +2,10 @@
 
 {% load static %}
 {% load jalali_tags %}
+{% load i18n %}
 
 {% block page_title %}
-    Profile
+    {% trans 'Profile' %}
 {% endblock %}
 
 {% block custom_css %}
@@ -19,13 +20,13 @@
 
 	<div class="container margin_30">
 		<div class="page_header">
-		    <h1>Update Account</h1>
+		    <h1>{% trans 'Update Account' %}</h1>
 	</div>
 	<!-- /page_header -->
 			<div class="row justify-content-center">
 			<div class="col-xl-6 col-lg-6 col-md-8">
 				<div class="box_account">
-					<h3 class="new_client">Update Form</h3>
+					<h3 class="new_client">{% trans 'Update Form' %}</h3>
 					<div class="form_container">
                         <form action="" method="POST">
                             {% csrf_token %}
@@ -33,12 +34,12 @@
                                 <div class="row no-gutters">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <input type="text" name="first_name" class="form-control" value="{{ user_form.first_name.initial }}" placeholder="First Name">
+                                            <input type="text" name="first_name" class="form-control" value="{{ user_form.first_name.initial }}" placeholder="{% trans 'First Name' %}">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <input type="text" name="last_name" class="form-control" value="{{ user_form.last_name.initial }}" placeholder="Last Name">
+                                            <input type="text" name="last_name" class="form-control" value="{{ user_form.last_name.initial }}" placeholder="{% trans 'Last Name' %}">
                                         </div>
                                     </div>
                                 </div>
@@ -46,14 +47,14 @@
                                 <div class="row no-gutters">
                                     <div class="col-6 pr-1">
                                         <div class="form-group">
-                                            <input type="text" name="birth_date" class="jalali_date-date form-control" value="{{ profile_form.birth_date.initial|to_jalali:'%Y/%m/%d' }}" placeholder="Birth Date">
+                                            <input type="text" name="birth_date" class="jalali_date-date form-control" value="{{ profile_form.birth_date.initial|to_jalali:'%Y/%m/%d' }}" placeholder="{% trans 'Birth Date' %}">
                                         </div>
                                     </div>
                                 </div>
                                 <!-- /row -->
                             </div>
                             <!-- /private -->
-                            <div class="text-center"><input type="submit" value="Save" class="btn_1 full-width"></div>
+                            <div class="text-center"><input type="submit" value="{% trans 'Save' %}" class="btn_1 full-width"></div>
                         </form>
 					</div>
 					<!-- /form_container -->

@@ -1,0 +1,1417 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-12 18:22+0330\n"
+"PO-Revision-Date: 2024-04-12 18:23+0330\n"
+"Last-Translator: امیرحسین پورسعید <amir@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
+
+#: .\store\accounts\forms.py:29 .\store\accounts\forms.py:45
+msgid "Your Phone Number"
+msgstr "شماره تلفن"
+
+#: .\store\accounts\forms.py:49 .\store\coupons\forms.py:6
+#: .\store\coupons\models.py:7
+msgid "code"
+msgstr "کد"
+
+#: .\store\accounts\models.py:11
+msgid "phone_number"
+msgstr "شماره تلفن"
+
+#: .\store\accounts\models.py:15 .\store\orders\models.py:10
+#: .\store\products\models.py:77 .\store\shipping\models.py:10
+msgid "user"
+msgstr "کاربر"
+
+#: .\store\accounts\models.py:16
+msgid "birth_date"
+msgstr "تاریخ تولد"
+
+#: .\store\accounts\models.py:19
+msgid "Customer"
+msgstr "مشتری"
+
+#: .\store\accounts\models.py:20
+msgid "Customers"
+msgstr "مشتری ها"
+
+#: .\store\accounts\templates\accounts\profile.html:8
+msgid "Profile"
+msgstr "پروفایل کاربری"
+
+#: .\store\accounts\templates\accounts\profile.html:23
+msgid "Update Account"
+msgstr "بروز رسانی کاربر"
+
+#: .\store\accounts\templates\accounts\profile.html:29
+msgid "Update Form"
+msgstr "فرم بروزرسانی"
+
+#: .\store\accounts\templates\accounts\profile.html:37
+#: .\store\shipping\templates\shipping\create.html:54
+msgid "First Name"
+msgstr "نام"
+
+#: .\store\accounts\templates\accounts\profile.html:42
+#: .\store\shipping\templates\shipping\create.html:58
+#: .\store\shipping\templates\shipping\create.html:96
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: .\store\accounts\templates\accounts\profile.html:50
+msgid "Birth Date"
+msgstr "تاریخ تولد"
+
+#: .\store\accounts\templates\accounts\profile.html:57
+msgid "Save"
+msgstr "ذخیره"
+
+#: .\store\accounts\views.py:31
+msgid "Code sent successfully"
+msgstr "کد با موفقیت ارسال شد."
+
+#: .\store\accounts\views.py:34
+msgid "User with this phone number does not exists."
+msgstr "کاربر با این شماره تلفن وجود ندارد."
+
+#: .\store\accounts\views.py:56
+msgid "Authentication successfully."
+msgstr "احراز هویت با موفقیت انجام شد."
+
+#: .\store\accounts\views.py:59
+msgid "Authentication faild."
+msgstr "احراز هویت ناموفق بود."
+
+#: .\store\accounts\views.py:61
+msgid "Invalid OTP code."
+msgstr "کد نامعتبر است."
+
+#: .\store\accounts\views.py:89
+msgid "Your account has been updated."
+msgstr "حساب شما به روز شده است."
+
+#: .\store\cart\cart.py:36
+msgid "Product successfully added to cart"
+msgstr "محصول با موفقیت به سبد خرید اضافه شد."
+
+#: .\store\cart\cart.py:46
+msgid "Product successfully removed from cart"
+msgstr "محصول با موفقیت از سبد خرید حذف شد."
+
+#: .\store\cart\forms.py:11 .\store\orders\models.py:56
+msgid "quantity"
+msgstr "تعداد"
+
+#: .\store\cart\templates\cart\detail.html:13
+msgid "Cart"
+msgstr "سبد خرید"
+
+#: .\store\cart\templates\cart\detail.html:20
+msgid "Cart page"
+msgstr "صفحه سبد خرید"
+
+#: .\store\cart\templates\cart\detail.html:27
+#: .\store\orders\templates\orders\pdf.html:22 .\store\products\models.py:60
+msgid "Product"
+msgstr "محصول"
+
+#: .\store\cart\templates\cart\detail.html:30
+#: .\store\orders\templates\orders\pdf.html:23
+msgid "Price"
+msgstr "قیمت"
+
+#: .\store\cart\templates\cart\detail.html:33
+#: .\store\orders\templates\orders\pdf.html:24
+#: .\store\products\templates\products\detail.html:63
+msgid "Quantity"
+msgstr "تعداد"
+
+#: .\store\cart\templates\cart\detail.html:36
+#: .\store\cart\templates\cart\detail.html:118
+#: .\store\orders\templates\orders\create.html:62
+#: .\store\orders\templates\orders\pdf.html:40
+#: .\store\shipping\templates\shipping\create.html:180
+msgid "Subtotal"
+msgstr "مجموع"
+
+#: .\store\cart\templates\cart\detail.html:55
+#: .\store\cart\templates\cart\detail.html:72
+#: .\store\cart\templates\cart\detail.html:118
+#: .\store\cart\templates\cart\detail.html:124
+#: .\store\cart\templates\cart\detail.html:129
+#: .\store\orders\templates\orders\create.html:54
+#: .\store\orders\templates\orders\create.html:63
+#: .\store\orders\templates\orders\create.html:71
+#: .\store\orders\templates\orders\create.html:82
+#: .\store\orders\templates\orders\list.html:39
+#: .\store\orders\templates\orders\pdf.html:32
+#: .\store\orders\templates\orders\pdf.html:34
+#: .\store\orders\templates\orders\pdf.html:42
+#: .\store\orders\templates\orders\pdf.html:51
+#: .\store\orders\templates\orders\pdf.html:58
+#: .\store\products\templates\products\detail.html:75
+#: .\store\products\templates\products\detail.html:77
+#: .\store\products\templates\products\detail.html:79
+#: .\store\products\templates\products\detail.html:292
+#: .\store\products\templates\products\detail.html:293
+#: .\store\products\templates\products\detail.html:295
+#: .\store\products\templates\products\wish_list.html:45
+#: .\store\products\templates\products\wish_list.html:46
+#: .\store\products\templates\products\wish_list.html:48
+#: .\store\shipping\templates\shipping\create.html:172
+#: .\store\shipping\templates\shipping\create.html:181
+#: .\store\shipping\templates\shipping\create.html:189
+#: .\store\shipping\templates\shipping\create.html:196
+#: .\store\templates\_base.html:174 .\store\templates\home.html:139
+#: .\store\templates\home.html:140 .\store\templates\home.html:142
+#: .\store\templates\home.html:192 .\store\templates\home.html:193
+#: .\store\templates\home.html:195 .\store\templates\partials\_list.html:80
+#: .\store\templates\partials\_list.html:81
+#: .\store\templates\partials\_list.html:83
+msgid "$"
+msgstr "تومان"
+
+#: .\store\cart\templates\cart\detail.html:67
+msgid "Update Cart"
+msgstr "بروزرسانی سبد خرید"
+
+#: .\store\cart\templates\cart\detail.html:86
+msgid "Clear Cart"
+msgstr "خالی کردن سبد خرید"
+
+#: .\store\cart\templates\cart\detail.html:96
+msgid "Promo code"
+msgstr "کد تخفیف"
+
+#: .\store\cart\templates\cart\detail.html:97
+msgid "Apply Coupon"
+msgstr "اعمال تخفیف"
+
+#: .\store\cart\templates\cart\detail.html:122 .\store\orders\models.py:22
+#: .\store\orders\templates\orders\create.html:68
+#: .\store\orders\templates\orders\pdf.html:47
+#: .\store\shipping\templates\shipping\create.html:186
+msgid "coupon"
+msgstr "کد تخفیف"
+
+#: .\store\cart\templates\cart\detail.html:122
+#: .\store\orders\templates\orders\create.html:69
+#: .\store\orders\templates\orders\pdf.html:48
+#: .\store\shipping\templates\shipping\create.html:187
+msgid "off"
+msgstr "تخفیف"
+
+#: .\store\cart\templates\cart\detail.html:129
+#: .\store\orders\templates\orders\pdf.html:57
+msgid "Total"
+msgstr "کل"
+
+#: .\store\cart\templates\cart\detail.html:132
+msgid "Proceed to Checkout"
+msgstr "تایید و تکمیل سفارش"
+
+#: .\store\cart\views.py:57
+msgid "All products successfully removed from your cart"
+msgstr "همه محصولات با موفقیت از سبد خرید شما حذف شدند."
+
+#: .\store\cart\views.py:59
+msgid "Your cart is already empty."
+msgstr "سبد خرید شما در حال حاضر خالی است."
+
+#: .\store\comments\models.py:9 .\store\inventory\models.py:7
+#: .\store\inventory\models.py:33 .\store\orders\models.py:55
+#: .\store\products\models.py:78 .\store\products\models.py:87
+#: .\store\products\models.py:97 .\store\products\models.py:128
+#: .\store\qas\models.py:18
+msgid "product"
+msgstr "محصول"
+
+#: .\store\comments\models.py:10 .\store\qas\models.py:17
+#: .\store\qas\models.py:34
+msgid "author"
+msgstr "نویسنده"
+
+#: .\store\comments\models.py:11 .\store\products\models.py:25
+#: .\store\products\models.py:47 .\store\products\models.py:114
+#: .\store\products\models.py:126 .\store\products\models.py:139
+msgid "title"
+msgstr "موضوع"
+
+#: .\store\comments\models.py:12
+msgid "body"
+msgstr "متن"
+
+#: .\store\comments\models.py:13 .\store\products\models.py:28
+#: .\store\products\models.py:52 .\store\qas\models.py:19
+msgid "is_active"
+msgstr "آیا فعال است ؟"
+
+#: .\store\comments\models.py:14 .\store\orders\models.py:14
+#: .\store\products\models.py:39 .\store\qas\models.py:8
+msgid "created"
+msgstr "ساخته شده"
+
+#: .\store\comments\models.py:15 .\store\orders\models.py:15
+#: .\store\products\models.py:40 .\store\qas\models.py:9
+msgid "modified"
+msgstr "آپدیت شده"
+
+#: .\store\comments\models.py:16
+msgid "rate"
+msgstr "امتیاز"
+
+#: .\store\comments\models.py:17
+msgid "likes"
+msgstr "لایک"
+
+#: .\store\comments\models.py:18
+msgid "dislikes"
+msgstr "دیس لایک"
+
+#: .\store\comments\models.py:21
+msgid "Comment"
+msgstr "نظر"
+
+#: .\store\comments\models.py:22
+msgid "Comments"
+msgstr "نظرات"
+
+#: .\store\comments\templates\comments\comment_form.html:7
+msgid "Leave Comment"
+msgstr "افزودن نظر"
+
+#: .\store\comments\templates\comments\comment_form.html:28
+msgid "Overall rating"
+msgstr "امتیاز"
+
+#: .\store\comments\templates\comments\comment_form.html:45
+msgid "Title of your review"
+msgstr "موضوع نظر شما"
+
+#: .\store\comments\templates\comments\comment_form.html:46
+msgid "If you could say it in one sentence, what would you say?"
+msgstr "اگر بتوانید آن را در یک جمله بگویید، چه می گویید؟"
+
+#: .\store\comments\templates\comments\comment_form.html:49
+msgid "Your review"
+msgstr "نظر شما"
+
+#: .\store\comments\templates\comments\comment_form.html:50
+msgid "Write your review to help others learn about this online business"
+msgstr ""
+"نظر خود را بنویسید تا به دیگران کمک کنید تا در مورد این تجارت آنلاین "
+"بیاموزند"
+
+#: .\store\comments\templates\comments\comment_form.html:52
+msgid "Submit review"
+msgstr "ثبت نظر"
+
+#: .\store\comments\views.py:25
+msgid "Comment successfully saved."
+msgstr "نظر با موفقیت ذخیره شد."
+
+#: .\store\comments\views.py:52 .\store\comments\views.py:59
+#| msgid "Your address successfully saved."
+msgid "Your like successfully saved."
+msgstr "دوست داشتن شما با موفقیت ذخیره شد."
+
+#: .\store\comments\views.py:56
+#| msgid "Your address successfully saved."
+msgid "Your dislike successfully saved."
+msgstr "دوست داشتن شما با موفقیت ذخیره شد."
+
+#: .\store\coupons\models.py:8
+msgid "valid_from"
+msgstr "معتبر از تاریخ"
+
+#: .\store\coupons\models.py:9
+msgid "valid_to"
+msgstr "معتبر تا تاریخ"
+
+#: .\store\coupons\models.py:10 .\store\inventory\models.py:11
+#: .\store\orders\models.py:23 .\store\orders\templates\orders\list.html:23
+msgid "discount"
+msgstr "تخفیف"
+
+#: .\store\coupons\models.py:14
+msgid "active"
+msgstr "فعال است ؟"
+
+#: .\store\coupons\models.py:17
+msgid "Coupon"
+msgstr "کد تخفیف"
+
+#: .\store\coupons\models.py:18
+msgid "Coupons"
+msgstr "کد های تخفیف"
+
+#: .\store\coupons\views.py:26
+msgid "Coupon apply successfull."
+msgstr "کد تخفیف با موفقیت اعمال شد."
+
+#: .\store\coupons\views.py:30
+msgid "Coupon does not exists or expired."
+msgstr "کد تخفیف وجود ندارد یا منقضی شده است."
+
+#: .\store\inventory\models.py:8
+msgid "sku"
+msgstr "کد انبارداری"
+
+#: .\store\inventory\models.py:9
+msgid "buy_price"
+msgstr "قیمت خرید"
+
+#: .\store\inventory\models.py:10
+msgid "sale_price"
+msgstr "قیمت فروش"
+
+#: .\store\inventory\models.py:15
+msgid "num_stock"
+msgstr "موجودی انبار"
+
+#: .\store\inventory\models.py:16
+msgid "threshold_low_stock"
+msgstr "حد موجودی"
+
+#: .\store\inventory\models.py:19
+msgid "Stock"
+msgstr "انبار"
+
+#: .\store\inventory\models.py:20
+msgid "Stocks"
+msgstr "انبار ها"
+
+#: .\store\inventory\models.py:34
+msgid "num_sold"
+msgstr "تعداد فروش"
+
+#: .\store\inventory\models.py:35
+msgid "sold_at"
+msgstr "فروخته شده در تاریخ"
+
+#: .\store\inventory\models.py:38
+msgid "Sale"
+msgstr "فروش"
+
+#: .\store\inventory\models.py:39
+msgid "Sales"
+msgstr "فروش ها"
+
+#: .\store\orders\models.py:9
+msgid "shipping"
+msgstr "حمل و نقل"
+
+#: .\store\orders\models.py:11
+msgid "order_number"
+msgstr "شماره سفارش"
+
+#: .\store\orders\models.py:12
+msgid "note"
+msgstr "یادداشت"
+
+#: .\store\orders\models.py:13
+msgid "is_paid"
+msgstr "پرداخت شده ؟"
+
+#: .\store\orders\models.py:28
+msgid "zarinpal_authority"
+msgstr ""
+
+#: .\store\orders\models.py:29
+msgid "zarinpal_ref_id"
+msgstr ""
+
+#: .\store\orders\models.py:30
+msgid "zarinpal_data"
+msgstr ""
+
+#: .\store\orders\models.py:33
+msgid "Order"
+msgstr "سفارش"
+
+#: .\store\orders\models.py:34
+msgid "Orders"
+msgstr "سفارش ها"
+
+#: .\store\orders\models.py:54
+msgid "order"
+msgstr "سفارش"
+
+#: .\store\orders\models.py:57
+msgid "price"
+msgstr "قیمت"
+
+#: .\store\orders\models.py:60
+msgid "Order Item"
+msgstr "آیتم سفارش"
+
+#: .\store\orders\models.py:61
+msgid "Order Items"
+msgstr "آیتم های سفارش"
+
+#: .\store\orders\templates\orders\create.html:15
+msgid "Order Page"
+msgstr "صفحه سفارش"
+
+#: .\store\orders\templates\orders\create.html:32
+msgid "Order Note"
+msgstr "متن سفارش"
+
+#: .\store\orders\templates\orders\create.html:37
+msgid "Note"
+msgstr "یادداشت"
+
+#: .\store\orders\templates\orders\create.html:48
+msgid "Order Summary And Payment"
+msgstr "خلاصه سفارش"
+
+#: .\store\orders\templates\orders\create.html:78
+msgid "Delivery Date"
+msgstr "تاریخ ارسال"
+
+#: .\store\orders\templates\orders\create.html:79
+msgid "in"
+msgstr "در"
+
+#: .\store\orders\templates\orders\create.html:82
+#: .\store\shipping\templates\shipping\create.html:196
+msgid "TOTAL"
+msgstr "کل"
+
+#: .\store\orders\templates\orders\create.html:84
+msgid "Payment"
+msgstr "پرداخت"
+
+#: .\store\orders\templates\orders\list.html:9
+msgid "Order List"
+msgstr "لیست سفارش ها"
+
+#: .\store\orders\templates\orders\list.html:20
+msgid "Order ID"
+msgstr "شماره سفارش"
+
+#: .\store\orders\templates\orders\list.html:21 .\store\shipping\models.py:22
+msgid "Address"
+msgstr "آدرس"
+
+#: .\store\orders\templates\orders\list.html:22
+msgid "Date"
+msgstr "تاریخ"
+
+#: .\store\orders\templates\orders\list.html:24
+msgid "Total Amount"
+msgstr "مقدار کل"
+
+#: .\store\orders\templates\orders\list.html:25
+msgid "Status"
+msgstr "وضعیت"
+
+#: .\store\orders\templates\orders\list.html:26
+msgid "PDF"
+msgstr "پی دی اف"
+
+#: .\store\orders\templates\orders\list.html:43
+msgid "Pay"
+msgstr "پرداخت"
+
+#: .\store\orders\templates\orders\list.html:50
+msgid "Download"
+msgstr "دانلود"
+
+#: .\store\orders\templates\orders\pdf.html:5
+msgid "My Shop"
+msgstr "فروشگاه من"
+
+#: .\store\orders\templates\orders\pdf.html:7
+msgid "Invoice no."
+msgstr "شماره سفارش"
+
+#: .\store\orders\templates\orders\pdf.html:12
+msgid "Bill to"
+msgstr "صورت حساب برای"
+
+#: .\store\orders\templates\orders\pdf.html:18
+msgid "Items bought"
+msgstr "اقلام خریداری شده"
+
+#: .\store\orders\templates\orders\pdf.html:25
+msgid "Cost"
+msgstr "هزینه"
+
+#: .\store\orders\templates\orders\pdf.html:65
+msgid "Paid"
+msgstr "پرداخت شده"
+
+#: .\store\orders\templates\orders\pdf.html:67
+msgid "Pending payment"
+msgstr "در انتظار پرداخت"
+
+#: .\store\orders\views.py:27 .\store\shipping\views.py:18
+msgid "Your cart is empty please add product to cart."
+msgstr "سبد شما خالی است لطفا محصول را به سبد خرید اضافه کنید."
+
+#: .\store\orders\views.py:69
+msgid "Order successfully created."
+msgstr "سفارش با موفقیت ایجاد شد."
+
+#: .\store\payment\tasks.py:18
+msgid "My Shop - Invoice no. "
+msgstr "فروشگاه شما - شماره سفارش"
+
+#: .\store\payment\tasks.py:19
+msgid "Please, find attached the invoice for your recent purchase."
+msgstr "لطفا فاکتور خرید اخیر خود را پیوست شده بیابید."
+
+#: .\store\payment\views.py:48
+msgid "Error from zarinpal"
+msgstr "خطا از زرین پال."
+
+#: .\store\payment\views.py:103
+msgid "Your payment has been successfully completed."
+msgstr "پرداخت شما با موفقیت انجام شد."
+
+#: .\store\payment\views.py:107
+msgid ""
+"Your payment has been successfully completed. This transaction has already "
+"been registered."
+msgstr "پرداخت شما با موفقیت انجام شد. این پرداخت قبلاً ثبت شده است."
+
+#: .\store\payment\views.py:113
+msgid "The transaction was unsuccessful "
+msgstr "پرداخت ناموفق بود."
+
+#: .\store\payment\views.py:116
+msgid "The transaction was unsuccessful"
+msgstr "پرداخت ناموفق بود."
+
+#: .\store\products\forms.py:7
+msgid "Sort by price: low to high"
+msgstr "مرتب سازی براساس قیمت : کم به زیاد"
+
+#: .\store\products\forms.py:8
+msgid "Sort by price: high to low"
+msgstr "مرتب سازی براساس قیمت : زیاد به کم"
+
+#: .\store\products\forms.py:9
+msgid "Sort by new"
+msgstr "مرتب سازی براساس تاریخ : جدید ترین"
+
+#: .\store\products\forms.py:12
+msgid "field"
+msgstr "فیلد"
+
+#: .\store\products\models.py:14 .\store\products\models.py:88
+msgid "ip_address"
+msgstr "آی پی آدرس"
+
+#: .\store\products\models.py:17
+msgid "IP Address"
+msgstr "آی پی آدرس"
+
+#: .\store\products\models.py:18
+msgid "IP Addresses"
+msgstr "آی پی آدرس ها"
+
+#: .\store\products\models.py:26 .\store\products\models.py:49
+#: .\store\products\models.py:151
+msgid "description"
+msgstr "توضیحات"
+
+#: .\store\products\models.py:27 .\store\products\models.py:51
+msgid "slug"
+msgstr "اسلاگ"
+
+#: .\store\products\models.py:31
+msgid "Category"
+msgstr "دسته بندی"
+
+#: .\store\products\models.py:32 .\store\templates\_base.html:117
+#: .\store\templates\_base.html:220
+msgid "Categories"
+msgstr "دسته بندی ها"
+
+#: .\store\products\models.py:48
+msgid "summary"
+msgstr "خلاصه"
+
+#: .\store\products\models.py:50
+msgid "main_cover"
+msgstr "کاور اصلی"
+
+#: .\store\products\models.py:53
+msgid "category"
+msgstr "دسته بندی"
+
+#: .\store\products\models.py:54
+msgid "hits"
+msgstr "بازدید ها"
+
+#: .\store\products\models.py:55
+msgid "favorites"
+msgstr "مورد علاقه ها"
+
+#: .\store\products\models.py:61
+#: .\store\products\templates\products\detail.html:267
+#: .\store\templates\home.html:114 .\store\templates\home.html:168
+msgid "Products"
+msgstr "محصولات"
+
+#: .\store\products\models.py:82
+msgid "Product Favorite"
+msgstr "محصول مورد علاقه"
+
+#: .\store\products\models.py:83
+msgid "Products Favorites"
+msgstr "محصولات مورد علاقه"
+
+#: .\store\products\models.py:92
+msgid "Product Hit"
+msgstr "بازدید محصول"
+
+#: .\store\products\models.py:93
+msgid "Products Hits"
+msgstr "بازدید های محصول"
+
+#: .\store\products\models.py:98
+msgid "image"
+msgstr "تصویر"
+
+#: .\store\products\models.py:101
+msgid "Product Image"
+msgstr "تصویر محصول"
+
+#: .\store\products\models.py:102
+msgid "Product Images"
+msgstr "تصویر های محصول"
+
+#: .\store\products\models.py:117
+msgid "Attribute Type"
+msgstr "نوع ویژگی"
+
+#: .\store\products\models.py:118
+msgid "Attribute Types"
+msgstr "نوع های ویژگی"
+
+#: .\store\products\models.py:127
+msgid "type"
+msgstr "نوع"
+
+#: .\store\products\models.py:131
+msgid "Attribute"
+msgstr "ویژگی"
+
+#: .\store\products\models.py:132
+msgid "Attributes"
+msgstr "ویژگی ها"
+
+#: .\store\products\models.py:140
+msgid "attribute"
+msgstr "ویژگی"
+
+#: .\store\products\models.py:143
+msgid "Option Group"
+msgstr "گروه آپشن"
+
+#: .\store\products\models.py:144
+msgid "Option Groups"
+msgstr "گروه های آپشن"
+
+#: .\store\products\models.py:152
+msgid "group"
+msgstr "گروه"
+
+#: .\store\products\models.py:155
+msgid "Option Group Value"
+msgstr "مقدار گروه آپشن"
+
+#: .\store\products\models.py:156
+msgid "Option Group Values"
+msgstr "مقدار های گروه آپشن"
+
+#: .\store\products\templates\products\detail.html:13
+msgid "Poduct Detail"
+msgstr "جزعیات محصول"
+
+#: .\store\products\templates\products\detail.html:56
+msgid "reviews"
+msgstr "نظرات"
+
+#: .\store\products\templates\products\detail.html:57
+msgid "SKU"
+msgstr ""
+
+#: .\store\products\templates\products\detail.html:85
+#: .\store\products\templates\products\detail.html:301
+#: .\store\products\templates\products\wish_list.html:56
+#: .\store\templates\home.html:148 .\store\templates\home.html:201
+#: .\store\templates\partials\_list.html:91
+msgid "Add To Cart"
+msgstr "افزودن به سبد خرید"
+
+#: .\store\products\templates\products\detail.html:91
+#: .\store\products\templates\products\detail.html:307
+#: .\store\products\templates\products\wish_list.html:62
+#: .\store\templates\home.html:207 .\store\templates\partials\_list.html:97
+msgid "Unavailable"
+msgstr "ناموجود"
+
+#: .\store\products\templates\products\detail.html:101
+msgid "Add To Wishlist"
+msgstr "افزودن به علاقه"
+
+#: .\store\products\templates\products\detail.html:101
+msgid "Remove From Wishlist"
+msgstr "حذف از علاقه"
+
+#: .\store\products\templates\products\detail.html:119
+#: .\store\products\templates\products\detail.html:139
+msgid "Description"
+msgstr "توضیحات"
+
+#: .\store\products\templates\products\detail.html:122
+#: .\store\products\templates\products\detail.html:179
+msgid "Reviews"
+msgstr "نظرات"
+
+#: .\store\products\templates\products\detail.html:125
+#: .\store\products\templates\products\detail.html:226
+msgid "Question And Answer"
+msgstr "سوالات و پاسخ ها"
+
+#: .\store\products\templates\products\detail.html:147
+msgid "Details"
+msgstr "جزعیات"
+
+#: .\store\products\templates\products\detail.html:201
+msgid "Author"
+msgstr "نویسنده"
+
+#: .\store\products\templates\products\detail.html:215
+msgid "Leave a review"
+msgstr "ثبت نظر"
+
+#: .\store\products\templates\products\detail.html:240
+msgid "Question Author"
+msgstr "نویسنده سوال"
+
+#: .\store\products\templates\products\detail.html:242
+msgid "answer"
+msgstr "پاسخ"
+
+#: .\store\products\templates\products\detail.html:243
+msgid "Answer Author"
+msgstr "نویسنده پاسخ"
+
+#: .\store\products\templates\products\detail.html:245
+msgid "Leave a Answer"
+msgstr "ثبت پاسخ"
+
+#: .\store\products\templates\products\detail.html:251
+msgid "Leave a Question"
+msgstr "ثبت سوال"
+
+#: .\store\products\templates\products\detail.html:266
+msgid "Related"
+msgstr "مشابه"
+
+#: .\store\products\templates\products\detail.html:284
+#: .\store\products\templates\products\wish_list.html:37
+#: .\store\templates\home.html:132 .\store\templates\home.html:184
+#: .\store\templates\partials\_list.html:72
+msgid "in stock"
+msgstr "موجودی انبار"
+
+#: .\store\products\templates\products\wish_list.html:13
+#: .\store\templates\partials\_list.html:13
+msgid "Products List"
+msgstr "لیست محصولات"
+
+#: .\store\products\views.py:89
+msgid "The product successfully added to favorite."
+msgstr "محصول با موفقیت به موارد دلخواه اضافه شد."
+
+#: .\store\products\views.py:92
+msgid "The product successfully removed from favorite."
+msgstr "محصول با موفقیت از موارد دلخواه حذف شد."
+
+#: .\store\qas\models.py:16 .\store\qas\models.py:33
+msgid "text"
+msgstr "متن"
+
+#: .\store\qas\models.py:22
+msgid "Question"
+msgstr "سوال"
+
+#: .\store\qas\models.py:23
+msgid "Questions"
+msgstr "سوالات"
+
+#: .\store\qas\models.py:35
+msgid "question"
+msgstr "سوال"
+
+#: .\store\qas\models.py:38
+msgid "Answer"
+msgstr "پاسخ"
+
+#: .\store\qas\models.py:39
+msgid "Answers"
+msgstr "پاسخ ها"
+
+#: .\store\qas\templates\qas\answer_form.html:7
+msgid "Leave Answer"
+msgstr "افزودن پاسخ"
+
+#: .\store\qas\templates\qas\answer_form.html:32
+msgid "Your answer"
+msgstr "پاسخ شما"
+
+#: .\store\qas\templates\qas\answer_form.html:33
+msgid "Write your question answer"
+msgstr "پاسخ سوال را بنویسید"
+
+#: .\store\qas\templates\qas\answer_form.html:35
+msgid "Submit answer"
+msgstr "ثبت پاسخ"
+
+#: .\store\qas\templates\qas\question_form.html:7
+msgid "Leave Question"
+msgstr "افزودن سوال"
+
+#: .\store\qas\templates\qas\question_form.html:32
+msgid "Your question"
+msgstr "سوال شما"
+
+#: .\store\qas\templates\qas\question_form.html:33
+msgid "Write your question"
+msgstr "سوال خود را بنویسید"
+
+#: .\store\qas\templates\qas\question_form.html:35
+msgid "Submit question"
+msgstr "ثبت سوال"
+
+#: .\store\qas\views.py:24
+msgid "Question successfully saved."
+msgstr "سوال با موفقیت ذخیره شد."
+
+#: .\store\qas\views.py:41
+msgid "Answer successfully saved."
+msgstr "پاسخ با موفقیت ذخیره شد."
+
+#: .\store\shipping\models.py:11 .\store\shipping\models.py:42
+msgid "address"
+msgstr "آدرس"
+
+#: .\store\shipping\models.py:12
+msgid "city"
+msgstr "شهر"
+
+#: .\store\shipping\models.py:13
+msgid "province"
+msgstr "استان"
+
+#: .\store\shipping\models.py:14
+msgid "building_number"
+msgstr "پلاک"
+
+#: .\store\shipping\models.py:15
+msgid "unit"
+msgstr "واحد"
+
+#: .\store\shipping\models.py:16
+msgid "postal_code"
+msgstr "کد پستی"
+
+#: .\store\shipping\models.py:17
+msgid "receiver_first_name"
+msgstr "نام گیرنده"
+
+#: .\store\shipping\models.py:18
+msgid "receiver_last_name"
+msgstr "نام خانوادگی گیرنده"
+
+#: .\store\shipping\models.py:19
+msgid "mobile"
+msgstr "تلفن همراه"
+
+#: .\store\shipping\models.py:23
+msgid "Addresses"
+msgstr "آدرس ها"
+
+#: .\store\shipping\models.py:30
+msgid "start_time"
+msgstr "تاریخ شروع"
+
+#: .\store\shipping\models.py:31
+msgid "end_time"
+msgstr "تاریخ پایان"
+
+#: .\store\shipping\models.py:34
+msgid "Time Slot"
+msgstr "بازه زمانی"
+
+#: .\store\shipping\models.py:35
+msgid "Time Slots"
+msgstr "بازه های زمانی"
+
+#: .\store\shipping\models.py:43
+msgid "delivery_date"
+msgstr "تاریخ ارسال"
+
+#: .\store\shipping\models.py:44
+msgid "delivery_time_slot"
+msgstr "بازه زمانی"
+
+#: .\store\shipping\models.py:45
+msgid "max_capacity"
+msgstr "حداکثر ظرفیت"
+
+#: .\store\shipping\models.py:48
+#: .\store\shipping\templates\shipping\create.html:138
+msgid "Shipping"
+msgstr "حمل و نقل"
+
+#: .\store\shipping\models.py:49
+msgid "Shippings"
+msgstr "حمل و نقل ها"
+
+#: .\store\shipping\templates\shipping\create.html:17
+msgid "Shipping Page"
+msgstr "صفحه حمل و نقل"
+
+#: .\store\shipping\templates\shipping\create.html:37
+msgid "User Info and Billing address"
+msgstr "اطلاعات کاربر"
+
+#: .\store\shipping\templates\shipping\create.html:41
+msgid "Add New Address"
+msgstr "افزودن آدرس جدید"
+
+#: .\store\shipping\templates\shipping\create.html:45
+msgid "Choose A Address"
+msgstr "انتخاب آدرس"
+
+#: .\store\shipping\templates\shipping\create.html:63
+#: .\store\shipping\templates\shipping\create.html:101
+msgid "Full Address"
+msgstr "آدرس کامل"
+
+#: .\store\shipping\templates\shipping\create.html:68
+#: .\store\shipping\templates\shipping\create.html:105
+msgid "City"
+msgstr "شهر"
+
+#: .\store\shipping\templates\shipping\create.html:71
+msgid "Province"
+msgstr "استان"
+
+#: .\store\shipping\templates\shipping\create.html:75
+msgid "Building Number"
+msgstr "پلاک"
+
+#: .\store\shipping\templates\shipping\create.html:79
+msgid "Unit"
+msgstr "واحد"
+
+#: .\store\shipping\templates\shipping\create.html:82
+#: .\store\shipping\templates\shipping\create.html:108
+msgid "Postal code"
+msgstr "کد پستی"
+
+#: .\store\shipping\templates\shipping\create.html:87
+msgid "Telephone"
+msgstr "تلفن"
+
+#: .\store\shipping\templates\shipping\create.html:93
+msgid "Name"
+msgstr "نام خانوادگی"
+
+#: .\store\shipping\templates\shipping\create.html:112
+msgid "Save Address"
+msgstr "ذخیره آدرس"
+
+#: .\store\shipping\templates\shipping\create.html:143
+msgid "Calendar"
+msgstr "تقویم"
+
+#: .\store\shipping\templates\shipping\create.html:166
+msgid "Order Summary"
+msgstr "خلاصه سفارش"
+
+#: .\store\shipping\templates\shipping\create.html:198
+#: .\store\templates\account\email_confirm.html:42
+msgid "Confirm"
+msgstr "تایید"
+
+#: .\store\shipping\views.py:32
+msgid "Your shipping successfully saved."
+msgstr "ارسال شما با موفقیت ذخیره شد."
+
+#: .\store\shipping\views.py:54
+msgid "Your address successfully saved."
+msgstr "آدرس شما با موفقیت ذخیره شد."
+
+#: .\store\templates\_base.html:89
+msgid "Home"
+msgstr "خانه"
+
+#: .\store\templates\_base.html:92
+msgid "All Products"
+msgstr "محصولات"
+
+#: .\store\templates\_base.html:143
+msgid "Search over 10.000 products"
+msgstr "جست جو بین 10000 محصول"
+
+#: .\store\templates\_base.html:175
+msgid "View Cart"
+msgstr "مشاهده سبد خرید"
+
+#: .\store\templates\_base.html:182
+msgid "Wishlist"
+msgstr "لیست مورد علاقه"
+
+#: .\store\templates\_base.html:186
+msgid "Account"
+msgstr "حساب کاربری"
+
+#: .\store\templates\_base.html:189
+msgid "Hello"
+msgstr "سلام"
+
+#: .\store\templates\_base.html:190
+msgid "Log Out"
+msgstr "خروج"
+
+#: .\store\templates\_base.html:192 .\store\templates\account\login.html:22
+msgid "Sign In"
+msgstr "ورود"
+
+#: .\store\templates\_base.html:193
+msgid "Sign Up"
+msgstr "ثبت نام"
+
+#: .\store\templates\_base.html:197
+msgid "My Orders"
+msgstr "سفارش ها"
+
+#: .\store\templates\_base.html:200
+msgid "My Profile"
+msgstr "پروفایل کاربری"
+
+#: .\store\templates\_base.html:203
+msgid "Help and Faq"
+msgstr "سوالات و پاسخ ها"
+
+#: .\store\templates\_base.html:211
+msgid "Search"
+msgstr "جست جو"
+
+#: .\store\templates\account\email_confirm.html:9
+#: .\store\templates\account\email_confirm.html:23
+#: .\store\templates\account\email_confirm.html:29
+msgid "Confirm Email Address"
+msgstr "تایید آدرس ایمیل"
+
+#: .\store\templates\account\email_confirm.html:35
+#, python-format
+msgid ""
+"Please confirm\n"
+"                                            that <a href=\"mailto:%(email)s\">%(email)s</a> is an email address for\n"
+"                                            user %(user_display)s."
+msgstr ""
+"لطفا تایید کنید که %(email)s یک آدرس ایمیل برای کاربر %(user_display)s است"
+
+#: .\store\templates\account\email_confirm.html:47
+#, python-format
+msgid ""
+"Unable to confirm %(email)s because it is already confirmed by a\n"
+"                                        different account."
+msgstr "تأیید %(email)s ممکن نیست زیرا قبلاً توسط حساب دیگری تأیید شده است."
+
+#: .\store\templates\account\email_confirm.html:54
+#, python-format
+msgid ""
+"This email confirmation link expired or is invalid. Please\n"
+"                                    <a href=\"%(email_url)s\">issue a new email confirmation request</a>.\n"
+"                                "
+msgstr ""
+"این پیوند تأیید ایمیل منقضی شده یا نامعتبر است. لطفا %(email_url)s یک "
+"درخواست تأیید ایمیل جدید صادر کنید."
+
+#: .\store\templates\account\login.html:8
+#: .\store\templates\account\verify_otp.html:7
+msgid "Login Page"
+msgstr "صفحه ورود"
+
+#: .\store\templates\account\login.html:29
+msgid "Already Client"
+msgstr "کاربر موجود است"
+
+#: .\store\templates\account\login.html:33
+#: .\store\templates\account\login_otp.html:33
+msgid "Login with Google"
+msgstr "ورود با حساب گوگل"
+
+#: .\store\templates\account\login.html:36
+#: .\store\templates\account\login_otp.html:36
+msgid "Or"
+msgstr "یا"
+
+#: .\store\templates\account\login.html:46
+msgid "Email or Username*"
+msgstr "نام کاربری یا ایمیل"
+
+#: .\store\templates\account\login.html:49
+msgid "Password*"
+msgstr "رمز عبور"
+
+#: .\store\templates\account\login.html:53
+msgid "Login with Phone Number"
+msgstr "ورود با شماره تلفن"
+
+#: .\store\templates\account\login.html:59
+msgid "Forgot Password"
+msgstr "فراموشی رمز عبور"
+
+#: .\store\templates\account\login.html:63
+msgid "Log In"
+msgstr "ورود"
+
+#: .\store\templates\account\login_otp.html:22
+#: .\store\templates\account\verify_otp.html:21
+msgid "Sign In With Phone Number"
+msgstr "ورود با شماره تلفن"
+
+#: .\store\templates\account\login_otp.html:29
+msgid "Send Code To Client"
+msgstr "ارسال کد به کاربر"
+
+#: .\store\templates\account\login_otp.html:41
+msgid "Phone Number*"
+msgstr "شماره تلفن"
+
+#: .\store\templates\account\login_otp.html:43
+#: .\store\templates\account\verify_otp.html:36
+msgid "Send Code"
+msgstr "ارسال کد"
+
+#: .\store\templates\account\password_change.html:7
+#: .\store\templates\account\password_change.html:21
+#: .\store\templates\account\password_change.html:28
+#: .\store\templates\account\password_change.html:49
+#: .\store\templates\account\password_reset_from_key.html:8
+#: .\store\templates\account\password_reset_from_key.html:29
+#: .\store\templates\account\password_reset_from_key.html:56
+#: .\store\templates\account\password_reset_from_key_done.html:8
+#: .\store\templates\account\password_reset_from_key_done.html:26
+#: .\store\templates\account\password_reset_from_key_done.html:28
+msgid "Change Password"
+msgstr "تغییر رمز عبور"
+
+#: .\store\templates\account\password_change.html:38
+msgid "Current Password"
+msgstr "رمز عبور کنونی"
+
+#: .\store\templates\account\password_change.html:41
+#: .\store\templates\account\password_reset_from_key.html:50
+msgid "New Password"
+msgstr "رمز عبور جدید"
+
+#: .\store\templates\account\password_change.html:44
+#: .\store\templates\account\password_reset_from_key.html:54
+msgid "Repeat New Password"
+msgstr "تکرار رمز عبور"
+
+#: .\store\templates\account\password_change.html:47
+msgid "Lost Password?"
+msgstr "فراموشی رمز عبور"
+
+#: .\store\templates\account\password_change.html:57
+#: .\store\templates\account\password_reset.html:35
+msgid "Type your email"
+msgstr "ایمیل خود را وارد کنید"
+
+#: .\store\templates\account\password_change.html:59
+#: .\store\templates\account\password_reset.html:37
+msgid "A new password will be sent shortly."
+msgstr "رمز عبور جدید به زودی ارسال خواهد شد."
+
+#: .\store\templates\account\password_change.html:60
+#: .\store\templates\account\password_reset.html:38
+msgid "Reset Password"
+msgstr "تغییر رمز عبور"
+
+#: .\store\templates\account\password_reset.html:7
+#: .\store\templates\account\password_reset.html:25
+#: .\store\templates\account\password_reset_done.html:7
+#: .\store\templates\account\password_reset_done.html:25
+msgid "Password Reset"
+msgstr "فراموشی رمز عبور"
+
+#: .\store\templates\account\password_reset_done.html:27
+msgid ""
+"We have sent you an email. If you have not received it please check your\n"
+"                                    spam folder. Otherwise contact us if you do not receive it in a few\n"
+"                                    minutes."
+msgstr ""
+"ما برای شما ایمیل فرستادیم. اگر آن را دریافت نکرده اید لطفاً بررسی کنید\n"
+"پوشه اسپم. در غیر این صورت اگر در چند دقیقه دریافت نکردید با ما تماس بگیرید."
+
+#: .\store\templates\account\password_reset_from_key.html:27
+msgid "Bad Token"
+msgstr "توکن نامعتبر"
+
+#: .\store\templates\account\password_reset_from_key.html:36
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already\n"
+"                                        been used.  Please request a\n"
+"                                        <a href=\"%(passwd_reset_url)s\">new password reset</a>."
+msgstr ""
+"پیوند بازنشانی رمز عبور نامعتبر بود، احتمالاً به این دلیل که قبلاً استفاده "
+"شده است. لطفا درخواست %(passwd_reset_url)s فراموشی رمز عبور صادر کنید."
+
+#: .\store\templates\account\password_reset_from_key_done.html:29
+msgid "Your password is now changed."
+msgstr "رمز عبور شما تغییر کرد ."
+
+#: .\store\templates\account\signup.html:8
+msgid "Sign Up Page"
+msgstr "ثبت نام"
+
+#: .\store\templates\account\signup.html:22
+msgid "Create an Account"
+msgstr "ساخت کاربر جدید"
+
+#: .\store\templates\account\signup.html:29
+msgid "New Client"
+msgstr "کاربر جدید"
+
+#: .\store\templates\account\signup.html:29
+msgid "* Required Fields"
+msgstr "فیلد های الزامی *"
+
+#: .\store\templates\account\signup.html:39
+msgid "Email *"
+msgstr "ایمیل *"
+
+#: .\store\templates\account\signup.html:42
+msgid "Password *"
+msgstr "رمز عبور *"
+
+#: .\store\templates\account\signup.html:49
+msgid "Username *"
+msgstr "نام کاربری *"
+
+#: .\store\templates\account\signup.html:54
+msgid "Telephone *"
+msgstr "تلفن *"
+
+#: .\store\templates\account\signup.html:62
+msgid "Register"
+msgstr "ثبت نام"
+
+#: .\store\templates\account\verification_sent.html:7
+msgid "Verify Email Page"
+msgstr "صفحه تایید ایمیل"
+
+#: .\store\templates\account\verification_sent.html:22
+#: .\store\templates\account\verification_sent.html:29
+msgid "Verify Your Email Address"
+msgstr "تایید ایمیل آدرس"
+
+#: .\store\templates\account\verification_sent.html:30
+msgid ""
+"We have sent an email to you for verification. Follow the link provided\n"
+"                                to finalize the signup process. If you do not see the verification email in your main\n"
+"                                inbox, check your spam folder. Please contact us if you do not receive the verification\n"
+"                                email within a few minutes."
+msgstr ""
+"ما یک ایمیل برای شما برای تایید ارسال کرده ایم. لینک ارائه شده را دنبال کنید\n"
+"برای نهایی کردن مراحل ثبت نام اگر ایمیل تأیید را در اصلی خود نمی بینید\n"
+"صندوق ورودی، پوشه اسپم خود را بررسی کنید. لطفاً در صورت عدم دریافت تأییدیه با ما تماس بگیرید\n"
+"در عرض چند دقیقه ایمیل بزنید."
+
+#: .\store\templates\account\verify_otp.html:28
+msgid "Verify Code"
+msgstr "ارسال کد"
+
+#: .\store\templates\account\verify_otp.html:34
+msgid "Code*"
+msgstr "کد"
+
+#: .\store\templates\home.html:24
+msgid "New mobile"
+msgstr "تلفن همراه"
+
+#: .\store\templates\home.html:26 .\store\templates\home.html:44
+#: .\store\templates\home.html:62 .\store\templates\home.html:83
+#: .\store\templates\home.html:94 .\store\templates\home.html:104
+msgid "Shop Now"
+msgstr "همین حالا خرید کنید"
+
+#: .\store\templates\home.html:42
+msgid "New laptop"
+msgstr "لپ تاپ های جدید"
+
+#: .\store\templates\home.html:60
+msgid "New headphones"
+msgstr "هدفون های جدید"
+
+#: .\store\templates\home.html:82
+msgid "Men's Collection"
+msgstr "مجموعه مردانه"
+
+#: .\store\templates\home.html:93
+msgid "Womens's Collection"
+msgstr "مجموعه زنانه"
+
+#: .\store\templates\home.html:103
+msgid "Kids's Collection"
+msgstr "مجموعه بچگانه"
+
+#: .\store\templates\home.html:113
+msgid "Top Selling"
+msgstr "پر فروش ترین"
+
+#: .\store\templates\home.html:167
+msgid "Top Hits"
+msgstr "پر بازدید ترین"
+
+#: .\store\templates\partials\_list.html:27
+msgid "sorting"
+msgstr "مرتب سازی"
+
+#: .\store\templates\partials\_list.html:39
+msgid "Filters"
+msgstr "فیلتر ها"
+
+#: .\store\templates\partials\_list.html:47
+msgid "Apply"
+msgstr "اعمال"
+
+#, fuzzy
+#~ msgid "The Product successfully removed from wishlist."
+#~ msgstr "محصول با موفقیت از موارد دلخواه حذف شد."
+
+#, fuzzy
+#~ msgid "The Product successfully added to wishlist."
+#~ msgstr "محصول با موفقیت به موارد دلخواه اضافه شد."
+
+#, fuzzy
+#~ msgid "{{ cart.coupon.code }} coupon ({{ cart.coupon.discount }}%% off)"
+#~ msgstr "\"{{ cart.coupon.code }}\" کد تخفیف "

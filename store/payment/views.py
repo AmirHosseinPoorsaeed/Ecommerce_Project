@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.db import transaction
 from django.db.models import F
 from django.contrib import messages
+from django.utils.translation import gettext as _
 
 from store.orders.models import Order
 from store.inventory.models import Sale, Stock
@@ -44,7 +45,7 @@ def payment_process_sandbox_view(request):
     if 'errors' not in data or len(data['errors']) == 0:
         return redirect(f'https://sandbox.zarinpal.com/pg/StartPay/{authority}')
     else:
-        messages.error(request, 'Error from zarinpal')
+        messages.error(request, _('Error from zarinpal'))
         return redirect('pages:home')
     
 def payment_callback_sandbox_view(request):
@@ -99,18 +100,18 @@ def payment_callback_sandbox_view(request):
 
                     del request.session['order_id']
 
-                    messages.success(request, 'پرداخت شما با موفقیت انجام شد.')
+                    messages.success(request, _('Your payment has been successfully completed.'))
                     return redirect('pages:home')
             
             elif payment_code == 101:
-                messages.warning(request, 'پرداخت شما با موفقیت انجام شد. این تراکنش قبلا ثبت شده است.')
+                messages.warning(request, _('Your payment has been successfully completed. This transaction has already been registered.'))
                 return redirect('pages:home')
             
             else:
                 error_code = response.json()['errors']['code']
                 error_message = response.json()['errors']['message']
-                messages.error(request, f'تراکنش ناموفق بود {error_message} {error_code}')
+                messages.error(request, _('The transaction was unsuccessful ') + error_message + error_code)
                 return redirect('pages:home')
     else:
-        messages.error(request, 'تراکنش ناموفق بود')
+        messages.error(request, _('The transaction was unsuccessful'))
         return redirect('pages:home')

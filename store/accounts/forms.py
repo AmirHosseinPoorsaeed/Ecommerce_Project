@@ -46,7 +46,7 @@ class PhoneNumberForm(forms.Form):
 
 
 class VerifyForm(forms.Form):
-    code = forms.CharField(max_length=5)
+    code = forms.CharField(max_length=5, label=_('code'))
 
 
 class UserUpdateForm(forms.ModelForm):
