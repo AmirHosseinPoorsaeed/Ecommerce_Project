@@ -90,7 +90,7 @@ def order_pdf(request, order_id):
     return response
 
 
-class OrderCustomerListView(LoginRequiredMixin, generic.ListView):
+class CustomerOrderListView(LoginRequiredMixin, generic.ListView):
     template_name = 'orders/list.html'
     context_object_name = 'orders'
 

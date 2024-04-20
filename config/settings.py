@@ -270,3 +270,5 @@ CACHES = {
 }
 
 LOCALE_PATHS = [str(BASE_DIR.joinpath('locale'))]
+
+OTP_EXPIRE_TIME = 180

@@ -72,10 +72,9 @@ class ProductDetailView(generic.DetailView):
         context['comment_form'] = CommentForm()
         context['question_form'] = QuestionForm()
         context['answer_form'] = AnswerForm()
+        context['add_to_cart_form'] = CartAddProductForm()
         context['similar_products'] = similar_products
-        context['add_to_cart_form'] = CartAddProductForm()
         context['add_to_wishlist'] = product.favorites.all()
-        context['add_to_cart_form'] = CartAddProductForm()
         return context
 
 

@@ -12,9 +12,9 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        last_week = datetime.today() - timedelta(days=7)
         products = Product.objects.active_with_stock_info()
 
+        last_week = datetime.today() - timedelta(days=7)
         most_sold_products = products.filter(sale_records__sold_at__gt=last_week)
         most_sold_products = most_sold_products.annotate(num_sold=F('sale_records__num_sold'))
         most_sold_products = most_sold_products.order_by('-num_sold', '-created')[:5]

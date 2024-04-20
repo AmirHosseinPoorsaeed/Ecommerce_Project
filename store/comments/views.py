@@ -28,8 +28,10 @@ class CommentCreateView(LoginRequiredMixin, generic.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         product_id = self.kwargs.get('product_id')
         product = get_object_or_404(Product, pk=product_id)
+        
         context['product'] = product
         return context
 

@@ -90,9 +90,9 @@ def payment_callback_sandbox_view(request):
                         product = order_item.product
                         quantity_sold = order_item.quantity
 
-                        Sale.objects.get_or_create(product=product)
-
-                        Sale.objects.filter(product=product).update(num_sold=F('num_sold') + quantity_sold)
+                        (sale, created) = Sale.objects.get_or_create(product=product)
+                        sale.num_sold += quantity_sold
+                        sale.save()
                         Stock.objects.filter(product=product).update(num_stock=F('num_stock') - quantity_sold)
                     order.save()
 

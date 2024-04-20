@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.core.cache import cache
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -10,7 +9,7 @@ from django.utils.translation import gettext as _
 from allauth.account.views import PasswordChangeView as AllAuthPasswordChangeView
 
 from .forms import PhoneNumberForm, VerifyForm, ProfileUpdateForm, UserUpdateForm
-from .utils import generate_random_otp, verify_otp_code
+from .utils import generate_random_otp, verify_otp_code, store_otp_in_cache
 from .decorators import unauthenticated_required
 
 User = get_user_model()
@@ -24,8 +23,7 @@ def send_otp(request):
             phone_number = form.cleaned_data['phone_number']
             if User.objects.filter(phone_number=phone_number).exists():
                 otp_code = generate_random_otp()
-                cache_key = f'otp_{phone_number}'
-                cache.set(cache_key, otp_code, 180)
+                store_otp_in_cache(phone_number, otp_code)
                 request.session['phone_number'] = str(phone_number)
                 print(otp_code)
                 messages.success(request, _('Code sent successfully'))

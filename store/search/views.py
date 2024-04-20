@@ -17,4 +17,5 @@ class SearchListView(SortMixin, generic.ListView):
         queryset = queryset.annotate(
             search=SearchVector('title', 'description'),
         ).filter(search=q)
+        
         return queryset

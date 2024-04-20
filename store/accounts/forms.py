@@ -32,7 +32,7 @@ class CustomSignupForm(AllAuthSignupForm):
         data = self.cleaned_data['phone_number']
         if not User.objects.filter(phone_number=data).exists():
             return data
-        raise forms.ValidationError('User with this phone number already exists.')
+        raise forms.ValidationError(_('User with this phone number already exists.'))
 
     def save(self, request):
         user = super().save(request)

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-12 18:22+0330\n"
-"PO-Revision-Date: 2024-04-12 18:23+0330\n"
+"POT-Creation-Date: 2024-04-20 15:02+0330\n"
+"PO-Revision-Date: 2024-04-20 15:03+0330\n"
 "Last-Translator: امیرحسین پورسعید <amir@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,11 @@ msgstr ""
 #: .\store\accounts\forms.py:29 .\store\accounts\forms.py:45
 msgid "Your Phone Number"
 msgstr "شماره تلفن"
+
+#: .\store\accounts\forms.py:35
+#| msgid "User with this phone number does not exists."
+msgid "User with this phone number already exists."
+msgstr "کاربر با این شماره تلفن وجود دارد."
 
 #: .\store\accounts\forms.py:49 .\store\coupons\forms.py:6
 #: .\store\coupons\models.py:7
@@ -79,27 +84,27 @@ msgstr "تاریخ تولد"
 msgid "Save"
 msgstr "ذخیره"
 
-#: .\store\accounts\views.py:31
+#: .\store\accounts\views.py:29
 msgid "Code sent successfully"
 msgstr "کد با موفقیت ارسال شد."
 
-#: .\store\accounts\views.py:34
+#: .\store\accounts\views.py:32
 msgid "User with this phone number does not exists."
 msgstr "کاربر با این شماره تلفن وجود ندارد."
 
-#: .\store\accounts\views.py:56
+#: .\store\accounts\views.py:54
 msgid "Authentication successfully."
 msgstr "احراز هویت با موفقیت انجام شد."
 
-#: .\store\accounts\views.py:59
+#: .\store\accounts\views.py:57
 msgid "Authentication faild."
 msgstr "احراز هویت ناموفق بود."
 
-#: .\store\accounts\views.py:61
+#: .\store\accounts\views.py:59
 msgid "Invalid OTP code."
 msgstr "کد نامعتبر است."
 
-#: .\store\accounts\views.py:89
+#: .\store\accounts\views.py:87
 msgid "Your account has been updated."
 msgstr "حساب شما به روز شده است."
 
@@ -324,12 +329,10 @@ msgid "Comment successfully saved."
 msgstr "نظر با موفقیت ذخیره شد."
 
 #: .\store\comments\views.py:52 .\store\comments\views.py:59
-#| msgid "Your address successfully saved."
 msgid "Your like successfully saved."
 msgstr "دوست داشتن شما با موفقیت ذخیره شد."
 
 #: .\store\comments\views.py:56
-#| msgid "Your address successfully saved."
 msgid "Your dislike successfully saved."
 msgstr "دوست داشتن شما با موفقیت ذخیره شد."
 

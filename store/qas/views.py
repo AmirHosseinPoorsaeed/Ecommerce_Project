@@ -44,7 +44,9 @@ class AnswerCreateView(LoginRequiredMixin, generic.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
         question_id = self.kwargs.get('question_id')
         question = get_object_or_404(Question, pk=question_id)
+
         context['question'] = question
         return context

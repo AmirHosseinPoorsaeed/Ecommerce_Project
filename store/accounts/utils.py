@@ -1,5 +1,6 @@
 from random import randrange
 
+from django.conf import settings
 from django.core.cache import cache
 
 
@@ -14,3 +15,10 @@ def verify_otp_code(code, phone_number):
         cache.delete(f'otp_{phone_number}')
         return True
     return False
+
+
+def store_otp_in_cache(phone_number, otp_code):
+    cache_key = f'otp_{phone_number}'
+    cache.set(
+        cache_key, otp_code, settings.OTP_EXPIRE_TIME
+    )
