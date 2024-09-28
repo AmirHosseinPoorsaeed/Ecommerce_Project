@@ -81,26 +81,28 @@
     Then you need to create a database for this project and put the database information in the .env file
 </p>
 
-'''python
+
+
+```python
   # .env file
   POSTGRES_USER=database_user
   POSTGRES_DB=database_name
   POSTGRES_PASSWORD=database_password
   POSTGRES_ENGINE=django.db.backends.postgresql
   POSTGRES_PORT=database_port
-'''
+```
 
 <p>
     After creating .env file and put the database information you need obtain OAuth2 credentials from <a href="https://console.developers.google.com/">google Developer Concole</a>
 </p>
 
-'''python
+```python
   # .env file
   ...
 
   CLIENT_ID=...
   CLIENT_SECRET=...
-'''
+```
 
 <h5>
     Configuration of project almost done.
